@@ -38,7 +38,18 @@ public class CourseMap : IEntityTypeConfiguration<Course>
         builder.HasMany(x => x.Modules)
             .WithOne()
             .HasForeignKey("ModulesId")
-            .HasConstraintName("FK_Course_ModulesId")
+            .HasConstraintName("FK_Course_ModuleId")
             .OnDelete(DeleteBehavior.Cascade);
     }
 }
+
+
+
+
+
+
+
+
+
+
+

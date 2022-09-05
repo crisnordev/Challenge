@@ -5,7 +5,7 @@ namespace Challenge.Models;
 
 public class Module : Entity
 {
-    protected Module()
+    public Module()
     {
         Lectures = new List<Lecture>();
     }
@@ -29,6 +29,8 @@ public class Module : Entity
     [Display(Name = "Order")]
     [Range(1, 1000, ErrorMessage = "Module order must be between 1 and 1000.")]
     public int Order { get; set; }
+
+    [Display(Name = "CourseId")] public Course Course { get; set; }
 
     public IEnumerable<Lecture> Lectures { get; set; }
 }

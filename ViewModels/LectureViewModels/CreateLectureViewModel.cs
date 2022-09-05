@@ -1,21 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Challenge.Shared;
+using Challenge.Models;
 
-namespace Challenge.Models;
+namespace Challenge.ViewModels.LectureViewModels;
 
-public class Lecture : Entity
+public class CreateLectureViewModel
 {
-    public Lecture() { }
+    public CreateLectureViewModel() { }
 
-    public Lecture(string title, string description, string videoUrl)
+    public CreateLectureViewModel(string title, string description, string videoUrl)
     {
-        LectureId = Guid.NewGuid();
         LectureTitle = title;
         Description = description;
         VideoUrl = videoUrl;
     }
-
-    [Display(Name = "Lecture Id")] public Guid LectureId { get; set; }
     
     [Required(ErrorMessage = "Lecture title is required.")]
     [Display(Name = "Lecture title")]
@@ -27,11 +24,14 @@ public class Lecture : Entity
     [StringLength(160, MinimumLength = 2, ErrorMessage = "Lecture description must have between 2 and 160 characters.")]
     public string Description { get; set; } = string.Empty;
 
-    [Url]
-    [Required]
+    [Required(ErrorMessage = "Lecture video Url is required.")]
     [Display(Name = "Url")]
     [StringLength(2046, MinimumLength = 10, ErrorMessage = "Lecture video Url must have between 10 and 2046 characters.")]
     public string VideoUrl { get; set; } = "https://www.";
-
-    [Display(Name = "Module Id")] public Module Module { get; set; }
+    
+    public static implicit operator Lecture(CreateLectureViewModel model) =>
+        new(model.LectureTitle, model.Description, model.VideoUrl);
+    
+    public static implicit operator CreateLectureViewModel(Lecture model) =>
+        new(model.LectureTitle, model.Description, model.VideoUrl);
 }

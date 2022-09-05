@@ -29,5 +29,11 @@ public class LectureMap : IEntityTypeConfiguration<Lecture>
             .HasColumnName("VideoUrl")
             .HasColumnType("NVARCHAR")
             .HasMaxLength(2046);
+
+        builder.HasOne(x => x.Module)
+            .WithMany(x => x.Lectures)
+            .HasForeignKey("LectureId")
+            .HasConstraintName("FK_Module_LectureId")
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

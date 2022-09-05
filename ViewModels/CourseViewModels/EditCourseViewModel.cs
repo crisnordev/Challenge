@@ -1,26 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Challenge.Shared;
+using Challenge.Models;
 
-namespace Challenge.Models;
+namespace Challenge.ViewModels.CourseViewModels;
 
-public class Course : Entity
+public class EditCourseViewModel
 {
-    public Course()
-    {
-        Modules = new List<Module>();
-    }
+    public EditCourseViewModel() { }
 
-    public Course(string title, string tag, string summary, int duration)
+    public EditCourseViewModel(string title, string tag, string summary, int duration)
     {
-        CourseId = Guid.NewGuid();
         CourseTitle = title;
         Tag = tag;
         Summary = summary;
         Duration = duration;
-        Modules = new List<Module>();
     }
-
-    [Display(Name = "Course Id")] public Guid CourseId { get; set; }
     
     [Required(ErrorMessage = "Course title is required.")]
     [Display(Name = "Course title")]
@@ -42,5 +35,9 @@ public class Course : Entity
     [Range(1, 1000, ErrorMessage = "Module duration must be between 1 and 1000.")]
     public int Duration { get; set; }
 
-    public IEnumerable<Module> Modules { get; set; }
+    public static implicit operator Course(EditCourseViewModel model) =>
+        new(model.CourseTitle, model.Tag, model.Summary, model.Duration);
+    
+    public static implicit operator EditCourseViewModel(Course model) =>
+        new(model.CourseTitle, model.Tag, model.Summary, model.Duration);
 }
