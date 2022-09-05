@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-Chalenge-70869bfd-209c-44e4-a9e4-0798b76ff88d</UserSecretsId>
+    <UserSecretsId>aspnet-Challenge-70869bfd-209c-44e4-a9e4-0798b76ff88d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Chalenge.Data.Migrations
+namespace Challenge.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

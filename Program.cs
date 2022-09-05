@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Chalenge.Data;
+using Challenge.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

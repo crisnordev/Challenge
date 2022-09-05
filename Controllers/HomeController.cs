@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Chalenge.Models;
+using Challenge.Models;
 
-namespace Chalenge.Controllers;
+namespace Challenge.Controllers;
 
 public class HomeController : Controller
 {

@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "Chalenge": {
+    "Challenge": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
