@@ -1,4 +1,4 @@
-@model IEnumerable<Module>
+@model IEnumerable<CourseItem>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,7 +13,7 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ModuleTitle)
+            @Html.DisplayNameFor(model => model.CourseItemTitle)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Order)
@@ -26,15 +26,15 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ModuleTitle)
+                @Html.DisplayFor(modelItem => item.CourseItemTitle)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Order)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ModuleId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ModuleId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ModuleId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.CourseItemId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CourseItemId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CourseItemId">Delete</a>
             </td>
         </tr>
     }

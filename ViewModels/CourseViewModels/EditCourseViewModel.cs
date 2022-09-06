@@ -34,10 +34,4 @@ public class EditCourseViewModel
     [Display(Name = "Duration")]
     [Range(1, 1000, ErrorMessage = "Module duration must be between 1 and 1000.")]
     public int Duration { get; set; }
-
-    public static implicit operator Course(EditCourseViewModel model) =>
-        new(model.CourseTitle, model.Tag, model.Summary, model.Duration);
-    
-    public static implicit operator EditCourseViewModel(Course model) =>
-        new(model.CourseTitle, model.Tag, model.Summary, model.Duration);
 }

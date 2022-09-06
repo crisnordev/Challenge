@@ -17,20 +17,21 @@ namespace Challenge.Controllers
 
         public async Task<IActionResult> Index()
         {
-              return _context.Courses != null ? 
+              return await _context.Courses.ToListAsync() != null ? 
                           View(await _context.Courses.AsNoTracking().ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
         }
 
         public async Task<IActionResult> Details(Guid? id)
         {
-            if (id == null || _context.Courses == null)
+            if (id == null || await _context.Courses.ToListAsync() == null)
             {
                 return NotFound();
             }
 
-            var course = await _context.Courses.AsNoTracking()
+            var course = await _context.Courses.Include(x => x.CourseItems).AsNoTracking()
                 .FirstOrDefaultAsync(m => m.CourseId == id);
+            
             if (course == null)
             {
                 return NotFound();
@@ -52,7 +53,7 @@ namespace Challenge.Controllers
 
             var course = new Course(model.CourseTitle, model.Tag, model.Summary, model.Duration);
             
-            _context.Add(course);
+            await _context.Courses.AddAsync(course);
             await _context.SaveChangesAsync();
             View(model);
             return RedirectToAction(nameof(Index));
@@ -65,21 +66,22 @@ namespace Challenge.Controllers
                 return NotFound();
             }
 
-            EditCourseViewModel course = await _context.Courses.AsNoTracking().FirstOrDefaultAsync(
-                x => x.CourseId == id);
+            var course = await _context.Courses.AsNoTracking().FirstOrDefaultAsync(x => x.CourseId == id);
             if (course == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            var editCourse = new EditCourseViewModel(course.CourseTitle, course.Tag, course.Summary, course.Duration);
+
+            return View(editCourse);
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, EditCourseViewModel model)
         {
-            var course = _context.Courses.FirstOrDefaultAsync(x => x.CourseId == id).Result;
+            var course = await _context.Courses.FindAsync(id);
             
             if (course == null) return NotFound();
 
@@ -107,7 +109,7 @@ namespace Challenge.Controllers
 
         public async Task<IActionResult> Delete(Guid? id)
         {
-            if (id == null || _context.Courses == null)
+            if (id == null || await _context.Courses.ToListAsync() == null)
             {
                 return NotFound();
             }
@@ -126,7 +128,7 @@ namespace Challenge.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (_context.Courses == null)
+            if (await _context.Courses.ToListAsync() == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
             }

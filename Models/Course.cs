@@ -7,7 +7,7 @@ public class Course : Entity
 {
     public Course()
     {
-        Modules = new List<Module>();
+        CourseItems = new List<CourseItem>();
     }
 
     public Course(string title, string tag, string summary, int duration)
@@ -17,13 +17,13 @@ public class Course : Entity
         Tag = tag;
         Summary = summary;
         Duration = duration;
-        Modules = new List<Module>();
+        CourseItems = new List<CourseItem>();
     }
 
     [Display(Name = "Course Id")] public Guid CourseId { get; set; }
     
     [Required(ErrorMessage = "Course title is required.")]
-    [Display(Name = "Course title")]
+    [Display(Name = "Course")]
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Course title must have between 2 and 80 characters.")]
     public string CourseTitle { get; set; } = string.Empty;
 
@@ -42,5 +42,5 @@ public class Course : Entity
     [Range(1, 1000, ErrorMessage = "Module duration must be between 1 and 1000.")]
     public int Duration { get; set; }
 
-    public IEnumerable<Module> Modules { get; set; }
+    [Display(Name = "Modules")] public IEnumerable<CourseItem> CourseItems { get; set; }
 }

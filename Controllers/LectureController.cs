@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Challenge.Data;
 using Challenge.Models;
 using Challenge.ViewModels.LectureViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Challenge.Controllers
 {
@@ -39,21 +40,27 @@ namespace Challenge.Controllers
             return View(lecture);
         }
 
-        public IActionResult Create()
+        
+        public IActionResult Create(CreateLectureViewModel model)
         {
+            ViewData["CourseItemId"] = new SelectList(_context.CourseItems, "CourseItemId", "CourseItemTitle");
+
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateLectureViewModel model)
+        public async Task<IActionResult> CreateConfirm(CreateLectureViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
-            
-            var lecture = new Lecture(model.LectureTitle, model.Description, model.VideoUrl);
 
-            _context.Add(lecture);
+            var courseItem = await _context.CourseItems.FindAsync(model.CourseItemId);
+            var lecture = new Lecture(model.LectureTitle, model.Description, model.VideoUrl, courseItem);
+
+            _context.Update(courseItem);
+            await _context.Lectures.AddAsync(lecture);
             await _context.SaveChangesAsync();
+            View(model);
             return RedirectToAction(nameof(Index));
         }
 
@@ -64,12 +71,14 @@ namespace Challenge.Controllers
                 return NotFound();
             }
 
-            EditLectureViewModel lecture = await _context.Lectures.AsNoTracking().FirstOrDefaultAsync(
-                x => x.LectureId == id);
-            if (lecture == null)
+            var item = await _context.Lectures.AsNoTracking().FirstOrDefaultAsync(x => x.LectureId == id);
+            if (item == null)
             {
                 return NotFound();
             }
+
+            var lecture = new EditLectureViewModel(item.LectureTitle, item.Description, item.VideoUrl);
+            
             return View(lecture);
         }
 
@@ -77,7 +86,8 @@ namespace Challenge.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, EditLectureViewModel model)
         {
-            var lecture = _context.Lectures.FirstOrDefaultAsync(x => x.LectureId == id).Result;
+            var lecture = await _context.Lectures.FindAsync(id);
+            
             if (lecture == null) return NotFound();
 
             if (!ModelState.IsValid) return View(model);
@@ -85,7 +95,7 @@ namespace Challenge.Controllers
             lecture.LectureTitle = model.LectureTitle;
             lecture.Description = model.Description;
             lecture.VideoUrl = model.VideoUrl;
-            
+
             try
             {
                 _context.Update(lecture);
@@ -103,13 +113,12 @@ namespace Challenge.Controllers
 
         public async Task<IActionResult> Delete(Guid? id)
         {
-            if (id == null || _context.Lectures == null)
+            if (id == null || await _context.Lectures.ToListAsync() == null)
             {
                 return NotFound();
             }
 
-            var lecture = await _context.Lectures.AsNoTracking()
-                .FirstOrDefaultAsync(m => m.LectureId == id);
+            var lecture = await _context.Lectures.AsNoTracking().FirstOrDefaultAsync(m => m.LectureId == id);
             if (lecture == null)
             {
                 return NotFound();

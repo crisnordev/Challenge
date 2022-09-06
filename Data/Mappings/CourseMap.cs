@@ -33,13 +33,9 @@ public class CourseMap : IEntityTypeConfiguration<Course>
         builder.Property(x => x.Duration)
             .IsRequired()
             .HasColumnName("Duration")
-            .HasColumnType("INT");
-        
-        builder.HasMany(x => x.Modules)
-            .WithOne()
-            .HasForeignKey("ModulesId")
-            .HasConstraintName("FK_Course_ModuleId")
-            .OnDelete(DeleteBehavior.Cascade);
+            .HasColumnType("INTEGER");
+
+        builder.HasMany(x => x.CourseItems);
     }
 }
 

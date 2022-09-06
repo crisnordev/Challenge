@@ -5,16 +5,6 @@ namespace Challenge.ViewModels.CourseViewModels;
 
 public class CreateCourseViewModel
 {
-    public CreateCourseViewModel() { }
-
-    public CreateCourseViewModel(string title, string tag, string summary, int duration)
-    {
-        CourseTitle = title;
-        Tag = tag;
-        Summary = summary;
-        Duration = duration;
-    }
-    
     [Required(ErrorMessage = "Course title is required.")]
     [Display(Name = "Course title")]
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Course title must have between 2 and 80 characters.")]
@@ -34,10 +24,4 @@ public class CreateCourseViewModel
     [Display(Name = "Duration")]
     [Range(1, 1000, ErrorMessage = "Module duration must be between 1 and 1000.")]
     public int Duration { get; set; }
-    
-    public static implicit operator Course(CreateCourseViewModel model) =>
-        new(model.CourseTitle, model.Tag, model.Summary, model.Duration);
-    
-    public static implicit operator CreateCourseViewModel(Course model) =>
-        new(model.CourseTitle, model.Tag, model.Summary, model.Duration);
 }

@@ -1,4 +1,4 @@
-@model Module
+@model CourseItem
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,10 +12,10 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ModuleTitle)
+            @Html.DisplayNameFor(model => model.CourseItemTitle)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ModuleTitle)
+            @Html.DisplayFor(model => model.CourseItemTitle)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Order)
@@ -26,7 +26,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="ModuleId" />
+        <input type="hidden" asp-for="CourseItemId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

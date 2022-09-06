@@ -3,34 +3,35 @@ using Challenge.Shared;
 
 namespace Challenge.Models;
 
-public class Module : Entity
+public class CourseItem : Entity
 {
-    public Module()
+    public CourseItem()
     {
         Lectures = new List<Lecture>();
     }
 
-    public Module(string title ,int order)
+    public CourseItem(string title ,int order, Course course)
     {
-        ModuleId = Guid.NewGuid();
-        ModuleTitle = title;
+        CourseItemId = Guid.NewGuid();
+        CourseItemTitle = title;
         Order = order;
+        Course = course;
         Lectures = new List<Lecture>();
     }
 
-    [Display(Name = "Module Id")] public Guid ModuleId { get; set; }
+    [Display(Name = "Module Id")] public Guid CourseItemId { get; set; }
 
     [Required(ErrorMessage = "Module title is required.")]
-    [Display(Name = "Module title")]
+    [Display(Name = "Module")]
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Module title must have between 2 and 80 characters.")]
-    public string ModuleTitle { get; set; } = string.Empty;
+    public string CourseItemTitle { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Module order is required.")]
     [Display(Name = "Order")]
     [Range(1, 1000, ErrorMessage = "Module order must be between 1 and 1000.")]
     public int Order { get; set; }
 
-    [Display(Name = "CourseId")] public Course Course { get; set; }
+    [Display(Name = "Course")] public Course Course { get; set; }
 
-    public IEnumerable<Lecture> Lectures { get; set; }
+    [Display(Name = "Lectures")] public IEnumerable<Lecture> Lectures { get; set; }
 }
