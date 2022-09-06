@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Challenge.Models;
+using Challenge.ViewModels;
 
 namespace Challenge.ViewModels.CourseViewModels;
 

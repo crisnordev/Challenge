@@ -1,4 +1,4 @@
-namespace Challenge.Models;
+namespace Challenge.ViewModels;
 
 public class ErrorViewModel
 {

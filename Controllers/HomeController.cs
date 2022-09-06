@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Challenge.Models;
+using Challenge.ViewModels;
 
 namespace Challenge.Controllers;
 

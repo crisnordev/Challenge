@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Challenge.Data;
-using Challenge.Models;
+using Challenge.ViewModels;
 using Challenge.ViewModels.CourseItemViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Challenge.Controllers
 {
+    [Authorize]
     public class CourseItemController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -16,6 +18,7 @@ namespace Challenge.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return await _context.CourseItems.ToListAsync() != null
@@ -23,6 +26,7 @@ namespace Challenge.Controllers
                 : Problem("Entity set 'ApplicationDbContext.Modules'  is null.");
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || await _context.CourseItems.ToListAsync() == null)

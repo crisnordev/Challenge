@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Challenge.Data;
-using Challenge.Models;
+using Challenge.ViewModels;
 using Challenge.ViewModels.LectureViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Challenge.Controllers
 {
+    [Authorize]
     public class LectureController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -16,6 +18,7 @@ namespace Challenge.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
               return _context.Lectures != null ? 
@@ -23,6 +26,7 @@ namespace Challenge.Controllers
                           Problem("Entity set 'ApplicationDbContext.Lectures'  is null.");
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || _context.Lectures == null)
@@ -40,7 +44,6 @@ namespace Challenge.Controllers
             return View(lecture);
         }
 
-        
         public IActionResult Create(CreateLectureViewModel model)
         {
             ViewData["CourseItemId"] = new SelectList(_context.CourseItems, "CourseItemId", "CourseItemTitle");

@@ -1,4 +1,4 @@
-﻿using Challenge.Models;
+﻿using Challenge.ViewModels;
 using Challenge.Data.Mappings;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

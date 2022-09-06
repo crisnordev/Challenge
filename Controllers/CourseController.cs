@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Challenge.Data;
-using Challenge.Models;
+using Challenge.ViewModels;
 using Challenge.ViewModels.CourseViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Challenge.Controllers
 {
+    [Authorize]
     public class CourseController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -15,13 +17,15 @@ namespace Challenge.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
               return await _context.Courses.ToListAsync() != null ? 
                           View(await _context.Courses.AsNoTracking().ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
         }
-
+        
+        [AllowAnonymous]
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null || await _context.Courses.ToListAsync() == null)

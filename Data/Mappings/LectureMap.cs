@@ -1,4 +1,4 @@
-﻿using Challenge.Models;
+﻿using Challenge.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
