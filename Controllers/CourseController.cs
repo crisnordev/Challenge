@@ -20,11 +20,11 @@ namespace Challenge.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-              return await _context.Courses.ToListAsync() != null ? 
-                          View(await _context.Courses.AsNoTracking().ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
+            return await _context.Courses.ToListAsync() != null
+                ? View(await _context.Courses.AsNoTracking().ToListAsync() as IEnumerable<GetCoursesViewModel>)
+                : Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
         }
-        
+
         [AllowAnonymous]
         public async Task<IActionResult> Details(Guid? id)
         {
@@ -33,9 +33,9 @@ namespace Challenge.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses.Include(x => x.CourseItems).AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseId == id);
-            
+            var course = await _context.Courses.Include(x => x.CourseItems)
+                .AsNoTracking().FirstOrDefaultAsync(m => m.CourseId == id);
+
             if (course == null)
             {
                 return NotFound();

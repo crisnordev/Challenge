@@ -1,4 +1,4 @@
-@model Course
+@model Challenge.ViewModels.CourseViewModels.GetCourseByIdViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -39,25 +39,25 @@
         <thead>
         <tr class="success">
             <th>
-                @Html.DisplayNameFor(model => model.CourseItems.ToList()[0].CourseItemTitle)
-                <td>
-                    <a asp-controller="CourseItem" asp-action="Create">Create module</a>
-                </td>
+                @Html.DisplayNameFor(model => model.CourseItems)
             </th>
         </tr>
         </thead>
+        <tbody>
         @foreach (var item in Model.CourseItems.ToList())
         {
-            <tbody>
             <td>
-                @Html.DisplayFor(model => item.CourseItemTitle)
-                <td>
-                    <a asp-controller="CourseItem" asp-action="Details" asp-route-id="@item.CourseItemId">Details</a>
-                </td>
+                @Html.DisplayFor(model => item.Value)
             </td>
-            </tbody>
+            <td>
+                <a asp-controller="CourseItem" asp-action="Details" asp-route-id="@item.Key">Details</a>
+            </td>
         }
+        </tbody>
     </table>
+    <tr>
+        <a asp-controller="CourseItem" asp-action="Create">New module</a>
+    </tr>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.CourseId">Edit course</a> |
