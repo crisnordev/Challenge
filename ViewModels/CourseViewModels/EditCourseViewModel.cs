@@ -1,18 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Challenge.ViewModels;
 
 namespace Challenge.ViewModels.CourseViewModels;
 
 public class EditCourseViewModel
 {
-    public EditCourseViewModel() { }
-
-    public EditCourseViewModel(string title, string tag, string summary, int duration)
+    public EditCourseViewModel()
     {
-        CourseTitle = title;
-        Tag = tag;
-        Summary = summary;
-        Duration = duration;
+        CourseItems = new Dictionary<Guid, string>();
     }
     
     [Required(ErrorMessage = "Course title is required.")]
@@ -34,4 +28,31 @@ public class EditCourseViewModel
     [Display(Name = "Duration")]
     [Range(1, 1000, ErrorMessage = "Module duration must be between 1 and 1000.")]
     public int Duration { get; set; }
+
+    public Dictionary<Guid, string> CourseItems { get; set; } 
+
+    public static implicit operator EditCourseViewModel(Course course)
+    {
+        var editCourse = new EditCourseViewModel
+        {
+            CourseTitle = course.CourseTitle,
+            Tag = course.Tag,
+            Summary = course.Summary,
+            Duration = course.Duration,
+            CourseItems = new Dictionary<Guid, string>()
+        };
+        
+        foreach (var item in course.CourseItems)
+            editCourse.CourseItems.Add(item.CourseItemId, item.CourseItemTitle);
+        
+        return editCourse;
+    }
+
+    public static implicit operator Course(EditCourseViewModel editCourseView) => new()
+    {
+        CourseTitle = editCourseView.CourseTitle,
+        Tag = editCourseView.Tag,
+        Summary = editCourseView.Summary,
+        Duration = editCourseView.Duration
+    };
 }

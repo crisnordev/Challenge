@@ -1,4 +1,4 @@
-@model IEnumerable<CourseItem>
+@model IEnumerable<Challenge.ViewModels.CourseItemViewModels.GetCourseItemsViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.CourseItemTitle)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Order)
+            @Html.DisplayNameFor(model => model.CourseTitle)
         </th>
         <th></th>
     </tr>
@@ -29,7 +29,7 @@
                 @Html.DisplayFor(modelItem => item.CourseItemTitle)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Order)
+                @Html.DisplayFor(modelItem => item.CourseTitle)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CourseItemId">Edit</a> |

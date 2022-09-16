@@ -1,4 +1,4 @@
-@model CourseItem
+@model Challenge.ViewModels.CourseItemViewModels.GetCourseItemByIdViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -23,12 +23,12 @@
             @Html.DisplayFor(model => model.Order)
         </dd>
         <dd class="col-sm-10">
-            @Html.DisplayNameFor(model => model.Course.CourseTitle)
+            @Html.DisplayNameFor(model => model.CourseTitle)
         </dd>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Course.CourseTitle)
+            @Html.DisplayFor(model => model.CourseTitle)
             <td>
-                <a asp-controller="Course" asp-action="Details" asp-route-id="@Model.Course.CourseId">Details</a> |
+                <a asp-controller="Course" asp-action="Details" asp-route-id="@Model.CourseId">Details</a> |
             </td>
         </dd>
     </dl>
@@ -36,27 +36,29 @@
         <thead>
         <tr class="success">
             <th>
-                @Html.DisplayNameFor(model => model.Lectures.ToList()[0].LectureTitle)
-                <td>
-                    <a asp-controller="Lecture" asp-action="Create">Create lecture</a>
-                </td>
+                @Html.DisplayNameFor(model => model.Lectures)
+            </th>
+            <th>
+                <a asp-controller="Lecture" asp-action="Create">Create lecture</a>
             </th>
         </tr>
         </thead>
+
+        <tbody>
         @foreach (var item in Model.Lectures.ToList())
         {
-            <tbody>
             <td>
-                @Html.DisplayFor(model => item.LectureTitle)
-                <td>
-                    <a asp-controller="Lecture" asp-action="Details" asp-route-id="@item.LectureId">Details</a>
-                </td>
+                @Html.DisplayFor(model => item.Value)
             </td>
-            </tbody>
+            <td>
+                <a asp-controller="Lecture" asp-action="Details" asp-route-id="@item.Key">Details</a>
+            </td>
         }
+        </tbody>
     </table>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.CourseItemId">Edit module</a> |
+    <a asp-action="Edit" asp-route-id="@Model.CourseItemId">Edit module</a> |
+    <a asp-action="Create">Create New</a> |
     <a asp-action="Index">Back to List</a>
 </div>

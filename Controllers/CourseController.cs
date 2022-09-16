@@ -1,3 +1,4 @@
+using System.Data.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Challenge.Data;
@@ -5,150 +6,118 @@ using Challenge.ViewModels;
 using Challenge.ViewModels.CourseViewModels;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Challenge.Controllers
+namespace Challenge.Controllers;
+
+[Authorize]
+public class CourseController : Controller
 {
-    [Authorize]
-    public class CourseController : Controller
+    private readonly ApplicationDbContext _context;
+
+    public CourseController(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public CourseController(ApplicationDbContext context)
+    [AllowAnonymous]
+    public async Task<IActionResult> Index()
+    {
+        var databaseCourses = await _context.Courses.AsNoTracking().ToListAsync();
+
+        if (!databaseCourses.Any()) return RedirectToAction(nameof(Create));
+
+        var courses = databaseCourses.Select(x => (GetCoursesViewModel)x).ToList();
+
+        return View(courses);
+    }
+
+    [AllowAnonymous]
+    public async Task<IActionResult> Details(Guid? id)
+    {
+        if (id == null) return BadRequest("Id must not be null.");
+
+        var course = await _context.Courses.Include(x => x.CourseItems)
+            .AsNoTracking().FirstOrDefaultAsync(m => m.CourseId == id);
+
+        if (course == null) return RedirectToAction(nameof(Index));
+
+        return View(course);
+    }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(CreateCourseViewModel model)
+    {
+        if (!ModelState.IsValid) return View(model);
+
+        var course = new Course(model.CourseTitle, model.Tag, model.Summary, model.Duration);
+
+        await _context.Courses.AddAsync(course);
+        await _context.SaveChangesAsync();
+
+        View(model);
+        return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> Edit(Guid? id, EditCourseViewModel model)
+    {
+        if (id == null) return BadRequest("Id must not be null.");
+
+        model = await _context.Courses.Include(x => x.CourseItems)
+            .AsNoTracking().FirstOrDefaultAsync(x => x.CourseId == id);
+
+        if (model == null) return RedirectToAction(nameof(Index));
+
+        return View(model);
+    }
+
+    [HttpPost, ActionName("Edit")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(Guid id, EditCourseViewModel model)
+    {
+        if (!ModelState.IsValid) return View(model);
+
+        var course = await _context.Courses.FindAsync(id);
+        course = model;
+
+        try
         {
-            _context = context;
-        }
-
-        [AllowAnonymous]
-        public async Task<IActionResult> Index()
-        {
-            return await _context.Courses.ToListAsync() != null
-                ? View(await _context.Courses.AsNoTracking().ToListAsync() as IEnumerable<GetCoursesViewModel>)
-                : Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
-        }
-
-        [AllowAnonymous]
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null || await _context.Courses.ToListAsync() == null)
-            {
-                return NotFound();
-            }
-
-            var course = await _context.Courses.Include(x => x.CourseItems)
-                .AsNoTracking().FirstOrDefaultAsync(m => m.CourseId == id);
-
-            if (course == null)
-            {
-                return NotFound();
-            }
-
-            return View(course);
-        }
-
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateCourseViewModel model)
-        {
-            if (!ModelState.IsValid) return View(model);
-
-            var course = new Course(model.CourseTitle, model.Tag, model.Summary, model.Duration);
-            
-            await _context.Courses.AddAsync(course);
+            _context.Update(course);
             await _context.SaveChangesAsync();
-            View(model);
-            return RedirectToAction(nameof(Index));
         }
-
-        public async Task<IActionResult> Edit(Guid? id)
+        catch (DbException)
         {
-            if (id == null || _context.Courses == null)
-            {
-                return NotFound();
-            }
-
-            var course = await _context.Courses.AsNoTracking().FirstOrDefaultAsync(x => x.CourseId == id);
-            if (course == null)
-            {
-                return NotFound();
-            }
-
-            var editCourse = new EditCourseViewModel(course.CourseTitle, course.Tag, course.Summary, course.Duration);
-
-            return View(editCourse);
+            StatusCode(500, "Internal server error.");
         }
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> Delete(Guid? id)
+    {
+        if (id == null) return BadRequest("Id must not be null.");
+
+        var course = await _context.Courses.AsNoTracking()
+            .FirstOrDefaultAsync(m => m.CourseId == id);
         
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, EditCourseViewModel model)
-        {
-            var course = await _context.Courses.FindAsync(id);
-            
-            if (course == null) return NotFound();
+        if (course == null) return RedirectToAction(nameof(Index));
 
-            if (!ModelState.IsValid) return View(model);
-            
-            course.CourseTitle = model.CourseTitle;
-            course.Tag = model.Tag;
-            course.Summary = model.Summary;
-            course.Duration = model.Duration;
+        return View(course);
+    }
 
-            try
-            {
-                _context.Update(course);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CourseExists(id))
-                {
-                    return NotFound();
-                }
-            }
-            return RedirectToAction(nameof(Index));
-        }
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(Guid id)
+    {
+        var course = await _context.Courses.FindAsync(id);
 
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null || await _context.Courses.ToListAsync() == null)
-            {
-                return NotFound();
-            }
+        _context.Courses.Remove(course);
+        await _context.SaveChangesAsync();
 
-            var course = await _context.Courses.AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseId == id);
-            if (course == null)
-            {
-                return NotFound();
-            }
-
-            return View(course);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
-        {
-            if (await _context.Courses.ToListAsync() == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Courses'  is null.");
-            }
-            
-            var course = await _context.Courses.FindAsync(id);
-            if (course == null) return RedirectToAction(nameof(Index));
-            
-            _context.Courses.Remove(course);
-            await _context.SaveChangesAsync();
-            
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool CourseExists(Guid id)
-        {
-          return (_context.Courses?.AsNoTracking().Any(e => e.CourseId == id)).GetValueOrDefault();
-        }
+        return RedirectToAction(nameof(Index));
     }
 }

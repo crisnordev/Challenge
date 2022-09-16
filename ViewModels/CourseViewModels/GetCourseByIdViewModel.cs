@@ -4,7 +4,10 @@ namespace Challenge.ViewModels.CourseViewModels;
 
 public class GetCourseByIdViewModel
 {
-    public GetCourseByIdViewModel() { }
+    public GetCourseByIdViewModel()
+    {
+        CourseItems = new Dictionary<Guid, string>();
+    }
 
     public Guid CourseId { get; set; }
     
@@ -28,10 +31,9 @@ public class GetCourseByIdViewModel
             Summary = course.Summary,
             Duration = course.Duration
         };
+        
         foreach (var courseItem in course.CourseItems)
-        {
             courseView.CourseItems.Add(courseItem.CourseItemId, courseItem.CourseItemTitle);
-        }
 
         return courseView;
     }

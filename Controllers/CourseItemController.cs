@@ -1,3 +1,4 @@
+using System.Data.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Challenge.Data;
@@ -6,160 +7,153 @@ using Challenge.ViewModels.CourseItemViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Challenge.Controllers
+namespace Challenge.Controllers;
+
+[Authorize]
+public class CourseItemController : Controller
 {
-    [Authorize]
-    public class CourseItemController : Controller
+    private readonly ApplicationDbContext _context;
+
+    public CourseItemController(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public CourseItemController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        [AllowAnonymous]
-        public async Task<IActionResult> Index()
-        {
-            return await _context.CourseItems.ToListAsync() != null
-                ? View(await _context.CourseItems.AsNoTracking().ToListAsync())
-                : Problem("Entity set 'ApplicationDbContext.Modules'  is null.");
-        }
-
-        [AllowAnonymous]
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null || await _context.CourseItems.ToListAsync() == null)
-            {
-                return NotFound();
-            }
-
-            var courseItem = await _context.CourseItems.Include(x => x.Course)
-                .Include(x => x.Lectures).AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseItemId == id);
-
-            if (courseItem == null)
-            {
-                return NotFound();
-            }
-
-            return View(courseItem);
-        }
-
-        public IActionResult Create(CreateCourseItemViewModel model)
-        {
-            ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseTitle");
+    [AllowAnonymous]
+    public async Task<IActionResult> Index()
+    {
+        var databaseCourseItem = await _context.CourseItems.Include(x =>
+            x.Course).AsNoTracking().OrderBy(x => x.Order).ToListAsync();
             
-            return View(model);
+        if (!databaseCourseItem.Any()) return RedirectToAction(nameof(Create));
+
+        var courseItem = databaseCourseItem.Select(x => 
+            (GetCourseItemsViewModel)x).ToList();
+            
+        return View(courseItem);
+    }
+
+    [AllowAnonymous]
+    public async Task<IActionResult> Details(Guid? id)
+    {
+        if (id == null) return BadRequest("Id must not be null.");
+
+        var courseItem = await _context.CourseItems.Include(x => x.Course)
+            .Include(x => x.Lectures).AsNoTracking()
+            .FirstOrDefaultAsync(m => m.CourseItemId == id);
+
+        if (courseItem == null) return RedirectToAction(nameof(Index));
+
+        return View(courseItem);
+    }
+
+    public IActionResult Create(CreateCourseItemViewModel model)
+    {
+        ViewData["CourseId"] = new SelectList(_context.Courses, "CourseId", "CourseTitle");
+
+        return View(model);
+    }
+
+    [HttpPost, ActionName("Create")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> CreateConfirm(CreateCourseItemViewModel model)
+    {
+        if (!ModelState.IsValid) return View(model);
+
+        var course = await _context.Courses.Include(x => x.CourseItems)
+            .FirstOrDefaultAsync(y => y.CourseId == model.CourseId);
+            
+        var item = course.CourseItems.FirstOrDefault(x => x.Order == model.Order);
+            
+        if (item != null)
+        {
+            model.ExistingOrder = true;
+            model.ExistingOrderItemId = item.CourseItemId;
+            model.Order = 0;
+            return RedirectToAction(nameof(Create), new {model});
         }
 
-        [HttpPost, ActionName("Create")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateConfirm(CreateCourseItemViewModel model)
+        var courseItem = (CourseItem)model;
+        course.CourseItems.ToList().Add(courseItem);
+
+        _context.Update(course);
+        await _context.AddAsync(courseItem);
+        await _context.SaveChangesAsync();
+
+        View(model);
+        return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> Edit(Guid id, EditCourseItemViewModel model)
+    {
+        if (id == null) return BadRequest("Id must not be null.");
+
+        model = await _context.CourseItems.Include(x => x.Course)
+            .AsNoTracking().FirstOrDefaultAsync(x => x.CourseItemId == id);
+            
+        if (model == null) return RedirectToAction(nameof(Index));
+
+        return View(model);
+    }
+
+    [HttpPost, ActionName("Edit")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> EditConfirm(Guid id, EditCourseItemViewModel model)
+    {
+        if (!ModelState.IsValid) return View(model);
+        
+        var courseItem = await _context.CourseItems.Include(x => x.Course)
+            .FirstOrDefaultAsync(x => x.CourseItemId == id);
+
+        var item = _context.CourseItems.AsNoTracking()
+            .Where(x => x.Course.CourseId == courseItem.Course.CourseId)
+            .FirstOrDefaultAsync(x => x.Order == model.Order).Result;
+        
+        if (item != null)
         {
-            if (!ModelState.IsValid) return View(model);
+            model.ExistingOrder = true;
+            model.CourseId = item.Course.CourseId;
+            model.Order = 0;
+            return RedirectToAction(nameof(Edit), new {id, model});
+        }
+            
+        courseItem = model;
 
-            var course = await _context.Courses.FindAsync(model.CourseId);
-            var courseItem = new CourseItem(model.CourseItemTitle, model.Order, course);
-            course.CourseItems.ToList().Add(courseItem);
-
-            _context.Update(course);
-            await _context.AddAsync(courseItem);
+        try
+        {
+            _context.Update(courseItem);
             await _context.SaveChangesAsync();
-            
-            View(model);
-            return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Edit(Guid id, EditCourseItemViewModel model)
+        catch (DbException)
         {
-            if (id == null || await _context.CourseItems.ToListAsync() == null)
-            {
-                return NotFound();
-            }
-
-            var item = await _context.CourseItems.Include(x => x.Course)
-                .AsNoTracking().FirstOrDefaultAsync(x => x.CourseItemId == id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-
-            model.CourseItemTitle = item.CourseItemTitle;
-            model.Order = item.Order;
-            
-            return View(model);
+            StatusCode(500, "Internal server error.");
         }
 
-        [HttpPost, ActionName("Edit")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditConfirm(Guid id, EditCourseItemViewModel model)
-        {
-            var courseItem = await _context.CourseItems.FindAsync(id);
+        return RedirectToAction(nameof(Index));
+    }
 
-            if (courseItem == null) return NotFound();
+    public async Task<IActionResult> Delete(Guid? id)
+    {
+        if (id == null) return BadRequest("Id must not be null.");
 
-            if (!ModelState.IsValid) return View(model);
+        var courseItem = await _context.CourseItems.AsNoTracking()
+            .FirstOrDefaultAsync(m => m.CourseItemId == id);
 
-            courseItem.CourseItemTitle = model.CourseItemTitle;
-            courseItem.Order = model.Order;
+        if (courseItem == null) return RedirectToAction(nameof(Index));
 
-            try
-            {
-                _context.Update(courseItem);
-                await _context.SaveChangesAsync();
-            }
+        return View(courseItem);
+    }
 
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ModuleExists(courseItem.CourseItemId))
-                {
-                    return NotFound();
-                }
-            }
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(Guid id)
+    {
+        var module = await _context.CourseItems.FindAsync(id);
+        
+        _context.CourseItems.Remove(module);
+        await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null || await _context.CourseItems.ToListAsync() == null)
-            {
-                return NotFound();
-            }
-
-            var courseItem = await _context.CourseItems.AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseItemId == id);
-
-            if (courseItem == null)
-            {
-                return NotFound();
-            }
-
-            return View(courseItem);
-        }
-
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
-        {
-            if (await _context.CourseItems.ToListAsync() == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Modules'  is null.");
-            }
-
-            var module = await _context.CourseItems.FindAsync(id);
-            if (module == null) return RedirectToAction(nameof(Index));
-
-            _context.CourseItems.Remove(module);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ModuleExists(Guid id)
-        {
-            return (_context.CourseItems?.AsNoTracking().Any(e => e.CourseItemId == id)).GetValueOrDefault();
-        }
+        return RedirectToAction(nameof(Index));
     }
 }

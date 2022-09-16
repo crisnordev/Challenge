@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Challenge.ViewModels;
 
 namespace Challenge.ViewModels.CourseViewModels;
 
 public class CreateCourseViewModel
 {
+    public CreateCourseViewModel() { }
+
     [Required(ErrorMessage = "Course title is required.")]
     [Display(Name = "Course title")]
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Course title must have between 2 and 80 characters.")]
@@ -14,7 +15,7 @@ public class CreateCourseViewModel
     [Display(Name = "Tag")]
     [StringLength(4, MinimumLength = 4, ErrorMessage = "Course tag must have 4 characters.")]
     public string Tag { get; set; }
-    
+
     [Required(ErrorMessage = "Course summary is required.")]
     [Display(Name = "Summary")]
     [StringLength(160, MinimumLength = 2, ErrorMessage = "Course summary must have between 2 and 160 characters.")]
@@ -24,4 +25,20 @@ public class CreateCourseViewModel
     [Display(Name = "Duration")]
     [Range(1, 1000, ErrorMessage = "Module duration must be between 1 and 1000.")]
     public int Duration { get; set; }
+
+    public static implicit operator CreateCourseViewModel(Course course) => new()
+    {
+        CourseTitle = course.CourseTitle,
+        Tag = course.Tag,
+        Summary = course.Summary,
+        Duration = course.Duration
+    };
+
+    public static implicit operator Course(CreateCourseViewModel createCourse) => new()
+    {
+        CourseTitle = createCourse.CourseTitle,
+        Tag = createCourse.Tag,
+        Summary = createCourse.Summary,
+        Duration = createCourse.Duration
+    };
 }
