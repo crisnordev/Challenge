@@ -1,3 +1,4 @@
+using System.Data.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Challenge.Data;
@@ -21,25 +22,24 @@ namespace Challenge.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-              return _context.Lectures != null ? 
-                          View(await _context.Lectures.AsNoTracking().ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Lectures'  is null.");
+            var databaseLectures = await _context.Lectures.Include(x => x.CourseItem).AsNoTracking().ToListAsync();
+
+            if (!databaseLectures.Any()) return RedirectToAction(nameof(Create));
+
+            var lectures = databaseLectures.Select(x => (GetLecturesViewModel)x).ToList();
+
+            return View(lectures);
         }
 
         [AllowAnonymous]
         public async Task<IActionResult> Details(Guid? id)
         {
-            if (id == null || _context.Lectures == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return BadRequest("Id must not be null.");
 
-            var lecture = await _context.Lectures.AsNoTracking()
-                .FirstOrDefaultAsync(m => m.LectureId == id);
-            if (lecture == null)
-            {
-                return NotFound();
-            }
+            var lecture = await _context.Lectures.Include(x => x.CourseItem)
+                .AsNoTracking().FirstOrDefaultAsync(m => m.LectureId == id);
+            
+            if (lecture == null) return RedirectToAction(nameof(Index));
 
             return View(lecture);
         }
@@ -48,7 +48,7 @@ namespace Challenge.Controllers
         {
             ViewData["CourseItemId"] = new SelectList(_context.CourseItems, "CourseItemId", "CourseItemTitle");
 
-            return View();
+            return View(model);
         }
 
         [HttpPost, ActionName("Create")]
@@ -57,75 +57,65 @@ namespace Challenge.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var courseItem = await _context.CourseItems.FindAsync(model.CourseItemId);
-            var lecture = new Lecture(model.LectureTitle, model.Description, model.VideoUrl, courseItem);
+            var courseItem = _context.CourseItems.FirstOrDefault(x => x.CourseItemId == model.CourseItemId);
+            
+            var lecture = (Lecture)model;
 
-            _context.Update(courseItem);
+            if (courseItem != null)
+            {
+                lecture.CourseItem = courseItem;
+                courseItem.Lectures.ToList().Add(lecture);
+                _context.Update(courseItem);
+            }
+            
             await _context.Lectures.AddAsync(lecture);
             await _context.SaveChangesAsync();
+            
             View(model);
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(Guid? id, EditLectureViewModel? model)
         {
-            if (id == null || _context.Lectures == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return BadRequest("Id must not be null.");
 
-            var item = await _context.Lectures.AsNoTracking().FirstOrDefaultAsync(x => x.LectureId == id);
-            if (item == null)
-            {
-                return NotFound();
-            }
-
-            var lecture = new EditLectureViewModel(item.LectureTitle, item.Description, item.VideoUrl);
+            model = await _context.Lectures.AsNoTracking().FirstOrDefaultAsync(x => x.LectureId == id);
             
-            return View(lecture);
+            if (model == null) return RedirectToAction(nameof(Index));
+            
+            return View(model);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, EditLectureViewModel model)
+        public async Task<IActionResult> EditConfirm(Guid id, EditLectureViewModel model)
         {
-            var lecture = await _context.Lectures.FindAsync(id);
-            
-            if (lecture == null) return NotFound();
-
             if (!ModelState.IsValid) return View(model);
+            
+            var lecture = await _context.Lectures.FindAsync(id);
 
-            lecture.LectureTitle = model.LectureTitle;
-            lecture.Description = model.Description;
-            lecture.VideoUrl = model.VideoUrl;
+            lecture = model;
 
             try
             {
                 _context.Update(lecture);
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbException)
             {
-                if (!LectureExists(lecture.LectureId))
-                {
-                    return NotFound();
-                }
+                StatusCode(500, "Internal server error.");
             }
+            
             return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Delete(Guid? id)
         {
-            if (id == null || await _context.Lectures.ToListAsync() == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return BadRequest("Id must not be null.");
 
             var lecture = await _context.Lectures.AsNoTracking().FirstOrDefaultAsync(m => m.LectureId == id);
-            if (lecture == null)
-            {
-                return NotFound();
-            }
+            
+            if (lecture == null) return RedirectToAction(nameof(Index));
 
             return View(lecture);
         }
@@ -134,23 +124,12 @@ namespace Challenge.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (_context.Lectures == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Lectures'  is null.");
-            }
-            
             var lecture = await _context.Lectures.FindAsync(id);
-            if (lecture == null) return RedirectToAction(nameof(Index));
-            
+
             _context.Lectures.Remove(lecture);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool LectureExists(Guid id)
-        {
-          return (_context.Lectures?.AsNoTracking().Any(e => e.LectureId == id)).GetValueOrDefault();
         }
     }
 }

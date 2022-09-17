@@ -30,15 +30,10 @@
         </dd>
         <dd class="col-sm-10">
             @Html.DisplayNameFor(model => model.CourseItem.CourseItemTitle)
-            <td>
-                <a asp-controller="CourseItem" asp-action="Create" >Create module</a> |
-            </td>
+            <a asp-controller="CourseItem" asp-action="Details">Details</a>
         </dd>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CourseItem.CourseItemTitle)
-            <td>
-                <a asp-controller="CourseItem" asp-action="Details" asp-route-id="@Model.CourseItem.CourseItemId">Details</a>
-            </td>
         </dd>
     </dl>
 </div>

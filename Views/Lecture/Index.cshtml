@@ -1,4 +1,4 @@
-@model IEnumerable<Lecture>
+@model IEnumerable<Challenge.ViewModels.LectureViewModels.GetLecturesViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.LectureTitle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VideoUrl)
+                @Html.DisplayNameFor(model => model.CourseItemTitle)
             </th>
             <th></th>
         </tr>
@@ -28,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.LectureTitle)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VideoUrl)
+                @Html.DisplayFor(modelItem => item.CourseItemTitle)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.LectureId">Edit</a> |

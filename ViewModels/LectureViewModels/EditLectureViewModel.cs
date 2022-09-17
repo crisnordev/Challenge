@@ -5,13 +5,6 @@ namespace Challenge.ViewModels.LectureViewModels;
 public class EditLectureViewModel
 {
     public EditLectureViewModel() { }
-
-    public EditLectureViewModel(string title, string description, string videoUrl)
-    {
-        LectureTitle = title;
-        Description = description;
-        VideoUrl = videoUrl;
-    }
     
     [Required(ErrorMessage = "Lecture title is required.")]
     [Display(Name = "Lecture title")]
@@ -28,4 +21,18 @@ public class EditLectureViewModel
     [Display(Name = "Url")]
     [StringLength(2046, MinimumLength = 10, ErrorMessage = "Lecture video Url must have between 10 and 2046 characters.")]
     public string VideoUrl { get; set; } = "https://www.";
+    
+    public static implicit operator EditLectureViewModel(Lecture lecture) => new()
+    {
+        LectureTitle = lecture.LectureTitle,
+        Description = lecture.Description,
+        VideoUrl = lecture.VideoUrl,
+    };
+    
+    public static implicit operator Lecture(EditLectureViewModel editLectureViewModel) => new()
+    {
+        LectureTitle = editLectureViewModel.LectureTitle,
+        Description = editLectureViewModel.Description,
+        VideoUrl = editLectureViewModel.VideoUrl,
+    };
 }

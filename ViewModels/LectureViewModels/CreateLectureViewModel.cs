@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Challenge.ViewModels;
 
 namespace Challenge.ViewModels.LectureViewModels;
 
@@ -17,8 +16,24 @@ public class CreateLectureViewModel
 
     [Required(ErrorMessage = "Lecture video Url is required.")]
     [Display(Name = "Url")]
-    [StringLength(2046, MinimumLength = 10, ErrorMessage = "Lecture video Url must have between 10 and 2046 characters.")]
+    [StringLength(2046, MinimumLength = 10,
+        ErrorMessage = "Lecture video Url must have between 10 and 2046 characters.")]
     public string VideoUrl { get; set; } = "https://www.";
 
     public Guid CourseItemId { get; set; }
+
+    public static implicit operator CreateLectureViewModel(Lecture lecture) => new()
+    {
+        LectureTitle = lecture.LectureTitle,
+        Description = lecture.Description,
+        VideoUrl = lecture.VideoUrl,
+        CourseItemId = lecture.CourseItem.CourseItemId
+    };
+
+    public static implicit operator Lecture(CreateLectureViewModel createLectureViewModel) => new()
+    {
+        LectureTitle = createLectureViewModel.LectureTitle,
+        Description = createLectureViewModel.Description,
+        VideoUrl = createLectureViewModel.VideoUrl,
+    };
 }
