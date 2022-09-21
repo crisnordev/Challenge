@@ -21,11 +21,15 @@ public class CourseController : Controller
     [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
-        var databaseCourses = await _context.Courses.AsNoTracking().ToListAsync();
+        var courses = await _context.Courses.Select(x => new GetCoursesViewModel
+            {
+                CourseId = x.CourseId,
+                CourseTitle = x.CourseTitle,
+                Tag = x.Tag
+            })
+            .AsNoTracking().ToListAsync();
 
-        if (!databaseCourses.Any()) return RedirectToAction(nameof(Create));
-
-        var courses = databaseCourses.Select(x => (GetCoursesViewModel)x).ToList();
+        if (!courses.Any()) return RedirectToAction(nameof(Create));
 
         return View(courses);
     }
@@ -35,9 +39,16 @@ public class CourseController : Controller
     {
         if (id == null) return BadRequest("Id must not be null.");
 
-        var course = await _context.Courses.Include(x => x.CourseItems)
-            .AsNoTracking().FirstOrDefaultAsync(m => m.CourseId == id);
-
+        var course = await _context.Courses.AsNoTracking().Select(x => new GetCourseByIdViewModel
+            {
+                CourseId = x.CourseId,
+                CourseTitle = x.CourseTitle,
+                Tag = x.Tag,
+                Duration = x.Duration,
+                CourseItems = x.CourseItems.Select(y => y.CourseItemTitle).ToList()
+            })
+            .FirstOrDefaultAsync(m => m.CourseId == id);
+        
         if (course == null) return RedirectToAction(nameof(Index));
 
         return View(course);
@@ -63,16 +74,15 @@ public class CourseController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    public async Task<IActionResult> Edit(Guid? id, EditCourseViewModel model)
+    public async Task<IActionResult> Edit(Guid? id)
     {
         if (id == null) return BadRequest("Id must not be null.");
 
-        model = await _context.Courses.Include(x => x.CourseItems)
-            .AsNoTracking().FirstOrDefaultAsync(x => x.CourseId == id);
+        var model = await _context.Courses.AsNoTracking().FirstOrDefaultAsync(x => x.CourseId == id);
 
         if (model == null) return RedirectToAction(nameof(Index));
 
-        return View(model);
+        return View((EditCourseViewModel)model);
     }
 
     [HttpPost, ActionName("Edit")]
@@ -82,11 +92,17 @@ public class CourseController : Controller
         if (!ModelState.IsValid) return View(model);
 
         var course = await _context.Courses.FindAsync(id);
-        course = model;
+        
+        if (course == null) return RedirectToAction(nameof(Index));
+        
+        course.CourseTitle = model.CourseTitle;
+        course.Tag = model.Tag;
+        course.Summary = model.Summary;
+        course.Duration = model.Duration;
 
         try
         {
-            _context.Update(course);
+            _context.Courses.Update(course);
             await _context.SaveChangesAsync();
         }
         catch (DbException)

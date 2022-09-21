@@ -18,8 +18,6 @@ public class CreateCourseItemViewModel
 
     public bool ExistingOrder { get; set; }
 
-    public Guid ExistingOrderItemId { get; set; }
-    
     public Guid CourseId { get; set; }
     
     public static implicit operator CreateCourseItemViewModel(CourseItem courseItem) => new()

@@ -31,8 +31,8 @@ public class LectureMap : IEntityTypeConfiguration<Lecture>
             .HasMaxLength(2046);
 
         builder.HasOne(x => x.CourseItem)
-            .WithMany()
-            .HasForeignKey("CourseItemId")
-            .HasConstraintName("FK_Lecture_CourseItemId");
+            .WithMany(x => x.Lectures)
+            .HasConstraintName("FK_Lecture_CourseItemId")
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

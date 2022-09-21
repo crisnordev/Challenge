@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Challenge.Migrations
 {
-    public partial class CreateModelsTables : Migration
+    public partial class v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -176,8 +176,7 @@ namespace Challenge.Migrations
                     CourseItemId = table.Column<Guid>(type: "TEXT", nullable: false),
                     CourseItemTitle = table.Column<string>(type: "NVARCHAR", maxLength: 80, nullable: false),
                     Order = table.Column<int>(type: "INTEGER", nullable: false),
-                    CourseId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    CourseId1 = table.Column<Guid>(type: "TEXT", nullable: true)
+                    CourseId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -188,11 +187,6 @@ namespace Challenge.Migrations
                         principalTable: "Course",
                         principalColumn: "CourseId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Module_Course_CourseId1",
-                        column: x => x.CourseId1,
-                        principalTable: "Course",
-                        principalColumn: "CourseId");
                 });
 
             migrationBuilder.CreateTable(
@@ -203,8 +197,7 @@ namespace Challenge.Migrations
                     LectureTitle = table.Column<string>(type: "NVARCHAR", maxLength: 80, nullable: false),
                     Description = table.Column<string>(type: "NVARCHAR", maxLength: 160, nullable: false),
                     VideoUrl = table.Column<string>(type: "NVARCHAR", maxLength: 2046, nullable: false),
-                    CourseItemId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    CourseItemId1 = table.Column<Guid>(type: "TEXT", nullable: true)
+                    CourseItemId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -215,11 +208,6 @@ namespace Challenge.Migrations
                         principalTable: "Module",
                         principalColumn: "CourseItemId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Lecture_Module_CourseItemId1",
-                        column: x => x.CourseItemId1,
-                        principalTable: "Module",
-                        principalColumn: "CourseItemId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -265,19 +253,9 @@ namespace Challenge.Migrations
                 column: "CourseItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Lecture_CourseItemId1",
-                table: "Lecture",
-                column: "CourseItemId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Module_CourseId",
                 table: "Module",
                 column: "CourseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Module_CourseId1",
-                table: "Module",
-                column: "CourseId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

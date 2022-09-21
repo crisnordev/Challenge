@@ -4,11 +4,6 @@ namespace Challenge.ViewModels.CourseViewModels;
 
 public class EditCourseViewModel
 {
-    public EditCourseViewModel()
-    {
-        CourseItems = new Dictionary<Guid, string>();
-    }
-    
     [Required(ErrorMessage = "Course title is required.")]
     [Display(Name = "Course title")]
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Course title must have between 2 and 80 characters.")]
@@ -49,10 +44,10 @@ public class EditCourseViewModel
     }
 
     public static implicit operator Course(EditCourseViewModel editCourseView) => new()
-    {
-        CourseTitle = editCourseView.CourseTitle,
-        Tag = editCourseView.Tag,
-        Summary = editCourseView.Summary,
-        Duration = editCourseView.Duration
-    };
+        {
+            CourseTitle = editCourseView.CourseTitle,
+            Tag = editCourseView.Tag,
+            Summary = editCourseView.Summary,
+            Duration = editCourseView.Duration
+        };
 }

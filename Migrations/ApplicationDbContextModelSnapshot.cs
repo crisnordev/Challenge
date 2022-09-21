@@ -17,7 +17,7 @@ namespace Challenge.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
 
-            modelBuilder.Entity("Challenge.Models.Course", b =>
+            modelBuilder.Entity("Challenge.ViewModels.Course", b =>
                 {
                     b.Property<Guid>("CourseId")
                         .ValueGeneratedOnAdd()
@@ -50,16 +50,13 @@ namespace Challenge.Migrations
                     b.ToTable("Course", (string)null);
                 });
 
-            modelBuilder.Entity("Challenge.Models.CourseItem", b =>
+            modelBuilder.Entity("Challenge.ViewModels.CourseItem", b =>
                 {
                     b.Property<Guid>("CourseItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("CourseId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("CourseId1")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CourseItemTitle")
@@ -76,21 +73,16 @@ namespace Challenge.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("CourseId1");
-
                     b.ToTable("Module", (string)null);
                 });
 
-            modelBuilder.Entity("Challenge.Models.Lecture", b =>
+            modelBuilder.Entity("Challenge.ViewModels.Lecture", b =>
                 {
                     b.Property<Guid>("LectureId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("CourseItemId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid?>("CourseItemId1")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -114,8 +106,6 @@ namespace Challenge.Migrations
                     b.HasKey("LectureId");
 
                     b.HasIndex("CourseItemId");
-
-                    b.HasIndex("CourseItemId1");
 
                     b.ToTable("Lecture", (string)null);
                 });
@@ -316,34 +306,26 @@ namespace Challenge.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Challenge.Models.CourseItem", b =>
+            modelBuilder.Entity("Challenge.ViewModels.CourseItem", b =>
                 {
-                    b.HasOne("Challenge.Models.Course", "Course")
-                        .WithMany()
+                    b.HasOne("Challenge.ViewModels.Course", "Course")
+                        .WithMany("CourseItems")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_CourseItem_CourseId");
 
-                    b.HasOne("Challenge.Models.Course", null)
-                        .WithMany("CourseItems")
-                        .HasForeignKey("CourseId1");
-
                     b.Navigation("Course");
                 });
 
-            modelBuilder.Entity("Challenge.Models.Lecture", b =>
+            modelBuilder.Entity("Challenge.ViewModels.Lecture", b =>
                 {
-                    b.HasOne("Challenge.Models.CourseItem", "CourseItem")
-                        .WithMany()
+                    b.HasOne("Challenge.ViewModels.CourseItem", "CourseItem")
+                        .WithMany("Lectures")
                         .HasForeignKey("CourseItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Lecture_CourseItemId");
-
-                    b.HasOne("Challenge.Models.CourseItem", null)
-                        .WithMany("Lectures")
-                        .HasForeignKey("CourseItemId1");
 
                     b.Navigation("CourseItem");
                 });
@@ -399,12 +381,12 @@ namespace Challenge.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Challenge.Models.Course", b =>
+            modelBuilder.Entity("Challenge.ViewModels.Course", b =>
                 {
                     b.Navigation("CourseItems");
                 });
 
-            modelBuilder.Entity("Challenge.Models.CourseItem", b =>
+            modelBuilder.Entity("Challenge.ViewModels.CourseItem", b =>
                 {
                     b.Navigation("Lectures");
                 });

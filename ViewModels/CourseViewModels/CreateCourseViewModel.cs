@@ -4,8 +4,6 @@ namespace Challenge.ViewModels.CourseViewModels;
 
 public class CreateCourseViewModel
 {
-    public CreateCourseViewModel() { }
-
     [Required(ErrorMessage = "Course title is required.")]
     [Display(Name = "Course title")]
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Course title must have between 2 and 80 characters.")]

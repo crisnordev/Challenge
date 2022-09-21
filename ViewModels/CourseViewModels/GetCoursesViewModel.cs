@@ -4,8 +4,6 @@ namespace Challenge.ViewModels.CourseViewModels;
 
 public class GetCoursesViewModel
 {
-    public GetCoursesViewModel() { }
-
     public Guid CourseId { get; set; }
 
     [Display(Name = "Course")] public string CourseTitle { get; set; }

@@ -24,9 +24,9 @@ public class CourseItemMap : IEntityTypeConfiguration<CourseItem>
             .HasColumnType("INTEGER");
 
         builder.HasOne(x => x.Course)
-            .WithMany()
-            .HasForeignKey("CourseId")
-            .HasConstraintName("FK_CourseItem_CourseId");
+            .WithMany(x => x.CourseItems)
+            .HasConstraintName("FK_CourseItem_CourseId")
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasMany(x => x.Lectures);
     }
