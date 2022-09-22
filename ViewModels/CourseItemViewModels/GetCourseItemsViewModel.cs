@@ -10,7 +10,7 @@ public class GetCourseItemsViewModel
 
     [Display(Name = "Module")] public string CourseItemTitle { get; set; } = string.Empty;
 
-    public int Order { get; set; }
+    [Display(Name = "Order")] public int Order { get; set; }
     
     [Display(Name = "Course")] public string CourseTitle { get; set; }
 

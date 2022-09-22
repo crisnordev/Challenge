@@ -1,27 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using NuGet.Packaging;
 
 namespace Challenge.ViewModels.CourseItemViewModels;
 
 public class GetCourseItemByIdViewModel
 {
-    public GetCourseItemByIdViewModel()
-    {
-        Lectures = new Dictionary<Guid, string>();
-    }
-
     public Guid CourseItemId { get; set; }
 
-    [Display(Name = "Module")]
-    public string CourseItemTitle { get; set; } = string.Empty;
+    [Display(Name = "Module")] public string CourseItemTitle { get; set; } = string.Empty;
 
-    [Display(Name = "Order")]
-    public int Order { get; set; }
+    [Display(Name = "Order")] public int Order { get; set; }
 
     public Guid CourseId { get; set; }
-    
-    [Display(Name = "Course")] public string CourseTitle { get; set; }
 
-    [Display(Name = "Lectures")] public Dictionary<Guid, string> Lectures { get; set; }
+    [Display(Name = "Course")] public string CourseTitle { get; set; } = string.Empty;
+
+    [Display(Name = "Lectures")] public List<string> Lectures { get; set; } = new();
     
     public static implicit operator GetCourseItemByIdViewModel(CourseItem courseItem)
     {
@@ -31,11 +25,11 @@ public class GetCourseItemByIdViewModel
             CourseItemTitle = courseItem.CourseItemTitle,
             Order = courseItem.Order,
             CourseId = courseItem.Course.CourseId,
-            CourseTitle = courseItem.Course.CourseTitle
+            CourseTitle = courseItem.Course.CourseTitle,
+            Lectures = new List<string>()
         };
-        
-        foreach (var lecture in courseItem.Lectures)
-            item.Lectures.Add(lecture.LectureId, lecture.LectureTitle);
+
+        item.Lectures.AddRange(courseItem.Lectures.Select(x => x.LectureTitle));
             
         return item;
     }

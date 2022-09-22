@@ -22,13 +22,17 @@ public class CourseItemController : Controller
     [AllowAnonymous]
     public async Task<IActionResult> Index()
     {
-        var databaseCourseItem = await _context.CourseItems.Include(x =>
-            x.Course).AsNoTracking().OrderBy(x => x.Order).ToListAsync();
+        var courseItem = await _context.CourseItems.Include(x =>
+            x.Course).Select(x => new GetCourseItemsViewModel
+        {
+            CourseItemId = x.CourseItemId,
+            CourseItemTitle = x.CourseItemTitle,
+            Order = x.Order,
+            CourseTitle = x.Course.CourseTitle
+        }).AsNoTracking().OrderBy(x => x.CourseTitle)
+            .ThenBy(x => x.Order).ToListAsync();
             
-        if (!databaseCourseItem.Any()) return RedirectToAction(nameof(Create));
-
-        var courseItem = databaseCourseItem.Select(x => 
-            (GetCourseItemsViewModel)x).ToList();
+        if (!courseItem.Any()) return RedirectToAction(nameof(Create));
             
         return View(courseItem);
     }
@@ -40,7 +44,15 @@ public class CourseItemController : Controller
 
         var courseItem = await _context.CourseItems.Include(x => x.Course)
             .Include(x => x.Lectures).AsNoTracking()
-            .FirstOrDefaultAsync(m => m.CourseItemId == id);
+            .Select(x => new GetCourseItemByIdViewModel
+            {
+                CourseItemId = x.CourseItemId,
+                CourseItemTitle = x.CourseItemTitle,
+                Order = x.Order,
+                CourseId = x.Course.CourseId,
+                CourseTitle = x.Course.CourseTitle,
+                Lectures = x.Lectures.Select(x => x.LectureTitle).ToList()
+            }).FirstOrDefaultAsync(m => m.CourseItemId == id);
 
         if (courseItem == null) return RedirectToAction(nameof(Index));
 
@@ -60,23 +72,27 @@ public class CourseItemController : Controller
     {
         if (!ModelState.IsValid) return View(model);
 
-        var course = await _context.Courses.Include(x => x.CourseItems)
-            .FirstOrDefaultAsync(y => y.CourseId == model.CourseId);
+        var course = _context.Courses.Include(x => x.CourseItems)
+            .FirstOrDefault(y => y.CourseId == model.CourseId);
             
-        var item = course.CourseItems.FirstOrDefault(x => x.Order == model.Order);
+        var existingItemInOrder = course.CourseItems.FirstOrDefault(x => x.Order == model.Order);
             
-        if (item != null)
+        if (existingItemInOrder != null)
         {
             model.ExistingOrder = true;
-            model.ExistingOrderItemId = item.CourseItemId;
             model.Order = 0;
             return RedirectToAction(nameof(Create), new {model});
         }
 
         var courseItem = (CourseItem)model;
-        course.CourseItems.ToList().Add(courseItem);
 
-        _context.Update(course);
+        if (course != null)
+        {
+            courseItem.Course = course;
+            course.CourseItems.ToList().Add(courseItem);
+            _context.Update(course);
+        }
+        
         await _context.AddAsync(courseItem);
         await _context.SaveChangesAsync();
 
@@ -104,15 +120,15 @@ public class CourseItemController : Controller
         
         var courseItem = await _context.CourseItems.Include(x => x.Course)
             .FirstOrDefaultAsync(x => x.CourseItemId == id);
-
-        var item = _context.CourseItems.AsNoTracking()
+        
+        var existingItemInOrder = _context.CourseItems.AsNoTracking()
             .Where(x => x.Course.CourseId == courseItem.Course.CourseId)
             .FirstOrDefaultAsync(x => x.Order == model.Order).Result;
         
-        if (item != null)
+        if (existingItemInOrder != null)
         {
             model.ExistingOrder = true;
-            model.CourseId = item.Course.CourseId;
+            model.CourseId = existingItemInOrder.Course.CourseId;
             model.Order = 0;
             return RedirectToAction(nameof(Edit), new {id, model});
         }

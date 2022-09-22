@@ -13,6 +13,9 @@
     <thead>
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Order)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.CourseItemTitle)
         </th>
         <th>
@@ -25,6 +28,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.Order)
+            </th>
             <td>
                 @Html.DisplayFor(modelItem => item.CourseItemTitle)
             </td>
