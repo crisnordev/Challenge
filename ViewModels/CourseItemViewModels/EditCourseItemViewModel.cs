@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Challenge.ViewModels.CourseItemViewModels;
+namespace courseappchallenge.ViewModels.CourseItemViewModels;
 
 public class EditCourseItemViewModel
 {

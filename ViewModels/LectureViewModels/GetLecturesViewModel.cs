@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Challenge.ViewModels.LectureViewModels;
+namespace courseappchallenge.ViewModels.LectureViewModels;
 
 public class GetLecturesViewModel
 {

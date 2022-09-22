@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Challenge.ViewModels.CourseViewModels;
+namespace courseappchallenge.ViewModels.CourseViewModels;
 
 public class GetCourseByIdViewModel
 {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using NuGet.Packaging;
 
-namespace Challenge.ViewModels.CourseItemViewModels;
+namespace courseappchallenge.ViewModels.CourseItemViewModels;
 
 public class GetCourseItemByIdViewModel
 {

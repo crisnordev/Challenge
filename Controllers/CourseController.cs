@@ -1,12 +1,12 @@
 using System.Data.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Challenge.Data;
-using Challenge.ViewModels;
-using Challenge.ViewModels.CourseViewModels;
+using courseappchallenge.Data;
+using courseappchallenge.ViewModels;
+using courseappchallenge.ViewModels.CourseViewModels;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Challenge.Controllers;
+namespace courseappchallenge.Controllers;
 
 [Authorize]
 public class CourseController : Controller

@@ -1,3 +1,3 @@
-﻿namespace Challenge.Shared;
+﻿namespace courseappchallenge.Shared;
 
 public class Entity { }
