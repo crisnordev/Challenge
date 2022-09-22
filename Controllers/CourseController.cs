@@ -44,6 +44,7 @@ public class CourseController : Controller
                 CourseId = x.CourseId,
                 CourseTitle = x.CourseTitle,
                 Tag = x.Tag,
+                Summary = x.Summary,
                 Duration = x.Duration,
                 CourseItems = x.CourseItems.Select(y => y.CourseItemTitle).ToList()
             })

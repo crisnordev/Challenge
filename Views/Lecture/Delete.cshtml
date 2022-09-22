@@ -7,9 +7,10 @@
 <h1>Delete</h1>
 
 <h3>Are you sure you want to delete this?</h3>
+
+<h4>Lecture</h4>
+
 <div>
-    <h4>Lecture</h4>
-    <hr />
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.LectureTitle)
@@ -24,7 +25,6 @@
             @Html.DisplayFor(model => model.VideoUrl)
         </dd>
     </dl>
-    
     <form asp-action="Delete">
         <input type="hidden" asp-for="LectureId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

@@ -6,23 +6,20 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tag)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tag)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.ToList()) {
+    @foreach (var item in Model.ToList()) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CourseTitle)
@@ -36,6 +33,9 @@
                 <a asp-action="Delete" asp-route-id="@item.CourseId">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
+<p>
+    <a asp-action="Create">Create new course</a>
+</p>

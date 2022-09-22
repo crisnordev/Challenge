@@ -7,7 +7,15 @@
 <h1>Create</h1>
 
 <h4>Module</h4>
-<hr/>
+
+@if (Model.ExistingOrder)
+{
+    <h4>There is another module in this order. </h4>
+    <td>
+        <a asp-controller="Course" asp-action="Details" asp-route-id="@Model.CourseId">Detail</a>
+    </td>
+}
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -36,13 +44,6 @@
                 <input asp-for="CourseItemTitle" class="form-control"/>
                 <span asp-validation-for="CourseItemTitle" class="text-danger"></span>
             </div>
-            @if (Model.ExistingOrder)
-            {
-                <h4>There is another module in this order. </h4>
-                <td>
-                    <a asp-controller="Course" asp-action="Details" asp-route-id="@Model.CourseId">Detail</a>
-                </td>
-            }
             <div class="form-group">
                 <label asp-for="Order" class="control-label"></label>
                 <input asp-for="Order" class="form-control"/>

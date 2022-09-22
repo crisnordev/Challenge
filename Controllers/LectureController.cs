@@ -22,11 +22,16 @@ namespace Challenge.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var databaseLectures = await _context.Lectures.Include(x => x.CourseItem).AsNoTracking().ToListAsync();
+            var lectures = await _context.Lectures.Include(x => x.CourseItem)
+                .Select(x => new GetLecturesViewModel
+                {
+                    LectureId = x.LectureId,
+                    LectureTitle = x.LectureTitle,
+                    CourseItemTitle = x.CourseItem.CourseItemTitle
+                })
+                .AsNoTracking().ToListAsync();
 
-            if (!databaseLectures.Any()) return RedirectToAction(nameof(Create));
-
-            var lectures = databaseLectures.Select(x => (GetLecturesViewModel)x).ToList();
+            if (!lectures.Any()) return RedirectToAction(nameof(Create));
 
             return View(lectures);
         }
@@ -37,6 +42,15 @@ namespace Challenge.Controllers
             if (id == null) return BadRequest("Id must not be null.");
 
             var lecture = await _context.Lectures.Include(x => x.CourseItem)
+                .Select(x => new GetLectureByIdViewModel
+                {
+                    LectureId = x.LectureId,
+                    LectureTitle = x.LectureTitle,
+                    Description = x.Description,
+                    VideoUrl = x.VideoUrl,
+                    CourseItemId = x.CourseItem.CourseItemId,
+                    CourseItemTitle = x.CourseItem.CourseItemTitle
+                })
                 .AsNoTracking().FirstOrDefaultAsync(m => m.LectureId == id);
             
             if (lecture == null) return RedirectToAction(nameof(Index));
