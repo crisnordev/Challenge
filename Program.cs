@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using courseappchallenge.Data;
+using courseappchallenge.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,10 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+var apiKey = Environment.GetEnvironmentVariable("SendGridToken");
+builder.Services.AddSingleton(new AuthMessageSenderOptions {SendGridKey = apiKey});
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 var app = builder.Build();
 
