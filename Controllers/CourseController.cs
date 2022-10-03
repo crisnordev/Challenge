@@ -64,7 +64,7 @@ public class CourseController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CreateCourseViewModel model)
     {
-        if (!ModelState.IsValid) return View(model);
+        if (!ModelState.IsValid) return RedirectToAction(nameof(Create));
 
         var course = new Course(model.CourseTitle, model.Tag, model.Summary, model.Duration);
 
@@ -90,7 +90,7 @@ public class CourseController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(Guid id, EditCourseViewModel model)
     {
-        if (!ModelState.IsValid) return View(model);
+        if (!ModelState.IsValid) return RedirectToAction(nameof(Edit));
 
         var course = await _context.Courses.FindAsync(id);
         

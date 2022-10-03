@@ -69,7 +69,7 @@ namespace courseappchallenge.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateConfirm(CreateLectureViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid) return RedirectToAction(nameof(Create));
 
             var courseItem = _context.CourseItems.FirstOrDefault(x => x.CourseItemId == model.CourseItemId);
             
@@ -89,7 +89,7 @@ namespace courseappchallenge.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Edit(Guid? id, EditLectureViewModel? model)
+        public async Task<IActionResult> Edit(Guid? id, EditLectureViewModel model)
         {
             if (id == null) return BadRequest("Id must not be null.");
 
@@ -104,7 +104,7 @@ namespace courseappchallenge.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditConfirm(Guid id, EditLectureViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid) return RedirectToAction(nameof(Edit));
             
             var lecture = await _context.Lectures.FindAsync(id);
 

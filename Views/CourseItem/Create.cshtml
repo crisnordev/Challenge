@@ -8,14 +8,6 @@
 
 <h4>Module</h4>
 
-@if (Model.ExistingOrder)
-{
-    <h4>There is another module in this order. </h4>
-    <td>
-        <a asp-controller="Course" asp-action="Details" asp-route-id="@Model.CourseId">Detail</a>
-    </td>
-}
-
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">

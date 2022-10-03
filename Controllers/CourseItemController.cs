@@ -70,7 +70,7 @@ public class CourseItemController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> CreateConfirm(CreateCourseItemViewModel model)
     {
-        if (!ModelState.IsValid) return View(model);
+        if (!ModelState.IsValid) return RedirectToAction(nameof(Create));
 
         var course = _context.Courses.Include(x => x.CourseItems)
             .FirstOrDefault(y => y.CourseId == model.CourseId);
@@ -100,7 +100,7 @@ public class CourseItemController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    public async Task<IActionResult> Edit(Guid id, EditCourseItemViewModel model)
+    public async Task<IActionResult> Edit(Guid? id, EditCourseItemViewModel model)
     {
         if (id == null) return BadRequest("Id must not be null.");
 
@@ -116,7 +116,7 @@ public class CourseItemController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> EditConfirm(Guid id, EditCourseItemViewModel model)
     {
-        if (!ModelState.IsValid) return View(model);
+        if (!ModelState.IsValid) return RedirectToAction(nameof(Edit));
         
         var courseItem = await _context.CourseItems.Include(x => x.Course)
             .FirstOrDefaultAsync(x => x.CourseItemId == id);
