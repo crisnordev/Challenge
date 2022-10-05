@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using courseappchallenge.Data;
 using courseappchallenge.Models;
 using courseappchallenge.Services;
+using Microsoft.AspNetCore.Identity;
+using SendGrid.Extensions.DependencyInjection;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,8 +15,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = true;
+        options.SignIn.RequireConfirmedEmail = true;
+        options.SignIn.RequireConfirmedPhoneNumber = false;
+    })
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddSignInManager()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddTransient<IEmailService, EmailService>();
 
@@ -22,13 +32,12 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-var smtp = new Configuration.SmtpConfiguration();
-app.Configuration.GetSection("Smtp").Bind(smtp);
-Configuration.Smtp = smtp;
+var sendGrid = new Configuration.SendGridConfiguration();
+app.Configuration.GetSection("SendGridKey").Bind(sendGrid);
+Configuration.SendGridKey.Token = sendGrid.Token;
 
 app.UseExceptionHandler("/Home/Error");
 app.UseHsts();
-
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

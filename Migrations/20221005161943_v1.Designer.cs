@@ -11,7 +11,7 @@ using courseappchallenge.Data;
 namespace courseappchallenge.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221003153605_v1")]
+    [Migration("20221005161943_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

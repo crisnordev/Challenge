@@ -1,4 +1,4 @@
-﻿using courseappchallenge.Models;
+using courseappchallenge.Models;
 using courseappchallenge.ViewModels.AccountViewModels;
 using courseappchallenge.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -26,18 +26,13 @@ public class AccountController : Controller
 
     [HttpGet]
     [AllowAnonymous]
-    public IActionResult Login(string returnUrl = null)
-    {
-        ViewData["ReturnUrl"] = returnUrl;
-        return View();
-    }
+    public IActionResult Login() => View();
 
     [HttpPost]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
     {
-        ViewData["ReturnUrl"] = returnUrl;
         if (!ModelState.IsValid) return View(model);
         
         var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, 
@@ -46,27 +41,22 @@ public class AccountController : Controller
 
         ModelState.AddModelError(string.Empty, "Invalid login attempt.");
         
-        return View(model);
-
+        View(model);
+        return RedirectToAction(nameof(Index), "Home");
     }
 
     [HttpGet]
     [AllowAnonymous]
-    public IActionResult Register(string returnUrl = null)
-    {
-        ViewData["ReturnUrl"] = returnUrl;
-        return View();
-    }
+    public IActionResult Register() => View();
 
     [HttpPost]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+    public async Task<IActionResult> Register(RegisterViewModel model)
     {
-        ViewData["ReturnUrl"] = returnUrl;
         if (!ModelState.IsValid) return View(model);
         
-        var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+        var user = new ApplicationUser { UserName = model.UserName, Email = model.Email};
         var result = await _userManager.CreateAsync(user, model.Password);
         if (result.Succeeded)
         {
@@ -74,18 +64,18 @@ public class AccountController : Controller
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new 
                 { UserId = user.Id, Code = code }, protocol: HttpContext.Request.Scheme);
                 
-            _emailService.Send(model.Email, "Confirm your account",
+            await _emailService.SendAsync(model.UserName ,model.Email, "Confirm your account",
                 "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                
-            await _signInManager.SignInAsync(user, isPersistent: false);
-                
-            return RedirectToLocal(returnUrl);
+
+            return RedirectToAction(nameof(Index), "Home");
         }
             
         AddErrors(result);
         
         return View(model);
     }
+    
+    
 
     [HttpPost]
     [ValidateAntiForgeryToken]
@@ -119,23 +109,21 @@ public class AccountController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
     {
-        if (ModelState.IsValid)
-        {
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user == null || !await _userManager.IsEmailConfirmedAsync(user)) return View("ForgotPasswordConfirmation");
+        if (!ModelState.IsValid) return View(model);
+        
+        var user = await _userManager.FindByEmailAsync(model.Email);
+        if (user == null || !await _userManager.IsEmailConfirmedAsync(user)) return View("ForgotPasswordConfirmation");
             
-            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+        var code = await _userManager.GeneratePasswordResetTokenAsync(user);
             
-            var callbackUrl = Url.Action("ResetPassword", "Account", new 
-                { UserId = user.Id, Code = code }, protocol: HttpContext.Request.Scheme);
+        var callbackUrl = Url.Action("ResetPassword", "Account", new 
+            { UserId = user.Id, Code = code }, protocol: HttpContext.Request.Scheme);
             
-            _emailService.Send(model.Email, "Reset Password",
-               "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
+        await _emailService.SendAsync(user.UserName, model.Email, "Reset Password",
+            "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
             
-            return View("ForgotPasswordConfirmation");
-        }
-
-        return View(model);
+        View(model);
+        return RedirectToAction(nameof(ForgotPasswordConfirmation));
     }
 
     [HttpGet]

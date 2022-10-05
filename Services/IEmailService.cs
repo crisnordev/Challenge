@@ -5,5 +5,5 @@ namespace courseappchallenge.Services;
 
 public interface IEmailService
 {
-    bool Send(string email, string subject, string message);
+    Task SendAsync(string toName, string toEmail, string subject, string body);
 }

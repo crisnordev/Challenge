@@ -7,6 +7,11 @@ namespace courseappchallenge.ViewModels.AccountViewModels;
 
 public class RegisterViewModel
 {
+    [Required(ErrorMessage = "User name is required.")]
+    [Display(Name = "Name")]
+    [StringLength(120, MinimumLength = 2, ErrorMessage = "User name must have between 2 and 120 characters.")]
+    public string UserName { get; set; }
+    
     [Required(ErrorMessage = "E-mail is required.")]
     [EmailAddress(ErrorMessage = "This is not a valid e-mail.")]
     [Display(Name = "Email")]
