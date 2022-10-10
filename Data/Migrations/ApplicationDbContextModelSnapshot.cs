@@ -2,22 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using courseappchallenge.Data;
 
 #nullable disable
 
-namespace courseappchallenge.Migrations
+namespace courseappchallenge.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221005161943_v1")]
-    partial class v1
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.9");
 
             modelBuilder.Entity("courseappchallenge.Models.ApplicationUser", b =>
                 {
@@ -122,7 +120,7 @@ namespace courseappchallenge.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("CourseId")
+                    b.Property<Guid>("CourseId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CourseItemTitle")
@@ -148,7 +146,7 @@ namespace courseappchallenge.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("CourseItemId")
+                    b.Property<Guid>("CourseItemId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -314,6 +312,7 @@ namespace courseappchallenge.Migrations
                         .WithMany("CourseItems")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("FK_CourseItem_CourseId");
 
                     b.Navigation("Course");
@@ -325,6 +324,7 @@ namespace courseappchallenge.Migrations
                         .WithMany("Lectures")
                         .HasForeignKey("CourseItemId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("FK_Lecture_CourseItemId");
 
                     b.Navigation("CourseItem");
