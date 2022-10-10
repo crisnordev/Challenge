@@ -1,21 +1,23 @@
-﻿using courseappchallenge.Data.Mappings;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
+﻿using CourseAppChallenge.Data.Mappings;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace courseappchallenge.Data;
+namespace CourseAppChallenge.Data;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-    
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    {
+    }
+
     public DbSet<Course> Courses { get; set; }
 
-    public DbSet<CourseItem> CourseItems{ get; set; }
+    public DbSet<CourseItem> CourseItems { get; set; }
 
     public DbSet<Lecture> Lectures { get; set; }
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new CourseItemMap());

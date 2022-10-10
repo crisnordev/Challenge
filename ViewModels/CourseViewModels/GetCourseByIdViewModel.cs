@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace courseappchallenge.ViewModels.CourseViewModels;
+namespace CourseAppChallenge.ViewModels.CourseViewModels;
 
 public class GetCourseByIdViewModel
 {
@@ -14,7 +14,7 @@ public class GetCourseByIdViewModel
 
     [Display(Name = "Duration")] public int Duration { get; set; }
 
-    [Display(Name = "Modules")] public List<string> CourseItems { get; set; } = new(); 
+    [Display(Name = "Modules")] public List<string> CourseItems { get; set; } = new();
 
     public static implicit operator GetCourseByIdViewModel(Course course)
     {
@@ -29,7 +29,7 @@ public class GetCourseByIdViewModel
         };
 
         courseView.CourseItems.AddRange(course.CourseItems.Select(x => x.CourseItemTitle));
-        
+
         return courseView;
     }
 }

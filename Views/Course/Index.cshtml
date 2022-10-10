@@ -1,4 +1,4 @@
-@model IEnumerable<courseappchallenge.ViewModels.CourseViewModels.GetCoursesViewModel>
+@model IEnumerable<CourseAppChallenge.ViewModels.CourseViewModels.GetCoursesViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -19,7 +19,8 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.ToList()) {
+    @foreach (var item in Model.ToList())
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CourseTitle)

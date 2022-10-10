@@ -1,4 +1,4 @@
-@model IEnumerable<courseappchallenge.ViewModels.LectureViewModels.GetLecturesViewModel>
+@model IEnumerable<CourseAppChallenge.ViewModels.LectureViewModels.GetLecturesViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -8,18 +8,19 @@
 
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.LectureTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseItemTitle)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LectureTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CourseItemTitle)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.LectureTitle)
@@ -33,7 +34,7 @@
                 <a asp-action="Delete" asp-route-id="@item.LectureId">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
 <p>

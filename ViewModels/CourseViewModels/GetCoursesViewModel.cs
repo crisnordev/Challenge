@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace courseappchallenge.ViewModels.CourseViewModels;
+namespace CourseAppChallenge.ViewModels.CourseViewModels;
 
 public class GetCoursesViewModel
 {
@@ -10,7 +10,7 @@ public class GetCoursesViewModel
 
     [Display(Name = "Tag")] public string Tag { get; set; }
 
-    public static implicit operator GetCoursesViewModel(Course course) => new() 
+    public static implicit operator GetCoursesViewModel(Course course) => new()
     {
         CourseId = course.CourseId,
         CourseTitle = course.CourseTitle,

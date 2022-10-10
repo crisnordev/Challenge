@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Shared;
+using CourseAppChallenge.Shared;
 
-namespace courseappchallenge.ViewModels;
+namespace CourseAppChallenge.ViewModels;
 
 public class Lecture : Entity
 {
-    public Lecture() { }
+    public Lecture()
+    {
+    }
 
     public Lecture(string title, string description, string videoUrl, CourseItem courseItem)
     {
@@ -17,7 +19,7 @@ public class Lecture : Entity
     }
 
     [Display(Name = "Lecture Id")] public Guid LectureId { get; set; }
-    
+
     [Required(ErrorMessage = "Lecture title is required.")]
     [Display(Name = "Lecture")]
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Lecture title must have between 2 and 80 characters.")]
@@ -31,7 +33,8 @@ public class Lecture : Entity
     [Url]
     [Required]
     [Display(Name = "Url")]
-    [StringLength(2046, MinimumLength = 10, ErrorMessage = "Lecture video Url must have between 10 and 2046 characters.")]
+    [StringLength(2046, MinimumLength = 10,
+        ErrorMessage = "Lecture video Url must have between 10 and 2046 characters.")]
     public string VideoUrl { get; set; } = "https://www.";
 
     [Display(Name = "Module")] public CourseItem CourseItem { get; set; }

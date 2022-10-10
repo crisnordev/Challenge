@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace courseappchallenge.ViewModels.LectureViewModels;
+namespace CourseAppChallenge.ViewModels.LectureViewModels;
 
 public class GetLectureByIdViewModel
 {
-    public GetLectureByIdViewModel() { }
+    public GetLectureByIdViewModel()
+    {
+    }
 
     public Guid LectureId { get; set; }
 
@@ -28,4 +30,3 @@ public class GetLectureByIdViewModel
         CourseItemTitle = lecture.CourseItem.CourseItemTitle
     };
 }
-

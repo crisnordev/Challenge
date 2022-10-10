@@ -1,4 +1,5 @@
-@model Course
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model CourseAppChallenge.ViewModels.Course
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,24 +12,24 @@
 <h4>Course</h4>
 
 <div>
-    <hr />
+    <hr/>
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CourseTitle)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CourseTitle)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Tag)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Tag)
         </dd>
     </dl>
     <form asp-action="Delete">
-        <input type="hidden" asp-for="CourseId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="hidden" asp-for="CourseId"/>
+        <input type="submit" value="Delete" class="btn btn-danger"/> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>

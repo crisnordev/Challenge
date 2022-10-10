@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace courseappchallenge.ViewModels.CourseItemViewModels;
+namespace CourseAppChallenge.ViewModels.CourseItemViewModels;
 
 public class EditCourseItemViewModel
 {
-    public EditCourseItemViewModel() { }
+    public EditCourseItemViewModel()
+    {
+    }
 
     [Required(ErrorMessage = "Module title is required.")]
     [Display(Name = "Module title")]
@@ -25,7 +27,7 @@ public class EditCourseItemViewModel
         CourseItemTitle = courseItem.CourseItemTitle,
         Order = courseItem.Order
     };
-    
+
     public static implicit operator CourseItem(EditCourseItemViewModel editCourseItem) => new()
     {
         CourseItemTitle = editCourseItem.CourseItemTitle,

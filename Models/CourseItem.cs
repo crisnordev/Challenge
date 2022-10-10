@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Shared;
+using CourseAppChallenge.Shared;
 
-namespace courseappchallenge.ViewModels;
+namespace CourseAppChallenge.ViewModels;
 
 public class CourseItem : Entity
 {
@@ -10,7 +10,7 @@ public class CourseItem : Entity
         Lectures = new List<Lecture>();
     }
 
-    public CourseItem(string title ,int order, Course course)
+    public CourseItem(string title, int order, Course course)
     {
         CourseItemId = Guid.NewGuid();
         CourseItemTitle = title;
