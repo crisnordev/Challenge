@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using courseappchallenge.Models;
 
 namespace courseappchallenge.ViewModels.CourseItemViewModels;
 
@@ -16,19 +17,7 @@ public class CreateCourseItemViewModel
     [Range(1, 1000, ErrorMessage = "Module order must be between 1 and 1000.")]
     public int Order { get; set; }
 
-    public bool ExistingOrder { get; set; }
-
     public Guid CourseId { get; set; }
     
-    public static implicit operator CreateCourseItemViewModel(CourseItem courseItem) => new()
-    {
-        CourseItemTitle = courseItem.CourseItemTitle,
-        Order = courseItem.Order
-    };
-    
-    public static implicit operator CourseItem(CreateCourseItemViewModel createCourseItem) => new()
-    {
-        CourseItemTitle = createCourseItem.CourseItemTitle,
-        Order = createCourseItem.Order
-    };
+    [Display(Name = "Course")] public Course Course { get; set; } = default!;
 }
