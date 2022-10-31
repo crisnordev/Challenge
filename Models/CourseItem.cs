@@ -1,25 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using courseappchallenge.Shared;
 
-namespace courseappchallenge.ViewModels;
+namespace courseappchallenge.Models;
 
 public class CourseItem : Entity
 {
-    public CourseItem()
-    {
-        Lectures = new List<Lecture>();
-    }
-
-    public CourseItem(string title ,int order, Course course)
-    {
-        CourseItemId = Guid.NewGuid();
-        CourseItemTitle = title;
-        Order = order;
-        Course = course;
-        Lectures = new List<Lecture>();
-    }
-
-    [Display(Name = "Module Id")] public Guid CourseItemId { get; set; }
+    [Display(Name = "Module Id")] public Guid CourseItemId { get; set; } = Guid.NewGuid();
 
     [Required(ErrorMessage = "Module title is required.")]
     [Display(Name = "Module")]
@@ -31,7 +17,9 @@ public class CourseItem : Entity
     [Range(1, 1000, ErrorMessage = "Module order must be between 1 and 1000.")]
     public int Order { get; set; }
 
-    [Display(Name = "Course")] public Course Course { get; set; }
+    public Guid CourseId { get; set; }
 
-    [Display(Name = "Lectures")] public IEnumerable<Lecture> Lectures { get; set; }
+    [Display(Name = "Course")] public Course Course { get; set; } = default!;
+
+    [Display(Name = "Lectures")] public IEnumerable<Lecture> Lectures { get; set; } = new List<Lecture>();
 }

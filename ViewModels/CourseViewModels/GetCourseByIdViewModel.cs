@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using courseappchallenge.Models;
 
 namespace courseappchallenge.ViewModels.CourseViewModels;
 
@@ -14,22 +15,12 @@ public class GetCourseByIdViewModel
 
     [Display(Name = "Duration")] public int Duration { get; set; }
 
-    [Display(Name = "Modules")] public List<string> CourseItems { get; set; } = new(); 
-
-    public static implicit operator GetCourseByIdViewModel(Course course)
+    public static implicit operator GetCourseByIdViewModel(Course course) => new()
     {
-        var courseView = new GetCourseByIdViewModel
-        {
-            CourseId = course.CourseId,
-            CourseTitle = course.CourseTitle,
-            Tag = course.Tag,
-            Summary = course.Summary,
-            Duration = course.Duration,
-            CourseItems = new List<string>()
-        };
-
-        courseView.CourseItems.AddRange(course.CourseItems.Select(x => x.CourseItemTitle));
-        
-        return courseView;
-    }
+        CourseId = course.CourseId,
+        CourseTitle = course.CourseTitle,
+        Tag = course.Tag,
+        Summary = course.Summary,
+        Duration = course.Duration
+    };
 }
