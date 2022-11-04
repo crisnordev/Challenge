@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using courseappchallenge.Data;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels.CourseItemViewModels;
+using CourseAppChallenge.Data;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseItemViewModels;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Packaging;
 
-namespace courseappchallenge.Pages.CourseItems;
+namespace CourseAppChallenge.Pages.CourseItems;
 
 public class CreateModel : CourseNamePageModel
 {
@@ -23,35 +24,42 @@ public class CreateModel : CourseNamePageModel
 
     public IActionResult OnGet()
     {
-        PopulateCoursesDropDownList(_context);
-        
-        return Page();
+        try
+        {
+            PopulateCoursesDropDownList(_context);
+
+            return Page();
+        }
+        catch (DbUpdateException ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+        }
     }
     
-    // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid || _context.CourseItems == null || CourseItem == null) return Page();
+        if (!ModelState.IsValid) return Page();
         
-        var emptyCourseItem = new CourseItem();
+        var entry = await _context.CourseItems.AddAsync(new CourseItem());
+        entry.CurrentValues.SetValues(CreateCourseItemViewModel);
 
         try
         {
-            await TryUpdateModelAsync(
-                emptyCourseItem,
-                "CreateCourseItemViewModel", // Prefix for form value.
-                s => s.CourseItemTitle, s => s.Order, s => s.CourseId);
-
-            await _context.CourseItems.AddAsync(emptyCourseItem);
-            
             await _context.SaveChangesAsync();
-                
+
             return RedirectToPage("./Index");
         }
-        catch (DbUpdateException)
+        catch (DbUpdateException ex)
         {
-            PopulateCoursesDropDownList(_context, emptyCourseItem.Course);
-            return Page();
+            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
         }
     }
 }

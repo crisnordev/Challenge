@@ -1,18 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 
-namespace courseappchallenge.ViewModels.CourseViewModels;
+namespace CourseAppChallenge.ViewModels.CourseViewModels;
 
-public class DeleteCourseByIdViewModel
+public class GetCourseViewModel
 {
+    public Guid CourseId { get; set; }
+
     [Display(Name = "Course")] public string CourseTitle { get; set; } = string.Empty;
 
     [Display(Name = "Tag")] public string Tag { get; set; } = string.Empty;
 
     [Display(Name = "Duration")] public int Duration { get; set; }
 
-    public static implicit operator DeleteCourseByIdViewModel(Course course) => new()  
+    public static implicit operator GetCourseViewModel(Course course) => new()
     {
+        CourseId = course.CourseId,
         CourseTitle = course.CourseTitle,
         Tag = course.Tag,
         Duration = course.Duration

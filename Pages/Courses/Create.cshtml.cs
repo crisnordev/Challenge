@@ -1,11 +1,12 @@
-using courseappchallenge.Data;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels.CourseViewModels;
+using CourseAppChallenge.Data;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace courseappchallenge.Pages.Courses;
+namespace CourseAppChallenge.Pages.Courses;
 
 public class CreateModel : PageModel
 {
@@ -23,30 +24,27 @@ public class CreateModel : PageModel
     
     [BindProperty] public CreateCourseViewModel CreateCourseViewModel { get; set; } = default!;
 
-
-    // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+    
     public async Task<IActionResult> OnPostAsync()
     {
-        if (!ModelState.IsValid || _context.Courses == null || Course == null) return Page();
-
-        var emptyCourse = new Course();
+        if (!ModelState.IsValid) return Page();
+        
+        var entry = await _context.Courses.AddAsync(new Course());
+        entry.CurrentValues.SetValues(CreateCourseViewModel);
         
         try
         {
-            await TryUpdateModelAsync(
-                emptyCourse,
-                "CreateCourseViewModel", // Prefix for form value.
-                s => s.CourseTitle, s => s.Tag, s => s.Summary, s => s.Duration);
-
-            await _context.Courses.AddAsync(emptyCourse);
-            
             await _context.SaveChangesAsync();
                 
             return RedirectToPage("./Index");
         }
-        catch (DbUpdateException)
+        catch (DbUpdateException ex)
         {
-            return Page();
+            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
         }
     }
 }

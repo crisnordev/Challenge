@@ -1,43 +1,47 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Data.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.Data;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
+using CourseAppChallenge.Data;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseItemViewModels;
 
-namespace courseappchallenge.Pages.CourseItems;
+namespace CourseAppChallenge.Pages.CourseItems;
 
-    public class DetailsModel : PageModel
+public class DetailsModel : PageModel
+{
+    private readonly ApplicationDbContext _context;
+
+    public DetailsModel(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DetailsModel(ApplicationDbContext context)
+    public GetCourseItemByIdViewModel GetCourseItemByIdViewModel { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(Guid? id)
+    {
+        if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
+
+        try
         {
-            _context = context;
-        }
-
-      public CourseItem CourseItem { get; set; } = default!; 
-
-        public async Task<IActionResult> OnGetAsync(Guid? id)
-        {
-            if (id == null || _context.CourseItems == null)
-            {
-                return NotFound();
-            }
-
-            var courseitem = await _context.CourseItems.FirstOrDefaultAsync(m => m.CourseItemId == id);
-            if (courseitem == null)
-            {
-                return NotFound();
-            }
-            else 
-            {
-                CourseItem = courseitem;
-            }
+            GetCourseItemByIdViewModel = await _context.CourseItems.AsNoTracking().
+                Include(y => y.Course).
+                Include(z => z.Lectures).
+                FirstOrDefaultAsync(x => x.CourseItemId == id);
+            
             return Page();
+            
+        }
+        catch (DbException ex)
+        {
+            return string.IsNullOrEmpty(GetCourseItemByIdViewModel?.CourseItemTitle) ? 
+                NotFound(new ErrorResultViewModel("Can not find this module.")) : 
+                StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
         }
     }
+}

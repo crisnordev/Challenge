@@ -1,9 +1,9 @@
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.ViewModels;
+using CourseAppChallenge.ViewModels;
 
-namespace courseappchallenge.Data;
+namespace CourseAppChallenge.Data;
 
 public class ApplicationDbContext : IdentityDbContext
 {

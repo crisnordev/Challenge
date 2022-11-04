@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Shared;
-using courseappchallenge.ViewModels;
+using CourseAppChallenge.Shared;
+using CourseAppChallenge.ViewModels;
 
-namespace courseappchallenge.Models;
+namespace CourseAppChallenge.Models;
 
 public class Lecture : Entity
 {

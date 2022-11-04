@@ -1,5 +1,5 @@
 @page
-@model courseappchallenge.Pages.Courses.IndexModel
+@model CourseAppChallenge.Pages.Courses.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -13,33 +13,28 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Courses[0].CourseTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Courses[0].Tag)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Courses[0].Summary)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Courses[0].Duration)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GetCoursesViewModel.GetCoursesViewModelList[0].CourseTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GetCoursesViewModel.GetCoursesViewModelList[0].Tag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GetCoursesViewModel.GetCoursesViewModelList[0].Duration)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Courses) {
+    @foreach (var item in Model.GetCoursesViewModel.GetCoursesViewModelList)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CourseTitle)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Tag)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Summary)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Duration)
@@ -50,6 +45,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.CourseId">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

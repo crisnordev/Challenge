@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Shared;
+using CourseAppChallenge.Shared;
 
-namespace courseappchallenge.Models;
+namespace CourseAppChallenge.Models;
 
 public class CourseItem : Entity
 {

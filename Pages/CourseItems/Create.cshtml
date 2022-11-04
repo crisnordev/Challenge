@@ -1,5 +1,5 @@
 @page
-@model courseappchallenge.Pages.CourseItems.CreateModel
+@model CourseAppChallenge.Pages.CourseItems.CreateModel
 
 @{
     ViewData["Title"] = "Create";
@@ -9,19 +9,19 @@
 <h1>Create</h1>
 
 <h4>CourseItem</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="CreateCourseItemViewModel.CourseItemTitle" class="control-label"></label>
-                <input asp-for="CreateCourseItemViewModel.CourseItemTitle" class="form-control" />
+                <input asp-for="CreateCourseItemViewModel.CourseItemTitle" class="form-control"/>
                 <span asp-validation-for="CreateCourseItemViewModel.CourseItemTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CreateCourseItemViewModel.Order" class="control-label"></label>
-                <input asp-for="CreateCourseItemViewModel.Order" class="form-control" />
+                <input asp-for="CreateCourseItemViewModel.Order" class="form-control"/>
                 <span asp-validation-for="CreateCourseItemViewModel.Order" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -30,17 +30,16 @@
                         asp-items="@Model.CourseNameSelectList">
                     <option value="">-- Select Course --</option>
                 </select>
-                <span asp-validation-for="CreateCourseItemViewModel.CourseId" class="text-danger" />
+                <span asp-validation-for="CreateCourseItemViewModel.CourseId" class="text-danger"/>
             </div>
-            
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary"/>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
+    <div>
+        <a asp-page="Index">Back to List</a>
+    </div>
 </div>
 

@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 
-namespace courseappchallenge.ViewModels.CourseItemViewModels;
+namespace CourseAppChallenge.ViewModels.CourseItemViewModels;
 
 public class CreateCourseItemViewModel
 {
-    public CreateCourseItemViewModel() { }
-
     [Required(ErrorMessage = "Module title is required.")]
     [Display(Name = "Module title")]
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Module title must have between 2 and 80 characters.")]

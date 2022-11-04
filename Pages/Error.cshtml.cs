@@ -1,13 +1,16 @@
 using System.Diagnostics;
+using CourseAppChallenge.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace courseappchallenge.Pages;
+namespace CourseAppChallenge.Pages;
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 [IgnoreAntiforgeryToken]
 public class ErrorModel : PageModel
 {
+    public ErrorResultViewModel ErrorResultViewModel { get; set; } = default!;
+    
     public string? RequestId { get; set; }
 
     public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);

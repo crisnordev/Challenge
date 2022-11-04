@@ -1,15 +1,15 @@
-﻿using courseappchallenge.Data;
+﻿using CourseAppChallenge.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-namespace courseappchallenge.Pages.CourseItems;
+namespace CourseAppChallenge.Pages.CourseItems;
 
 public class CourseNamePageModel : PageModel
 {
-    public SelectList CourseNameSelectList { get; set; }
+    public SelectList CourseNameSelectList { get; set; } = new (default!);
 
-    public void PopulateCoursesDropDownList(ApplicationDbContext context, object selectedDepartment = null)
+    public void PopulateCoursesDropDownList(ApplicationDbContext context, object? selectedDepartment = null)
     {
         var coursesQuery = from item in context.Courses
             orderby item.CourseTitle

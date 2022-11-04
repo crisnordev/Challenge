@@ -1,63 +1,72 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.Data;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
+using CourseAppChallenge.Data;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseItemViewModels;
 
-namespace courseappchallenge.Pages.CourseItems;
+namespace CourseAppChallenge.Pages.CourseItems;
 
-    public class DeleteModel : PageModel
+public class DeleteModel : PageModel
+{
+    private readonly ApplicationDbContext _context;
+
+    public DeleteModel(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public DeleteModel(ApplicationDbContext context)
+    public CourseItem CourseItem { get; set; }
+
+    [BindProperty] public DeleteCourseItemViewModel DeleteCourseItemViewModel { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(Guid? id)
+    {
+        if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
+
+        try
         {
-            _context = context;
-        }
+            CourseItem = await _context.CourseItems.Include(y => y.Course)
+                .FirstOrDefaultAsync(x => x.CourseItemId == id);
 
-        [BindProperty]
-      public CourseItem CourseItem { get; set; } = default!;
+            DeleteCourseItemViewModel = CourseItem!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
-        {
-            if (id == null || _context.CourseItems == null)
-            {
-                return NotFound();
-            }
-
-            var courseitem = await _context.CourseItems.FirstOrDefaultAsync(m => m.CourseItemId == id);
-
-            if (courseitem == null)
-            {
-                return NotFound();
-            }
-            else 
-            {
-                CourseItem = courseitem;
-            }
             return Page();
         }
-
-        public async Task<IActionResult> OnPostAsync(Guid? id)
+        catch (DbException ex)
         {
-            if (id == null || _context.CourseItems == null)
-            {
-                return NotFound();
-            }
-            var courseitem = await _context.CourseItems.FindAsync(id);
+            return string.IsNullOrEmpty(CourseItem?.CourseItemTitle)
+                ? NotFound(new ErrorResultViewModel("Can not find this module."))
+                : StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+        }
+    }
 
-            if (courseitem != null)
-            {
-                CourseItem = courseitem;
-                _context.CourseItems.Remove(CourseItem);
-                await _context.SaveChangesAsync();
-            }
+    public async Task<IActionResult> OnPostAsync()
+    {
+        try
+        {
+            _context.CourseItems.Remove(CourseItem);
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
+        catch (DbUpdateException ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+        }
     }
+}

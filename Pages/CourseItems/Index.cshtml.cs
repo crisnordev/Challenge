@@ -1,32 +1,45 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.Data;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
+using CourseAppChallenge.Data;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseItemViewModels;
 
-namespace courseappchallenge.Pages.CourseItems;
+namespace CourseAppChallenge.Pages.CourseItems;
 
-    public class IndexModel : PageModel
+public class IndexModel : PageModel
+{
+    private readonly ApplicationDbContext _context;
+
+    public IndexModel(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public IndexModel(ApplicationDbContext context)
+    public GetCourseItemsViewModel GetCourseItemsViewModel { get; set; } = default!;
+
+    public async Task<ActionResult> OnGetAsync()
+    {
+        try
         {
-            _context = context;
+            GetCourseItemsViewModel = await _context.CourseItems!.AsNoTracking().OrderBy(y => y.Order)
+                .Include(x => x.Course).ToListAsync();
+
+            return Page();
         }
-
-        public IList<CourseItem> CourseItem { get;set; } = default!;
-
-        public async Task OnGetAsync()
+        catch (DbException ex)
         {
-            if (_context.CourseItems != null)
-            {
-                CourseItem = await _context.CourseItems.ToListAsync();
-            }
+            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
         }
     }
+}

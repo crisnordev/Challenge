@@ -1,10 +1,12 @@
+using System.Data.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.Data;
-using courseappchallenge.ViewModels.CourseViewModels;
+using CourseAppChallenge.Data;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseViewModels;
 
-namespace courseappchallenge.Pages.Courses;
+namespace CourseAppChallenge.Pages.Courses;
 
 public class DetailsModel : PageModel
 {
@@ -19,14 +21,26 @@ public class DetailsModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
-        if (id == null || _context.Courses == null) return NotFound();
-
-        var course = await _context.Courses.FirstOrDefaultAsync(m => m.CourseId == id);
-        if (course == null) return NotFound();
-
-        GetCourseByIdViewModel = course;
-
-        return Page();
+        if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
+        
+        try
+        {
+            GetCourseByIdViewModel = await _context.Courses.AsNoTracking().
+                Include(x => x.CourseItems).
+                FirstOrDefaultAsync(y => y.CourseId == id);
+            
+            return Page();
+        }
+        catch (DbException ex)
+        {
+            return string.IsNullOrEmpty(GetCourseByIdViewModel?.CourseTitle) ? 
+                NotFound(new ErrorResultViewModel("Can not find this course.")) : 
+                StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+        }
     }
 }
 

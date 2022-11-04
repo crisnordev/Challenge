@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace courseappchallenge.Models;
+namespace CourseAppChallenge.Models;
 
 public class ApplicationUser : IdentityUser
 {

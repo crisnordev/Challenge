@@ -1,5 +1,5 @@
 @page
-@model courseappchallenge.Pages.CourseItems.EditModel
+@model CourseAppChallenge.Pages.CourseItems.EditModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -9,30 +9,28 @@
 <h1>Edit</h1>
 
 <h4>CourseItem</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CourseItem.CourseItemId" />
+            <input type="hidden" asp-for="CourseItem.CourseItemId"/>
             <div class="form-group">
-                <label asp-for="CourseItem.CourseItemTitle" class="control-label"></label>
-                <input asp-for="CourseItem.CourseItemTitle" class="form-control" />
-                <span asp-validation-for="CourseItem.CourseItemTitle" class="text-danger"></span>
+                <label asp-for="EditCourseItemViewModel.CourseItemTitle" class="control-label"></label>
+                <input asp-for="EditCourseItemViewModel.CourseItemTitle" class="form-control"/>
+                <span asp-validation-for="EditCourseItemViewModel.CourseItemTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CourseItem.Order" class="control-label"></label>
-                <input asp-for="CourseItem.Order" class="form-control" />
-                <span asp-validation-for="CourseItem.Order" class="text-danger"></span>
+                <label asp-for="EditCourseItemViewModel.Order" class="control-label"></label>
+                <input asp-for="EditCourseItemViewModel.Order" class="form-control"/>
+                <span asp-validation-for="EditCourseItemViewModel.Order" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary"/>
             </div>
         </form>
     </div>
+    <div>
+        <a asp-page="./Index">Back to List</a>
+    </div>
 </div>
-
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
-

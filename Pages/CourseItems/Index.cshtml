@@ -1,10 +1,11 @@
 @page
-@model courseappchallenge.Pages.CourseItems.IndexModel
+@model CourseAppChallenge.Pages.CourseItems.IndexModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+
 
 <h1>Index</h1>
 
@@ -13,18 +14,21 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseItem[0].CourseItemTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CourseItem[0].Order)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GetCourseItemsViewModel.CourseItemsViewModelList![0].
+                CourseItemTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GetCourseItemsViewModel.CourseItemsViewModelList![0].
+                Order)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.CourseItem) {
+    @foreach (var item in Model.GetCourseItemsViewModel.CourseItemsViewModelList!)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CourseItemTitle)
@@ -38,6 +42,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.CourseItemId">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

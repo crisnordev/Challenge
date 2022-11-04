@@ -1,11 +1,13 @@
-using courseappchallenge.Data;
+using System.Data.Common;
+using CourseAppChallenge.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels.CourseViewModels;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseViewModels;
 
-namespace courseappchallenge.Pages.Courses;
+namespace CourseAppChallenge.Pages.Courses;
 
     public class DeleteModel : PageModel
     {
@@ -18,33 +20,49 @@ namespace courseappchallenge.Pages.Courses;
 
         public Course Course { get; set; } = default!;
         
-        [BindProperty] public DeleteCourseByIdViewModel DeleteCourseByIdViewModel { get; set; } = default!;
+        [BindProperty] public DeleteCourseViewModel DeleteCourseViewModel { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
-            if (id == null || _context.Courses == null) return NotFound();
-
-            var course = await _context.Courses.FirstOrDefaultAsync(m => m.CourseId == id);
-
-            if (course == null) return NotFound();
-
-            DeleteCourseByIdViewModel = course;
+            if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
             
-            return Page();
+            try
+            {
+                Course = await _context.Courses.Include(y => y.CourseItems)
+                    .FirstOrDefaultAsync(x => x.CourseId == id);
+
+                DeleteCourseViewModel = Course!;
+
+                return Page();
+            }
+            catch (DbException ex)
+            {
+                return string.IsNullOrEmpty(Course?.CourseTitle)
+                    ? NotFound(new ErrorResultViewModel("Can not find this course."))
+                    : StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+            }
         }
 
         public async Task<IActionResult> OnPostAsync(Guid? id)
         {
-            if (id == null || _context.Courses == null) return NotFound();
-            
-            var course = await _context.Courses.FindAsync(id);
+            try
+            {
+                _context.Courses.Remove(Course);
+                await _context.SaveChangesAsync();
 
-            if (course == null) return RedirectToPage("./Index");
-            
-            Course = course;
-            _context.Courses.Remove(Course);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+                return RedirectToPage("./Index");
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+            }
         }
     }

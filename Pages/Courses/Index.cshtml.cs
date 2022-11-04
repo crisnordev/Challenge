@@ -1,9 +1,14 @@
+using System.Data.Common;
+using System.Reflection;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.Data;
-using courseappchallenge.Models;
+using CourseAppChallenge.Data;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseViewModels;
+using Microsoft.AspNetCore.Mvc;
 
-namespace courseappchallenge.Pages.Courses;
+namespace CourseAppChallenge.Pages.Courses;
 
 public class IndexModel : PageModel
 {
@@ -14,13 +19,24 @@ public class IndexModel : PageModel
         _context = context;
     }
 
-    public IList<Course> Courses { get; set; } = default!;
+    public GetCoursesViewModel GetCoursesViewModel { get; set; } = default!;
 
-    public async Task OnGetAsync()
+    public async Task<ActionResult> OnGetAsync()
     {
-        if (_context.Courses != null)
+        try
         {
-            Courses = await _context.Courses.ToListAsync();
+            GetCoursesViewModel = await _context.Courses!.AsNoTracking()
+                .Include(x => x.CourseItems).ToListAsync();
+
+            return Page();
+        }
+        catch (DbException ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
         }
     }
 }

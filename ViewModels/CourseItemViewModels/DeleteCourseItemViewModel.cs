@@ -3,25 +3,19 @@ using CourseAppChallenge.Models;
 
 namespace CourseAppChallenge.ViewModels.CourseItemViewModels;
 
-public class GetCourseItemByIdViewModel
+public class DeleteCourseItemViewModel
 {
-    public Guid CourseItemId { get; set; }
-
     [Display(Name = "Module")] public string CourseItemTitle { get; set; } = string.Empty;
-
-    [Display(Name = "Order")] public int Order { get; set; }
 
     [Display(Name = "Course")] public string CourseTitle { get; set; } = string.Empty;
 
     [Display(Name = "Lectures")] public IList<string> Lectures { get; set; } = new List<string>();
 
-    public static implicit operator GetCourseItemByIdViewModel(CourseItem courseItem)
+    public static implicit operator DeleteCourseItemViewModel(CourseItem courseItem)
     {
-        var item = new GetCourseItemByIdViewModel
+        var item = new DeleteCourseItemViewModel
         {
-            CourseItemId = courseItem.CourseItemId,
             CourseItemTitle = courseItem.CourseItemTitle,
-            Order = courseItem.Order,
             CourseTitle = courseItem.Course.CourseTitle,
             Lectures = new List<string>()
         };
