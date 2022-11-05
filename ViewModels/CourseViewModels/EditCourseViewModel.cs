@@ -21,7 +21,7 @@ public class EditCourseViewModel
     public string Summary { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Module duration is required.")]
-    [Display(Name = "Duration")]
+    [Display(Name = "DurationInMinutes")]
     [Range(1, 1000, ErrorMessage = "Module duration must be between 1 and 1000.")]
     public int Duration { get; set; }
 
@@ -30,6 +30,6 @@ public class EditCourseViewModel
         CourseTitle = course.CourseTitle,
         Tag = course.Tag,
         Summary = course.Summary,
-        Duration = course.Duration
+        Duration = course.DurationInMinutes
     };
 }
