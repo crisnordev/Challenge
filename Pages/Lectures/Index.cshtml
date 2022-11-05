@@ -13,30 +13,25 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Lecture[0].LectureTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lecture[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lecture[0].VideoUrl)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GetLecturesViewModel.GetLecturesViewModelList[0].LectureTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GetLecturesViewModel.GetLecturesViewModelList[0].CourseItemTitle)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Lecture) {
+    @foreach (var item in Model.GetLecturesViewModel.GetLecturesViewModelList)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.LectureTitle)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VideoUrl)
+                @Html.DisplayFor(modelItem => item.CourseItemTitle)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.LectureId">Edit</a> |
@@ -44,6 +39,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.LectureId">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
