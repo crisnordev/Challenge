@@ -14,7 +14,7 @@ public class GetCourseByIdViewModel
 
     [Display(Name = "Summary")] public string Summary { get; set; } = string.Empty;
 
-    [Display(Name = "Duration")] public int Duration { get; set; }
+    [Display(Name = "DurationInMinutes")] public int Duration { get; set; }
 
     [Display(Name = "Modules")] public IList<string> CourseItems { get; set; } = new List<string>();
 
@@ -26,7 +26,7 @@ public class GetCourseByIdViewModel
             CourseTitle = course.CourseTitle,
             Tag = course.Tag,
             Summary = course.Summary,
-            Duration = course.Duration,
+            Duration = course.DurationInMinutes,
             CourseItems = new List<string>()
         };
 
