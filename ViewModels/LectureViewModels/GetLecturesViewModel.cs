@@ -1,22 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
-using CourseAppChallenge.Models;
+﻿using CourseAppChallenge.Models;
 
 namespace CourseAppChallenge.ViewModels.LectureViewModels;
 
 public class GetLecturesViewModel
 {
-    public GetLecturesViewModel() { }
+    public IList<GetLectureViewModel> GetLecturesViewModelList { get; set; } = new List<GetLectureViewModel>();
 
-    public Guid LectureId { get; set; }
-
-    [Display(Name = "Lecture")] public string LectureTitle { get; set; }
-    
-    [Display(Name = "Module")] public string CourseItemTitle { get; set; }
-
-    public static implicit operator GetLecturesViewModel(Lecture lecture) => new()
+    public static implicit operator GetLecturesViewModel(List<Lecture> lectures)
     {
-        LectureId = lecture.LectureId,
-        LectureTitle = lecture.LectureTitle,
-        CourseItemTitle = lecture.CourseItem.CourseItemTitle
-    };
+        var getLecturesViewModel = new GetLecturesViewModel();
+
+        foreach (var lecture in lectures)
+        {
+            getLecturesViewModel.GetLecturesViewModelList.Add(lecture);
+        }
+
+        return getLecturesViewModel;
+    }
 }

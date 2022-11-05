@@ -18,9 +18,10 @@ public class CreateModel : CourseNamePageModel
         _context = context;
     }
 
-    public CourseItem CourseItem { get; set; } = default!;
 
     [BindProperty] public CreateCourseItemViewModel CreateCourseItemViewModel { get; set; } = default!;
+
+    [BindProperty] public CourseItem CourseItem { get; set; } = default!;
 
     public IActionResult OnGet()
     {
@@ -39,11 +40,11 @@ public class CreateModel : CourseNamePageModel
             return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
         }
     }
-    
+
     public async Task<IActionResult> OnPostAsync()
     {
         if (!ModelState.IsValid) return Page();
-        
+
         var entry = await _context.CourseItems.AddAsync(new CourseItem());
         entry.CurrentValues.SetValues(CreateCourseItemViewModel);
 
@@ -63,4 +64,3 @@ public class CreateModel : CourseNamePageModel
         }
     }
 }
-

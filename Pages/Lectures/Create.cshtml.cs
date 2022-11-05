@@ -8,39 +8,62 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CourseAppChallenge.Data;
 using CourseAppChallenge.Models;
 using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.LectureViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseAppChallenge.Pages.Lectures;
 
-    public class CreateModel : PageModel
+public class CreateModel : CourseItemNamePageModel
+{
+    private readonly ApplicationDbContext _context;
+
+    public CreateModel(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public CreateModel(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+    [BindProperty] public CreateLectureViewModel CreateLectureViewModel { get; set; }
 
-        public IActionResult OnGet()
+    [BindProperty] public Lecture Lecture { get; set; } = default!;
+
+    public IActionResult OnGet()
+    {
+        try
         {
+            PopulateCourseItemsDropDownList(_context);
+
             return Page();
         }
-
-        [BindProperty]
-        public Lecture Lecture { get; set; } = default!;
-        
-
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        catch (DbUpdateException ex)
         {
-          if (!ModelState.IsValid || _context.Lectures == null || Lecture == null)
-            {
-                return Page();
-            }
+            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+        }
+    }
 
-            _context.Lectures.Add(Lecture);
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid) return Page();
+
+        var entry = await _context.Lectures.AddAsync(new Lecture());
+        entry.CurrentValues.SetValues(CreateLectureViewModel);
+
+        try
+        {
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }
+        catch (DbUpdateException ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+        }
     }
-
+}

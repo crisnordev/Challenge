@@ -21,20 +21,7 @@ public class CreateLectureViewModel
         ErrorMessage = "Lecture video Url must have between 10 and 2046 characters.")]
     public string VideoUrl { get; set; } = "https://www.";
 
-    public Guid CourseItemId { get; set; }
+    public Guid CourseItemId { get; set; } = Guid.Empty;
 
-    public static implicit operator CreateLectureViewModel(Lecture lecture) => new()
-    {
-        LectureTitle = lecture.LectureTitle,
-        Description = lecture.Description,
-        VideoUrl = lecture.VideoUrl,
-        CourseItemId = lecture.CourseItem.CourseItemId
-    };
-
-    public static implicit operator Lecture(CreateLectureViewModel createLectureViewModel) => new()
-    {
-        LectureTitle = createLectureViewModel.LectureTitle,
-        Description = createLectureViewModel.Description,
-        VideoUrl = createLectureViewModel.VideoUrl,
-    };
+    public CourseItem CourseItem { get; set; } = default!;
 }
