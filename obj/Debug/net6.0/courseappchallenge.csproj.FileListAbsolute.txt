@@ -292,3 +292,5 @@ C:\dev\Secondary\courseappchallenge\obj\Debug\net6.0\refint\courseappchallenge.d
 C:\dev\Secondary\courseappchallenge\obj\Debug\net6.0\courseappchallenge.pdb
 C:\dev\Secondary\courseappchallenge\obj\Debug\net6.0\courseappchallenge.genruntimeconfig.cache
 C:\dev\Secondary\courseappchallenge\obj\Debug\net6.0\ref\courseappchallenge.dll
+C:\dev\Secondary\courseappchallenge\bin\Debug\net6.0\SendGrid.dll
+C:\dev\Secondary\courseappchallenge\bin\Debug\net6.0\StarkbankEcdsa.dll

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\dev\\Secondary\\courseappchallenge\\courseappchallenge.csproj": {}
+    "C:\\dev\\Secondary\\CourseAppChallenge\\CourseAppChallenge.csproj": {}
   },
   "projects": {
-    "C:\\dev\\Secondary\\courseappchallenge\\courseappchallenge.csproj": {
+    "C:\\dev\\Secondary\\CourseAppChallenge\\CourseAppChallenge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\Secondary\\courseappchallenge\\courseappchallenge.csproj",
-        "projectName": "courseappchallenge",
-        "projectPath": "C:\\dev\\Secondary\\courseappchallenge\\courseappchallenge.csproj",
+        "projectUniqueName": "C:\\dev\\Secondary\\CourseAppChallenge\\CourseAppChallenge.csproj",
+        "projectName": "CourseAppChallenge",
+        "projectPath": "C:\\dev\\Secondary\\CourseAppChallenge\\CourseAppChallenge.csproj",
         "packagesPath": "C:\\Users\\crisnordev\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\Secondary\\courseappchallenge\\obj\\",
+        "outputPath": "C:\\dev\\Secondary\\CourseAppChallenge\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -72,6 +72,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.10, )"
+            },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.28.1, )"
             }
           },
           "imports": [

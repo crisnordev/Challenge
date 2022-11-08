@@ -11,13 +11,13 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
-[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-courseappchallenge-8b60c9b6-bd10-4537-aa2a-653476795d86")]
-[assembly: System.Reflection.AssemblyCompanyAttribute("courseappchallenge")]
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-CourseAppChallenge-8b60c9b6-bd10-4537-aa2a-653476795d86")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("CourseAppChallenge")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("courseappchallenge")]
-[assembly: System.Reflection.AssemblyTitleAttribute("courseappchallenge")]
+[assembly: System.Reflection.AssemblyProductAttribute("CourseAppChallenge")]
+[assembly: System.Reflection.AssemblyTitleAttribute("CourseAppChallenge")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.
