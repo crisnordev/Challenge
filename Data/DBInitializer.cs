@@ -1,7 +1,7 @@
-﻿using CourseAppChallenge.Models;
+﻿using courseappchallenge.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace CourseAppChallenge.Data;
+namespace courseappchallenge.Data;
 
 public static class DbInitializer
 {
@@ -163,6 +163,11 @@ public static class DbInitializer
         };
 
         context.Lectures.AddRange(lectures);
+
+        var roleAdmin = new AppRole { Name = "Administrator" };
+        var roleStudent = new AppRole { Name = "Student" };
+        
+        context.Roles.AddRange(roleAdmin, roleStudent);
 
         context.SaveChanges();
     }

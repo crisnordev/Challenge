@@ -1,14 +1,14 @@
+using courseappchallenge.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using CourseAppChallenge.Data;
-using CourseAppChallenge.Models;
-using CourseAppChallenge.ViewModels;
-using CourseAppChallenge.ViewModels.CourseItemViewModels;
+using courseappchallenge.Models;
+using courseappchallenge.ViewModels;
+using courseappchallenge.ViewModels.CourseItemViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Packaging;
 
-namespace CourseAppChallenge.Pages.CourseItems;
+namespace courseappchallenge.Pages.CourseItems;
 
+[Authorize(Roles = "Administrator")]
 public class CreateModel : CourseNamePageModel
 {
     private readonly ApplicationDbContext _context;

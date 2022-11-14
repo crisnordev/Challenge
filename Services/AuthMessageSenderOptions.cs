@@ -1,4 +1,4 @@
-﻿namespace CourseAppChallenge.Services;
+﻿namespace courseappchallenge.Services;
 
 public class AuthMessageSenderOptions
 {

@@ -1,9 +1,9 @@
-﻿using CourseAppChallenge.Data;
+﻿using courseappchallenge.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-namespace CourseAppChallenge.Pages.CourseItems;
+namespace courseappchallenge.Pages.CourseItems;
 
 public class CourseNamePageModel : PageModel
 {

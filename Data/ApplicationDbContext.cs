@@ -1,12 +1,12 @@
-using CourseAppChallenge.Data.Mappings;
-using CourseAppChallenge.Models;
+using courseappchallenge.Data.Mappings;
+using courseappchallenge.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CourseAppChallenge.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
-namespace CourseAppChallenge.Data;
+namespace courseappchallenge.Data;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, Guid>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {

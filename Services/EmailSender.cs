@@ -1,20 +1,15 @@
-﻿using CourseAppChallenge.Services;
-using Microsoft.AspNetCore.Identity.UI.Services;
+﻿using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
-namespace CourseAppChallenge.Services;
+namespace courseappchallenge.Services;
 
 public class EmailSender : IEmailSender
 {
-    private readonly ILogger _logger;
-
-    public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor,
-        ILogger<EmailSender> logger)
+    public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
     {
         Options = optionsAccessor.Value;
-        _logger = logger;
     }
 
     public AuthMessageSenderOptions Options { get; }
@@ -31,7 +26,7 @@ public class EmailSender : IEmailSender
         var client = new SendGridClient(apiKey);
         var msg = new SendGridMessage
         {
-            From = new EmailAddress("cris_nor@hotmail.com", "Password Recovery"),
+            From = new EmailAddress("cris_nor@hotmail.com", "Cristiano Noronha"),
             Subject = subject,
             PlainTextContent = message,
             HtmlContent = message
@@ -39,9 +34,6 @@ public class EmailSender : IEmailSender
         msg.AddTo(new EmailAddress(toEmail));
 
         msg.SetClickTracking(false, false);
-        var response = await client.SendEmailAsync(msg);
-        _logger.LogInformation(response.IsSuccessStatusCode
-            ? $"Email to {toEmail} queued successfully!"
-            : $"Failure Email to {toEmail}");
+        await client.SendEmailAsync(msg);
     }
 }

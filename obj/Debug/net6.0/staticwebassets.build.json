@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "goHB+IWBcU4vAuoYl9MloE9CJe04WrfOkhvbMDVei/k=",
+  "Hash": "vMEf5ZFTCwRNbPyBbewbDU7oL+Lfl1xtqWxo6J315Gw=",
   "Source": "courseappchallenge",
   "BasePath": "_content/courseappchallenge",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\dev\\Secondary\\courseappchallenge\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\courseappchallenge.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\dev\\Secondary\\courseappchallenge\\wwwroot\\app.db",
+      "SourceId": "courseappchallenge",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\dev\\Secondary\\courseappchallenge\\wwwroot\\",
+      "BasePath": "_content/courseappchallenge",
+      "RelativePath": "app.db",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\app.db"
     },
     {
       "Identity": "C:\\dev\\Secondary\\courseappchallenge\\wwwroot\\css\\site.css",

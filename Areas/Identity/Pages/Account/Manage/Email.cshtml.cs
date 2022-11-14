@@ -3,23 +3,23 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
-using CourseAppChallenge.Models;
-using CourseAppChallenge.ViewModels;
+using courseappchallenge.Models;
+using courseappchallenge.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace CourseAppChallenge.Areas.Identity.Pages.Account.Manage;
+namespace courseappchallenge.Areas.Identity.Pages.Account.Manage;
 
 public class EmailModel : PageModel
 {
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly UserManager<AppUser> _userManager;
+    private readonly SignInManager<AppUser> _signInManager;
     private readonly IEmailSender _emailSender;
 
-    public EmailModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
+    public EmailModel(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
         IEmailSender emailSender)
     {
         _userManager = userManager;
@@ -43,7 +43,7 @@ public class EmailModel : PageModel
         public string NewEmail { get; set; }
     }
 
-    private async Task LoadAsync(ApplicationUser user)
+    private async Task LoadAsync(AppUser user)
     {
         var email = await _userManager.GetEmailAsync(user);
         Email = email;
