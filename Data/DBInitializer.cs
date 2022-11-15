@@ -1,11 +1,12 @@
 ﻿using courseappchallenge.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace courseappchallenge.Data;
 
 public static class DbInitializer
 {
-    public static void Initialize(ApplicationDbContext context)
+    public static void Initialize(ApplicationDbContext context, RoleManager<AppRole> roleManager)
     {
         if (context.Courses.AsNoTracking().Any())
         {
@@ -102,8 +103,6 @@ public static class DbInitializer
         var classesModule = courseItems[1];
         var methodsModule = courseItems[2];
         var dotNetModule = courseItems[3];
-        var dataModule = courseItems[4];
-        var bindModule = courseItems[5];
 
         var lectures = new List<Lecture>
         {
@@ -163,11 +162,12 @@ public static class DbInitializer
         };
 
         context.Lectures.AddRange(lectures);
-
+        
         var roleAdmin = new AppRole { Name = "Administrator" };
         var roleStudent = new AppRole { Name = "Student" };
-        
-        context.Roles.AddRange(roleAdmin, roleStudent);
+
+        roleManager.CreateAsync(roleAdmin);
+        roleManager.CreateAsync(roleStudent);
 
         context.SaveChanges();
     }

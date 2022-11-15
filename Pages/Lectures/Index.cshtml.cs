@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace courseappchallenge.Pages.Lectures;
 
-[Authorize(Roles = "Administrator, Student")]
+[AllowAnonymous]
 public class IndexModel : PageModel
 {
     private readonly ApplicationDbContext _context;

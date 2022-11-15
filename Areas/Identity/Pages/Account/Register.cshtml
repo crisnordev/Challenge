@@ -26,14 +26,6 @@
             <label asp-for="Input.Email">Email</label>
             <span asp-validation-for="Input.Email" class="text-danger"></span>
         </div>
-        <div class="form-group mb-3">
-            <label asp-for="Input.AppRole" class="control-label"></label>
-            <select asp-for="Input.AppRoleId" class="form-control"
-                    asp-items="@Model.RoleNameSelectList">
-                <option value="">-- Select Role --</option>
-            </select>
-            <span asp-validation-for="Input.AppRoleId" class="text-danger"/>
-        </div>
         <div class="form-floating mb-3">
             <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password"/>
             <label asp-for="Input.Password">Password</label>

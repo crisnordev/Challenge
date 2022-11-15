@@ -1,4 +1,5 @@
-﻿using courseappchallenge.Data;
+﻿using courseappchallenge.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,9 +10,9 @@ public class RoleNamePageModel : PageModel
 {
     public SelectList RoleNameSelectList { get; set; } = default!;
 
-    public void PopulateRolesDropDownList(ApplicationDbContext context, object? selectedRole = null)
+    public void PopulateRolesDropDownList(RoleManager<AppRole> roleManager, object? selectedRole = null)
     {
-        var rolesQuery = from item in context.Roles
+        var rolesQuery = from item in roleManager.Roles
             orderby item.Name
             select item;
 

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace courseappchallenge.Pages.Courses;
 
-[Authorize(Roles = "Administrator")]
+[Authorize(Policy = "RequireAdministratorRole")]
 public class EditModel : PageModel
 {
     private readonly ApplicationDbContext _context;

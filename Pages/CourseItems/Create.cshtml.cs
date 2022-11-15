@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace courseappchallenge.Pages.CourseItems;
 
-[Authorize(Roles = "Administrator")]
+[Authorize(Policy = "RequireAdministratorRole")]
 public class CreateModel : CourseNamePageModel
 {
     private readonly ApplicationDbContext _context;

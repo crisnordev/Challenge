@@ -48,10 +48,7 @@ public class EmailModel : PageModel
         var email = await _userManager.GetEmailAsync(user);
         Email = email;
 
-        Input = new InputModel
-        {
-            NewEmail = email,
-        };
+        Input = new InputModel { NewEmail = email };
 
         IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
     }
@@ -101,10 +98,7 @@ public class EmailModel : PageModel
     public async Task<IActionResult> OnPostSendVerificationEmailAsync()
     {
         var user = await _userManager.GetUserAsync(User);
-        if (user == null)
-        {
-            return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-        }
+        if (user == null) return NotFound(new ErrorResultViewModel("Can not find user."));
 
         if (!ModelState.IsValid)
         {

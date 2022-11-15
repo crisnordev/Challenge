@@ -36,11 +36,22 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Order)
             </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.CourseItemId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.CourseItemId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.CourseItemId">Delete</a>
-            </td>
+            @{
+                if (User.IsInRole("Administrator"))
+                {
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.CourseItemId">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.CourseItemId">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.CourseItemId">Delete</a>
+                    </td>
+                }
+                else if (User.IsInRole("Student"))
+                {
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@item.CourseItemId">Details</a>
+                    </td>
+                }
+            }
         </tr>
     }
     </tbody>

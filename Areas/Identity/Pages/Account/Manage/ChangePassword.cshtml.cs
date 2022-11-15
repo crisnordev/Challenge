@@ -11,6 +11,7 @@ namespace courseappchallenge.Areas.Identity.Pages.Account.Manage;
 
 public class ChangePasswordModel : PageModel
 {
+    
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
 
@@ -62,17 +63,15 @@ public class ChangePasswordModel : PageModel
         var user = await _userManager.GetUserAsync(User);
         if (user == null) return NotFound(new ErrorResultViewModel("Can not find user."));
 
-        var changePasswordResult =
-            await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
+        var changePasswordResult = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
         if (!changePasswordResult.Succeeded)
         {
-            var errorResult = new ErrorResultViewModel("Something is wrong.");
             foreach (var error in changePasswordResult.Errors)
             {
-                errorResult.Errors?.Add(error.ToString());
+                ModelState.AddModelError(string.Empty, error.Description);
             }
 
-            return BadRequest(errorResult);
+            return Page();
         }
 
         await _signInManager.RefreshSignInAsync(user);
@@ -80,4 +79,5 @@ public class ChangePasswordModel : PageModel
 
         return RedirectToPage();
     }
+
 }

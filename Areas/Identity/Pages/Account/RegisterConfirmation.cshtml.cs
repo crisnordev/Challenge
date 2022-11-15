@@ -25,8 +25,6 @@ public class RegisterConfirmationModel : PageModel
 
     public string Email { get; set; }
 
-    public bool DisplayConfirmAccountLink { get; set; }
-
     public string EmailConfirmationUrl { get; set; }
 
     public async Task<IActionResult> OnGetAsync(string email, string returnUrl = null)
@@ -39,9 +37,6 @@ public class RegisterConfirmationModel : PageModel
         if (user == null) return NotFound($"Unable to load user with email '{email}'.");
 
         Email = email;
-
-        DisplayConfirmAccountLink = true;
-        if (!DisplayConfirmAccountLink) return Page();
 
         var userId = await _userManager.GetUserIdAsync(user);
         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

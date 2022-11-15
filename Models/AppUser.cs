@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿#nullable enable
+using Microsoft.AspNetCore.Identity;
 
 namespace courseappchallenge.Models;
 
@@ -13,8 +14,8 @@ public class AppUser : IdentityUser<Guid>
     public string FirstName { get; set; } = string.Empty;
 
     public string LastName { get; set; } = string.Empty;
-    
-    public Guid AppRoleId { get; set; } = Guid.NewGuid();
 
-    public virtual AppRole AppRole { get; set; } = default!;
+    public Guid? AppRoleId { get; set; }
+
+    public virtual AppRole? AppRole { get; set; }
 }

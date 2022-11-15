@@ -64,11 +64,11 @@ namespace courseappchallenge.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
-                    LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    AppRoleId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: false),
+                    AppRoleId = table.Column<Guid>(type: "TEXT", nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
@@ -89,8 +89,7 @@ namespace courseappchallenge.Migrations
                         name: "FK_AspNetUsers_AspNetRoles_AppRoleId",
                         column: x => x.AppRoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

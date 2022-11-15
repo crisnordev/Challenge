@@ -11,7 +11,7 @@ using courseappchallenge.Data;
 namespace courseappchallenge.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221113183606_v2.0.0")]
+    [Migration("20221115173033_v2.0.0")]
     partial class v200
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,7 +55,7 @@ namespace courseappchallenge.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("AppRoleId")
+                    b.Property<Guid?>("AppRoleId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -70,9 +70,11 @@ namespace courseappchallenge.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")
@@ -86,6 +88,7 @@ namespace courseappchallenge.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedUserName")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
@@ -105,6 +108,7 @@ namespace courseappchallenge.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
@@ -322,9 +326,7 @@ namespace courseappchallenge.Migrations
                 {
                     b.HasOne("courseappchallenge.Models.AppRole", "AppRole")
                         .WithMany("AppUsers")
-                        .HasForeignKey("AppRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AppRoleId");
 
                     b.Navigation("AppRole");
                 });

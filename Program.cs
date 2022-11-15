@@ -18,6 +18,14 @@ builder.Services.AddDefaultIdentity<AppUser>(options =>
     AddRoles<AppRole>().
     AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdministratorRole",
+        policy => policy.RequireRole("Administrator"));
+    options.AddPolicy("RequireStudentRole",
+        policy => policy.RequireRole("Student"));
+});
+
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.SignIn.RequireConfirmedEmail = true;
@@ -53,8 +61,9 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
 
     var context = services.GetRequiredService<ApplicationDbContext>();
+    var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
 
-    DbInitializer.Initialize(context);
+    DbInitializer.Initialize(context, roleManager);
 }
 
 app.UseHttpsRedirection();

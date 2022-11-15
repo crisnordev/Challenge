@@ -5,26 +5,26 @@ using System.Text;
 using System.Text.Encodings.Web;
 using courseappchallenge.Data;
 using courseappchallenge.Models;
+using courseappchallenge.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
 namespace courseappchallenge.Areas.Identity.Pages.Account;
 
-public class RegisterModel : RoleNamePageModel
+public class RegisterModel : PageModel
 {
-    private readonly ApplicationDbContext _context;
     private readonly SignInManager<AppUser> _signInManager;
     private readonly UserManager<AppUser> _userManager;
     private readonly IUserStore<AppUser> _userStore;
     private readonly IUserEmailStore<AppUser> _emailStore;
     private readonly IEmailSender _emailSender;
 
-    public RegisterModel(ApplicationDbContext context, UserManager<AppUser> userManager, IUserStore<AppUser> userStore,
+    public RegisterModel(UserManager<AppUser> userManager, IUserStore<AppUser> userStore, 
         SignInManager<AppUser> signInManager, IEmailSender emailSender)
     {
-        _context = context;
         _userManager = userManager;
         _userStore = userStore;
         _emailStore = GetEmailStore();
@@ -64,16 +64,11 @@ public class RegisterModel : RoleNamePageModel
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        public Guid AppRoleId { get; set; } 
-
-        [Display(Name = "Role")] public AppRole AppRole { get; set; }
     }
 
 
     public void OnGetAsync(string returnUrl = null)
     {
-        PopulateRolesDropDownList(_context);
         ReturnUrl = returnUrl;
     }
 
@@ -83,18 +78,23 @@ public class RegisterModel : RoleNamePageModel
         returnUrl ??= Url.Content("~/");
         if (!ModelState.IsValid) return Page();
 
+        if (_userManager.Users.Any(x => x.Email == Input.Email))
+            return BadRequest(new ErrorResultViewModel("This e-mail has already been used."));
+
         var user = CreateUser();
         user.FirstName = Input.FirstName;
         user.LastName = Input.LastName;
-        user.AppRoleId = Input.AppRoleId;
-        user.AppRole = Input.AppRole;
-
+        
         await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
         await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
         var result = await _userManager.CreateAsync(user, Input.Password);
 
         if (result.Succeeded)
         {
+            var addRole = await _userManager.AddToRoleAsync(user, "Administrator");
+            if (!addRole.Succeeded)
+                return BadRequest(new ErrorResultViewModel("Can not add user role."));
+            
             var userId = await _userManager.GetUserIdAsync(user);
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

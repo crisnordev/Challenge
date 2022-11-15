@@ -33,11 +33,22 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CourseItemTitle)
             </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.LectureId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.LectureId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.LectureId">Delete</a>
-            </td>
+            @{
+                if (User.IsInRole("Administrator"))
+                {
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.LectureId">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.LectureId">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.LectureId">Delete</a>
+                    </td>
+                }
+                else if (User.IsInRole("Student"))
+                {
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@item.LectureId">Details</a>
+                    </td>
+                }
+            }
         </tr>
     }
     </tbody>

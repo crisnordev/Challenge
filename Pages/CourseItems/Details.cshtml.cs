@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace courseappchallenge.Pages.CourseItems;
 
-[Authorize(Roles = "Administrator, Student")]
+[Authorize(Policy = "RequireAdministratorRole")]
+[Authorize(Policy = "RequireStudentRole")]
 public class DetailsModel : PageModel
 {
     private readonly ApplicationDbContext _context;

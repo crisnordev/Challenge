@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace courseappchallenge.Pages.CourseItems;
 
-[Authorize(Roles = "Administrator")]
+[Authorize(Policy = "RequireAdministratorRole")]
 public class DeleteModel : PageModel
 {
     private readonly ApplicationDbContext _context;

@@ -32,17 +32,23 @@ public class ConfirmEmailChangeModel : PageModel
         if (user == null) return NotFound(new ErrorResultViewModel("Can not find user."));
 
         code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
+        
+        var userName = await _userManager.GetUserNameAsync(user);
+        var userEmail = await _userManager.GetEmailAsync(user);
+        if (userName == userEmail)
+        {
+            var setUserNameResult = await _userManager.SetUserNameAsync(user, email);
+            if (!setUserNameResult.Succeeded)
+            {
+                StatusMessage = "Error changing email, and user name.";
+                return Page();
+            }
+        }
+        
         var result = await _userManager.ChangeEmailAsync(user, email, code);
         if (!result.Succeeded)
         {
             StatusMessage = "Error changing email.";
-            return Page();
-        }
-
-        var setUserNameResult = await _userManager.SetUserNameAsync(user, email);
-        if (!setUserNameResult.Succeeded)
-        {
-            StatusMessage = "Error changing user name.";
             return Page();
         }
 
