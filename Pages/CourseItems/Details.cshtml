@@ -1,5 +1,5 @@
-@page
-@model CourseAppChallenge.Pages.CourseItems.DetailsModel
+z@page
+@model courseappchallenge.Pages.CourseItems.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -8,40 +8,50 @@
 
 <h1>Details</h1>
 
+
+<h4>CourseItem</h4>
+<hr/>
+<dl class="row">
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.GetCourseItemByIdViewModel.CourseItemTitle)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.GetCourseItemByIdViewModel.CourseItemTitle)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.GetCourseItemByIdViewModel.Order)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.GetCourseItemByIdViewModel.Order)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.GetCourseItemByIdViewModel.CourseTitle)
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.GetCourseItemByIdViewModel.CourseTitle)
+    </dd>
+    <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.GetCourseItemByIdViewModel.Lectures)
+    </dt>
+    @foreach (var item in Model.GetCourseItemByIdViewModel.Lectures)
+    {
+        <dd class="col-sm-10">
+            @Html.DisplayFor(modelItem => item)
+        </dd>
+    }
+</dl>
 <div>
-    <h4>CourseItem</h4>
-    <hr/>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.GetCourseItemByIdViewModel.CourseItemTitle)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.GetCourseItemByIdViewModel.CourseItemTitle)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.GetCourseItemByIdViewModel.Order)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.GetCourseItemByIdViewModel.Order)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.GetCourseItemByIdViewModel.CourseTitle)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.GetCourseItemByIdViewModel.CourseTitle)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.GetCourseItemByIdViewModel.Lectures)
-        </dt>
-        @foreach (var item in Model.GetCourseItemByIdViewModel.Lectures)
+    @{
+        if (User.IsInRole("Administrator"))
         {
-            <dd class="col-sm-10">
-                @Html.DisplayFor(modelItem => item)
-            </dd>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@Model.GetCourseItemByIdViewModel?.CourseItemId">Edit</a> |
+                <a asp-page="./Index">Back to List</a>
+            </td>
         }
-    </dl>
-    <div>
-        <a asp-page="./Edit" asp-route-id="@Model.GetCourseItemByIdViewModel?.CourseItemId">Edit</a> |
-        <a asp-page="./Index">Back to List</a>
-    </div>
+        <td>
+            <a asp-page="./Index">Back to List</a>
+        </td>
+    }
+
 </div>

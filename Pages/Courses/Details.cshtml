@@ -1,5 +1,5 @@
 @page
-@model CourseAppChallenge.Pages.Courses.DetailsModel
+@model courseappchallenge.Pages.Courses.DetailsModel
 
 @{
     ViewData["Title"] = "Details";
@@ -48,6 +48,17 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.GetCourseByIdViewModel?.CourseId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    @{
+        if (User.IsInRole("Administrator"))
+        {
+            <td>
+                <a asp-page="./Edit" asp-route-id="@Model.GetCourseByIdViewModel?.CourseId">Edit</a> |
+                <a asp-page="./Index">Back to List</a>
+            </td>
+        }
+        <td>
+            <a asp-page="./Index">Back to List</a>
+        </td>
+    }
+
 </div>

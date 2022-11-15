@@ -1,5 +1,5 @@
 @page
-@model CourseAppChallenge.Pages.Courses.IndexModel
+@model courseappchallenge.Pages.Courses.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -39,11 +39,22 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Duration)
             </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.CourseId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.CourseId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.CourseId">Delete</a>
-            </td>
+            @{
+                if (User.IsInRole("Administrator"))
+                {
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.CourseId">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.CourseId">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.CourseId">Delete</a>
+                    </td>
+                }
+                else if (User.IsInRole("Student"))
+                {
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@item.CourseId">Details</a>
+                    </td>
+                }
+            }
         </tr>
     }
     </tbody>

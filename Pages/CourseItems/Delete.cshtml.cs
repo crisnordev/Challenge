@@ -1,18 +1,16 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
+using courseappchallenge.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using CourseAppChallenge.Data;
-using CourseAppChallenge.Models;
-using CourseAppChallenge.ViewModels;
-using CourseAppChallenge.ViewModels.CourseItemViewModels;
+using courseappchallenge.Models;
+using courseappchallenge.ViewModels;
+using courseappchallenge.ViewModels.CourseItemViewModels;
+using Microsoft.AspNetCore.Authorization;
 
-namespace CourseAppChallenge.Pages.CourseItems;
+namespace courseappchallenge.Pages.CourseItems;
 
+[Authorize(Policy = "RequireAdministratorRole")]
 public class DeleteModel : PageModel
 {
     private readonly ApplicationDbContext _context;

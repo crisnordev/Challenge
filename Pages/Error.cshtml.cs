@@ -1,9 +1,9 @@
 using System.Diagnostics;
-using CourseAppChallenge.ViewModels;
+using courseappchallenge.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace CourseAppChallenge.Pages;
+namespace courseappchallenge.Pages;
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 [IgnoreAntiforgeryToken]
