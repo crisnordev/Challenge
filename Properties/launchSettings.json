@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "courseappchallenge": {
+    "CourseAppChallenge": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

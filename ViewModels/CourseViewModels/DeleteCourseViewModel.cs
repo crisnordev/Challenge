@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using CourseAppChallenge.Models;
+using courseappchallenge.Models;
 using NuGet.Packaging;
 
-namespace CourseAppChallenge.ViewModels.CourseViewModels;
+namespace courseappchallenge.ViewModels.CourseViewModels;
 
 public class DeleteCourseViewModel
 {

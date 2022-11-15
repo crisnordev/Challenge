@@ -1,13 +1,16 @@
 using System.Data.Common;
+using courseappchallenge.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using CourseAppChallenge.Data;
-using CourseAppChallenge.ViewModels;
-using CourseAppChallenge.ViewModels.CourseItemViewModels;
+using courseappchallenge.ViewModels;
+using courseappchallenge.ViewModels.CourseItemViewModels;
+using Microsoft.AspNetCore.Authorization;
 
-namespace CourseAppChallenge.Pages.CourseItems;
+namespace courseappchallenge.Pages.CourseItems;
 
+[Authorize(Policy = "RequireAdministratorRole")]
+[Authorize(Policy = "RequireStudentRole")]
 public class DetailsModel : PageModel
 {
     private readonly ApplicationDbContext _context;

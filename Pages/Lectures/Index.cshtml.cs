@@ -1,18 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
+using courseappchallenge.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using CourseAppChallenge.Data;
-using CourseAppChallenge.Models;
-using CourseAppChallenge.ViewModels;
-using CourseAppChallenge.ViewModels.LectureViewModels;
+using courseappchallenge.ViewModels;
+using courseappchallenge.ViewModels.LectureViewModels;
+using Microsoft.AspNetCore.Authorization;
 
-namespace CourseAppChallenge.Pages.Lectures;
+namespace courseappchallenge.Pages.Lectures;
 
+[AllowAnonymous]
 public class IndexModel : PageModel
 {
     private readonly ApplicationDbContext _context;

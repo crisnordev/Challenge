@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\dev\\Secondary\\courseappchallenge\\courseappchallenge.csproj": {}
+    "C:\\dev\\CourseAppChallenge\\courseappchallenge.csproj": {}
   },
   "projects": {
-    "C:\\dev\\Secondary\\courseappchallenge\\courseappchallenge.csproj": {
+    "C:\\dev\\CourseAppChallenge\\courseappchallenge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\Secondary\\courseappchallenge\\courseappchallenge.csproj",
+        "projectUniqueName": "C:\\dev\\CourseAppChallenge\\courseappchallenge.csproj",
         "projectName": "courseappchallenge",
-        "projectPath": "C:\\dev\\Secondary\\courseappchallenge\\courseappchallenge.csproj",
+        "projectPath": "C:\\dev\\CourseAppChallenge\\courseappchallenge.csproj",
         "packagesPath": "C:\\Users\\crisnordev\\.nuget\\packages\\",
-        "outputPath": "C:\\dev\\Secondary\\courseappchallenge\\obj\\",
+        "outputPath": "C:\\dev\\CourseAppChallenge\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -57,10 +57,6 @@
               "target": "Package",
               "version": "[6.0.10, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[6.0.10, )"
-            },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[6.0.10, )"
@@ -72,6 +68,14 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.10, )"
+            },
+            "SecureIdentity": {
+              "target": "Package",
+              "version": "[1.0.4, )"
+            },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.28.1, )"
             }
           },
           "imports": [
@@ -93,7 +97,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
