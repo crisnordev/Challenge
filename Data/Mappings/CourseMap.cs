@@ -1,8 +1,8 @@
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace courseappchallenge.Data.Mappings;
+namespace CourseAppChallenge.Data.Mappings;
 
 public class CourseMap : IEntityTypeConfiguration<Course>
 {
@@ -24,7 +24,7 @@ public class CourseMap : IEntityTypeConfiguration<Course>
 
         builder.Property(x => x.DurationInMinutes)
             .IsRequired()
-            .HasColumnName("Duration")
+            .HasColumnName("DurationInMinutes")
             .HasColumnType("INTEGER");
 
         builder.HasMany(x => x.CourseItems);

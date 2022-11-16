@@ -1,11 +1,11 @@
 #nullable disable
 
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace courseappchallenge.Areas.Identity.Pages.Account;
+namespace CourseAppChallenge.Areas.Identity.Pages.Account;
 
 public class LogoutModel : PageModel
 {

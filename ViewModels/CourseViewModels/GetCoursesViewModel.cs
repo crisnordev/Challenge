@@ -1,7 +1,7 @@
-﻿using courseappchallenge.Models;
-using courseappchallenge.ViewModels.CourseItemViewModels;
+﻿using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels.CourseItemViewModels;
 
-namespace courseappchallenge.ViewModels.CourseViewModels;
+namespace CourseAppChallenge.ViewModels.CourseViewModels;
 
 public class GetCoursesViewModel
 {

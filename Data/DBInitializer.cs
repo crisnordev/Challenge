@@ -1,8 +1,8 @@
-﻿using courseappchallenge.Models;
+﻿using CourseAppChallenge.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace courseappchallenge.Data;
+namespace CourseAppChallenge.Data;
 
 public static class DbInitializer
 {

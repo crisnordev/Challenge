@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 
-namespace courseappchallenge.ViewModels.CourseItemViewModels;
+namespace CourseAppChallenge.ViewModels.CourseItemViewModels;
 
 public class GetCourseItemViewModel
 {

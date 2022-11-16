@@ -1,6 +1,6 @@
-﻿using courseappchallenge.Models;
+﻿using CourseAppChallenge.Models;
 
-namespace courseappchallenge.ViewModels.LectureViewModels;
+namespace CourseAppChallenge.ViewModels.LectureViewModels;
 
 public class GetLecturesViewModel
 {

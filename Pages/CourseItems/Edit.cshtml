@@ -1,5 +1,5 @@
 @page
-@model courseappchallenge.Pages.CourseItems.EditModel
+@model CourseAppChallenge.Pages.CourseItems.EditModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -14,7 +14,7 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CourseItem.CourseItemId"/>
+            <input type="hidden" asp-for="Id"/>
             <div class="form-group">
                 <label asp-for="EditCourseItemViewModel.CourseItemTitle" class="control-label"></label>
                 <input asp-for="EditCourseItemViewModel.CourseItemTitle" class="form-control"/>

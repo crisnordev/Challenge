@@ -1,14 +1,14 @@
 #nullable disable
 
 using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Data;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
+using CourseAppChallenge.Data;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace courseappchallenge.Areas.Identity.Pages.Account.Manage;
+namespace CourseAppChallenge.Areas.Identity.Pages.Account.Manage;
 
 public class IndexModel : RoleNamePageModel
 {

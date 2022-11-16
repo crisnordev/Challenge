@@ -1,5 +1,5 @@
 @page
-@model courseappchallenge.Pages.Courses.CreateModel
+@model CourseAppChallenge.Pages.Courses.CreateModel
 
 @{
     ViewData["Title"] = "Create";
@@ -30,9 +30,9 @@
                 <span asp-validation-for="CreateCourseViewModel.Summary" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreateCourseViewModel.Duration" class="control-label"></label>
-                <input asp-for="CreateCourseViewModel.Duration" class="form-control" />
-                <span asp-validation-for="CreateCourseViewModel.Duration" class="text-danger"></span>
+                <label asp-for="CreateCourseViewModel.DurationInMinutes" class="control-label"></label>
+                <input asp-for="CreateCourseViewModel.DurationInMinutes" class="form-control" />
+                <span asp-validation-for="CreateCourseViewModel.DurationInMinutes" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

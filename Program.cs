@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.Data;
-using courseappchallenge.Models;
-using courseappchallenge.Services;
+using CourseAppChallenge.Data;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 

@@ -2,7 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace courseappchallenge.Areas.Identity.Pages.Account.Manage;
+namespace CourseAppChallenge.Areas.Identity.Pages.Account.Manage;
 
 public static class ManageNavPages
 {

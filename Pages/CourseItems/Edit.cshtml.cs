@@ -1,13 +1,13 @@
-using courseappchallenge.Data;
+using CourseAppChallenge.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
-using courseappchallenge.ViewModels.CourseItemViewModels;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseItemViewModels;
 using Microsoft.AspNetCore.Authorization;
 
-namespace courseappchallenge.Pages.CourseItems;
+namespace CourseAppChallenge.Pages.CourseItems;
 
 [Authorize(Policy = "RequireAdministratorRole")]
 public class EditModel : PageModel
@@ -19,35 +19,42 @@ public class EditModel : PageModel
         _context = context;
     }
 
-    [BindProperty] public EditCourseItemViewModel EditCourseItemViewModel { get; set; } = default!;
+    [BindProperty] 
+    public EditCourseItemViewModel EditCourseItemViewModel { get; set; } = default!;
 
-    public CourseItem CourseItem { get; set; } = default!;
+    public Guid Id { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
         if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
 
-        CourseItem = await _context.CourseItems.FirstOrDefaultAsync(m => m.CourseItemId == id);
-        if (CourseItem == null) return NotFound(new ErrorResultViewModel("Can not find this module."));
+        Id = (Guid)id;
 
+        var courseItem = await _context.CourseItems.AsNoTracking().FirstOrDefaultAsync(x => x.CourseItemId == id);
+        if (courseItem == null) return NotFound(new ErrorResultViewModel("Can not find this module."));
+
+        EditCourseItemViewModel = courseItem;
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(Guid? id)
     {
         if (!ModelState.IsValid) return Page();
+        
+        var courseItem = await _context.CourseItems.FirstOrDefaultAsync(x => x.CourseItemId == id);
+        if (courseItem == null) return NotFound(new ErrorResultViewModel("Can not find this module."));
 
         try
         {
-            var entry = _context.Update(CourseItem);
-            entry.CurrentValues.SetValues(EditCourseItemViewModel);
+            await TryUpdateModelAsync(
+                courseItem!,
+                "editcourseitemviewmodel", 
+                c => c.CourseItemTitle, c => c.Order);
+
+            _context.CourseItems.Update(courseItem);
             await _context.SaveChangesAsync();
             
             return RedirectToPage("./Index");
-        }
-        catch (DbUpdateConcurrencyException ex)
-        {
-            return !CourseItemExists(CourseItem.CourseItemId) ? NotFound(new ErrorResultViewModel("Can not find this module", ex.Message)) : StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
         }
         catch (DbUpdateException ex)
         {

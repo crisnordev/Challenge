@@ -1,14 +1,14 @@
 using System.Data.Common;
-using courseappchallenge.Data;
-using courseappchallenge.Models;
+using CourseAppChallenge.Data;
+using CourseAppChallenge.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.ViewModels;
-using courseappchallenge.ViewModels.CourseViewModels;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseViewModels;
 using Microsoft.AspNetCore.Authorization;
 
-namespace courseappchallenge.Pages.Courses;
+namespace CourseAppChallenge.Pages.Courses;
 
 [Authorize(Policy = "RequireAdministratorRole")]
 public class DeleteModel : PageModel
@@ -20,40 +20,32 @@ public class DeleteModel : PageModel
         _context = context;
     }
 
-    public Course Course { get; set; } = default!;
-
     [BindProperty] public DeleteCourseViewModel DeleteCourseViewModel { get; set; } = default!;
 
+    public Guid? CourseId { get; set; } 
+    
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
         if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
+        CourseId = id;
 
-        try
-        {
-            Course = await _context.Courses.Include(y => y.CourseItems)
-                .FirstOrDefaultAsync(x => x.CourseId == id);
+        var course = await _context.Courses.AsNoTracking().Include(y => y.CourseItems)
+            .FirstOrDefaultAsync(x => x.CourseId == id);
+        if (course == null) return NotFound(new ErrorResultViewModel("Can not find course."));
 
-            DeleteCourseViewModel = Course!;
+        DeleteCourseViewModel = course!;
 
-            return Page();
-        }
-        catch (DbException ex)
-        {
-            return string.IsNullOrEmpty(Course?.CourseTitle)
-                ? NotFound(new ErrorResultViewModel("Can not find this course."))
-                : StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
-        }
+        return Page();
     }
 
     public async Task<IActionResult> OnPostAsync(Guid? id)
     {
+        var course = await _context.Courses.FindAsync(id); 
+        if (course == null) return NotFound(new ErrorResultViewModel("Can not find course."));
+        
         try
         {
-            _context.Courses.Remove(Course);
+            _context.Courses.Remove(course!);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

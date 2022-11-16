@@ -1,12 +1,12 @@
-using courseappchallenge.Data;
+using CourseAppChallenge.Data;
 using Microsoft.AspNetCore.Mvc;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
-using courseappchallenge.ViewModels.LectureViewModels;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.LectureViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
-namespace courseappchallenge.Pages.Lectures;
+namespace CourseAppChallenge.Pages.Lectures;
 
 [Authorize(Policy = "RequireAdministratorRole")]
 public class CreateModel : CourseItemNamePageModel
@@ -19,8 +19,6 @@ public class CreateModel : CourseItemNamePageModel
     }
 
     [BindProperty] public CreateLectureViewModel CreateLectureViewModel { get; set; }
-
-    [BindProperty] public Lecture Lecture { get; set; } = default!;
 
     public IActionResult OnGet()
     {

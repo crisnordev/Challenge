@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 
-namespace courseappchallenge.ViewModels.CourseItemViewModels;
+namespace CourseAppChallenge.ViewModels.CourseItemViewModels;
 
 public class EditCourseItemViewModel
 {
@@ -14,4 +14,10 @@ public class EditCourseItemViewModel
     [Display(Name = "Order")]
     [Range(1, 1000, ErrorMessage = "Module order must be between 1 and 1000.")]
     public int Order { get; set; }
+    
+    public static implicit operator EditCourseItemViewModel(CourseItem courseItem) => new ()
+    {
+        CourseItemTitle = courseItem.CourseItemTitle,
+        Order = courseItem.Order
+    };
 }

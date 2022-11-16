@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 
-namespace courseappchallenge.ViewModels.CourseViewModels;
+namespace CourseAppChallenge.ViewModels.CourseViewModels;
 
 public class GetCourseViewModel
 {
@@ -11,13 +11,13 @@ public class GetCourseViewModel
 
     [Display(Name = "Tag")] public string Tag { get; set; } = string.Empty;
 
-    [Display(Name = "DurationInMinutes")] public int Duration { get; set; }
+    [Display(Name = "Duration in minutes")] public int DurationInMinutes { get; set; }
 
     public static implicit operator GetCourseViewModel(Course course) => new()
     {
         CourseId = course.CourseId,
         CourseTitle = course.CourseTitle,
         Tag = course.Tag,
-        Duration = course.DurationInMinutes
+        DurationInMinutes = course.DurationInMinutes
     };
 }

@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\dev\\courseappchallenge\\courseappchallenge.csproj": {}
+    "C:\\dev\\courseappchallenge\\CourseAppChallenge.csproj": {}
   },
   "projects": {
-    "C:\\dev\\courseappchallenge\\courseappchallenge.csproj": {
+    "C:\\dev\\courseappchallenge\\CourseAppChallenge.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\dev\\courseappchallenge\\courseappchallenge.csproj",
-        "projectName": "courseappchallenge",
-        "projectPath": "C:\\dev\\courseappchallenge\\courseappchallenge.csproj",
+        "projectUniqueName": "C:\\dev\\courseappchallenge\\CourseAppChallenge.csproj",
+        "projectName": "CourseAppChallenge",
+        "projectPath": "C:\\dev\\courseappchallenge\\CourseAppChallenge.csproj",
         "packagesPath": "C:\\Users\\crisnordev\\.nuget\\packages\\",
         "outputPath": "C:\\dev\\courseappchallenge\\obj\\",
         "projectStyle": "PackageReference",
@@ -47,31 +47,29 @@
           "dependencies": {
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.10, )"
+              "version": "[6.0.11, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.10, )"
+              "version": "[6.0.11, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[6.0.10, )"
+              "version": "[6.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[6.0.10, )"
+              "version": "[6.0.11, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.10, )"
+              "version": "[6.0.11, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[6.0.10, )"
-            },
-            "SecureIdentity": {
-              "target": "Package",
-              "version": "[1.0.4, )"
             },
             "SendGrid": {
               "target": "Package",

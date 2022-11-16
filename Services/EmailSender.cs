@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
-namespace courseappchallenge.Services;
+namespace CourseAppChallenge.Services;
 
 public class EmailSender : IEmailSender
 {

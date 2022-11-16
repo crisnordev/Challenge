@@ -1,14 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 
-namespace courseappchallenge.ViewModels.LectureViewModels;
+namespace CourseAppChallenge.ViewModels.LectureViewModels;
 
 public class EditLectureViewModel
 {
-    public EditLectureViewModel()
-    {
-    }
-
     [Required(ErrorMessage = "Lecture title is required.")]
     [Display(Name = "Lecture title")]
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Lecture title must have between 2 and 80 characters.")]
@@ -25,4 +21,11 @@ public class EditLectureViewModel
     [StringLength(2046, MinimumLength = 10,
         ErrorMessage = "Lecture video Url must have between 10 and 2046 characters.")]
     public string VideoUrl { get; set; } = "https://www.";
+
+    public static implicit operator EditLectureViewModel(Lecture lecture) => new()
+    {
+        LectureTitle = lecture.LectureTitle,
+        Description = lecture.Description,
+        VideoUrl = lecture.VideoUrl
+    };
 }

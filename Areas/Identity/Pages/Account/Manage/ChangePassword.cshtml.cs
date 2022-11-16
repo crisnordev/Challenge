@@ -1,13 +1,13 @@
 #nullable disable
 
 using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace courseappchallenge.Areas.Identity.Pages.Account.Manage;
+namespace CourseAppChallenge.Areas.Identity.Pages.Account.Manage;
 
 public class ChangePasswordModel : PageModel
 {

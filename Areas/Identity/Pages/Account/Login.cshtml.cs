@@ -1,13 +1,13 @@
 #nullable disable
 
 using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace courseappchallenge.Areas.Identity.Pages.Account;
+namespace CourseAppChallenge.Areas.Identity.Pages.Account;
 
 public class LoginModel : PageModel
 {

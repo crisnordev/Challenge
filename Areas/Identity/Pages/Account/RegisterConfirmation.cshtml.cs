@@ -1,7 +1,7 @@
 #nullable disable
 
 using System.Text;
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace courseappchallenge.Areas.Identity.Pages.Account;
+namespace CourseAppChallenge.Areas.Identity.Pages.Account;
 
 [AllowAnonymous]
 public class RegisterConfirmationModel : PageModel

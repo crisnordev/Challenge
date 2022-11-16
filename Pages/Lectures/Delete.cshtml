@@ -1,5 +1,5 @@
 @page
-@model courseappchallenge.Pages.Lectures.DeleteModel
+@model CourseAppChallenge.Pages.Lectures.DeleteModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -28,7 +28,7 @@
     </dl>
 
     <form method="post">
-        <input type="hidden" asp-for="Lecture.LectureId"/>
+        <input type="hidden" asp-for="LectureId"/>
         <input type="submit" value="Delete" class="btn btn-danger"/> |
         <a asp-page="./Index">Back to List</a>
     </form>

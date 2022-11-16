@@ -1,4 +1,4 @@
-﻿namespace courseappchallenge.Shared;
+﻿namespace CourseAppChallenge.Shared;
 
 public class Entity
 {

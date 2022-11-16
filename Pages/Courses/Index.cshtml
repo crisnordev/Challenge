@@ -1,5 +1,5 @@
 @page
-@model courseappchallenge.Pages.Courses.IndexModel
+@model CourseAppChallenge.Pages.Courses.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -21,7 +21,7 @@
             @Html.DisplayNameFor(model => model.GetCoursesViewModel.GetCoursesViewModelList[0].Tag)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.GetCoursesViewModel.GetCoursesViewModelList[0].Duration)
+            @Html.DisplayNameFor(model => model.GetCoursesViewModel.GetCoursesViewModelList[0].DurationInMinutes)
         </th>
         <th></th>
     </tr>
@@ -37,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.Tag)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Duration)
+                @Html.DisplayFor(modelItem => item.DurationInMinutes)
             </td>
             @{
                 if (User.IsInRole("Administrator"))

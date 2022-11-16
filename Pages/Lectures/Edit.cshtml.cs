@@ -1,13 +1,13 @@
-using courseappchallenge.Data;
+using CourseAppChallenge.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
-using courseappchallenge.ViewModels.LectureViewModels;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.LectureViewModels;
 using Microsoft.AspNetCore.Authorization;
 
-namespace courseappchallenge.Pages.Lectures;
+namespace CourseAppChallenge.Pages.Lectures;
 
 [Authorize(Policy = "RequireAdministratorRole")]
 public class EditModel : PageModel
@@ -21,35 +21,39 @@ public class EditModel : PageModel
 
     [BindProperty] public EditLectureViewModel EditLectureViewModel { get; set; }
 
-    public Lecture Lecture { get; set; } = default!;
+    public Guid? LectureId { get; set; } 
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
         if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
+        LectureId = id;
 
-        Lecture = await _context.Lectures.FirstOrDefaultAsync(m => m.LectureId == id);
-        if (Lecture == null) return NotFound(new ErrorResultViewModel("Can not find this lecture."));
+        var lecture = await _context.Lectures.AsNoTracking().FirstOrDefaultAsync(m => m.LectureId == id);
+        if (lecture == null) return NotFound(new ErrorResultViewModel("Can not find this lecture."));
+
+        EditLectureViewModel = lecture;
 
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(Guid? id)
     {
         if (!ModelState.IsValid) return Page();
+        
+        var lecture = await _context.Lectures.FirstOrDefaultAsync(m => m.LectureId == id);
+        if (lecture == null) return NotFound(new ErrorResultViewModel("Can not find this lecture."));
 
         try
         {
-            var entry = _context.Update(Lecture);
-            entry.CurrentValues.SetValues(EditLectureViewModel);
+            await TryUpdateModelAsync(
+                lecture!,
+                "editlectureviewmodel", 
+                c => c.LectureTitle, c => c.Description, c => c.VideoUrl);
+
+            _context.Lectures.Update(lecture);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
-        }
-        catch (DbUpdateConcurrencyException ex)
-        {
-            return !LectureExists(Lecture.LectureId)
-                ? NotFound(new ErrorResultViewModel("Can not find this lecture", ex.Message))
-                : StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
         }
         catch (DbUpdateException ex)
         {
@@ -59,10 +63,5 @@ public class EditModel : PageModel
         {
             return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
         }
-    }
-
-    private bool LectureExists(Guid id)
-    {
-        return (_context.Lectures?.Any(e => e.LectureId == id)).GetValueOrDefault();
     }
 }

@@ -3,15 +3,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace courseappchallenge.Areas.Identity.Pages.Account;
+namespace CourseAppChallenge.Areas.Identity.Pages.Account;
 
 public class ForgotPasswordModel : PageModel
 {

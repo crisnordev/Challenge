@@ -1,12 +1,12 @@
-using courseappchallenge.Data;
+using CourseAppChallenge.Data;
 using Microsoft.AspNetCore.Mvc;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
-using courseappchallenge.ViewModels.CourseItemViewModels;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseItemViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
-namespace courseappchallenge.Pages.CourseItems;
+namespace CourseAppChallenge.Pages.CourseItems;
 
 [Authorize(Policy = "RequireAdministratorRole")]
 public class CreateModel : CourseNamePageModel
@@ -19,9 +19,10 @@ public class CreateModel : CourseNamePageModel
     }
 
 
-    [BindProperty] public CreateCourseItemViewModel CreateCourseItemViewModel { get; set; } = default!;
+    [BindProperty] 
+    public CreateCourseItemViewModel CreateCourseItemViewModel { get; set; } = default!;
 
-    [BindProperty] public CourseItem CourseItem { get; set; } = default!;
+    
 
     public IActionResult OnGet()
     {
@@ -47,6 +48,7 @@ public class CreateModel : CourseNamePageModel
 
         var entry = await _context.CourseItems.AddAsync(new CourseItem());
         entry.CurrentValues.SetValues(CreateCourseItemViewModel);
+        entry.Entity.Course = await _context.Courses.FindAsync(CreateCourseItemViewModel.CourseId);
 
         try
         {

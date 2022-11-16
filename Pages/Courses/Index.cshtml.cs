@@ -1,15 +1,15 @@
 using System.Data.Common;
 using System.Reflection;
-using courseappchallenge.Data;
+using CourseAppChallenge.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
-using courseappchallenge.ViewModels.CourseViewModels;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace courseappchallenge.Pages.Courses;
+namespace CourseAppChallenge.Pages.Courses;
 
 [AllowAnonymous]
 public class IndexModel : PageModel

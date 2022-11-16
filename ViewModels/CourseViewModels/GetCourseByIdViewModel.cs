@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 using NuGet.Packaging;
 
-namespace courseappchallenge.ViewModels.CourseViewModels;
+namespace CourseAppChallenge.ViewModels.CourseViewModels;
 
 public class GetCourseByIdViewModel
 {
@@ -14,7 +14,7 @@ public class GetCourseByIdViewModel
 
     [Display(Name = "Summary")] public string Summary { get; set; } = string.Empty;
 
-    [Display(Name = "DurationInMinutes")] public int Duration { get; set; }
+    [Display(Name = "Duration in minutes")] public int DurationInMinutes { get; set; }
 
     [Display(Name = "Modules")] public IList<string> CourseItems { get; set; } = new List<string>();
 
@@ -26,7 +26,7 @@ public class GetCourseByIdViewModel
             CourseTitle = course.CourseTitle,
             Tag = course.Tag,
             Summary = course.Summary,
-            Duration = course.DurationInMinutes,
+            DurationInMinutes = course.DurationInMinutes,
             CourseItems = new List<string>()
         };
 

@@ -1,19 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>aspnet-courseappchallenge-8b60c9b6-bd10-4537-aa2a-653476795d86</UserSecretsId>
-    </PropertyGroup>
+      <UserSecretsId>dfefd813-6656-419d-8e2a-39e421ed3e23</UserSecretsId>
+  </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.11" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.11" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.11" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.11" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.11">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
-        <PackageReference Include="SecureIdentity" Version="1.0.4" />
         <PackageReference Include="SendGrid" Version="9.28.1" />
     </ItemGroup>
 

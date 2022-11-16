@@ -1,13 +1,13 @@
-using courseappchallenge.Data;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
-using courseappchallenge.ViewModels.CourseViewModels;
+using CourseAppChallenge.Data;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace courseappchallenge.Pages.Courses;
+namespace CourseAppChallenge.Pages.Courses;
 
 [Authorize(Policy = "RequireAdministratorRole")]
 public class CreateModel : PageModel

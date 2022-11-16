@@ -1,8 +1,8 @@
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace courseappchallenge.Data.Mappings;
+namespace CourseAppChallenge.Data.Mappings;
 
 public class CourseItemMap : IEntityTypeConfiguration<CourseItem>
 {

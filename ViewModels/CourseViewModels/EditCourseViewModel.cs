@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using courseappchallenge.Models;
+using CourseAppChallenge.Models;
 
-namespace courseappchallenge.ViewModels.CourseViewModels;
+namespace CourseAppChallenge.ViewModels.CourseViewModels;
 
 public class EditCourseViewModel
 {
@@ -21,15 +21,15 @@ public class EditCourseViewModel
     public string Summary { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Module duration is required.")]
-    [Display(Name = "DurationInMinutes")]
+    [Display(Name = "Duration in minutes")]
     [Range(1, 1000, ErrorMessage = "Module duration must be between 1 and 1000.")]
-    public int Duration { get; set; }
+    public int DurationInMinutes { get; set; }
 
     public static implicit operator EditCourseViewModel(Course course) => new()
     {
         CourseTitle = course.CourseTitle,
         Tag = course.Tag,
         Summary = course.Summary,
-        Duration = course.DurationInMinutes
+        DurationInMinutes = course.DurationInMinutes
     };
 }

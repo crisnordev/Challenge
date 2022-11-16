@@ -1,14 +1,14 @@
 using System.Data.Common;
-using courseappchallenge.Data;
+using CourseAppChallenge.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
-using courseappchallenge.ViewModels.LectureViewModels;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.LectureViewModels;
 using Microsoft.AspNetCore.Authorization;
 
-namespace courseappchallenge.Pages.Lectures;
+namespace CourseAppChallenge.Pages.Lectures;
 
 [Authorize(Policy = "RequireAdministratorRole")]
 public class DeleteModel : PageModel
@@ -22,38 +22,30 @@ public class DeleteModel : PageModel
 
     [BindProperty] public DeleteLectureViewModel DeleteLectureViewModel { get; set; } = default!;
 
-    [BindProperty] public Lecture Lecture { get; set; } = default!;
-
+    public Guid? LectureId { get; set; }
+    
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
         if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
+        LectureId = id;
 
-        try
-        {
-            Lecture = await _context.Lectures.Include(y => y.CourseItem)
+        var lecture = await _context.Lectures.AsNoTracking().Include(y => y.CourseItem)
                 .FirstOrDefaultAsync(x => x.LectureId == id);
+        if (lecture == null) return NotFound(new ErrorResultViewModel("Can not find this lecture."));
 
-            DeleteLectureViewModel = Lecture!;
+        DeleteLectureViewModel = lecture!;
 
             return Page();
-        }
-        catch (DbException ex)
-        {
-            return string.IsNullOrEmpty(Lecture?.LectureTitle)
-                ? NotFound(new ErrorResultViewModel("Can not find this lecture."))
-                : StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
-        }
     }
 
     public async Task<IActionResult> OnPostAsync(Guid? id)
     {
+        var lecture = await _context.Lectures.FirstOrDefaultAsync(x => x.LectureId == id);
+        if (lecture == null) return NotFound(new ErrorResultViewModel("Can not find this lecture."));
+        
         try
         {
-            _context.Lectures.Remove(Lecture);
+            _context.Lectures.Remove(lecture);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

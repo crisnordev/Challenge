@@ -1,16 +1,15 @@
 using System.Data.Common;
-using courseappchallenge.Data;
+using CourseAppChallenge.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.ViewModels;
-using courseappchallenge.ViewModels.LectureViewModels;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.LectureViewModels;
 using Microsoft.AspNetCore.Authorization;
 
-namespace courseappchallenge.Pages.Lectures;
+namespace CourseAppChallenge.Pages.Lectures;
 
-[Authorize(Policy = "RequireAdministratorRole")]
-[Authorize(Policy = "RequireStudentRole")]
+[Authorize]
 public class DetailsModel : PageModel
 {
     private readonly ApplicationDbContext _context;
@@ -28,7 +27,8 @@ public class DetailsModel : PageModel
 
         try
         {
-            GetLectureByIdViewModel = await _context.Lectures.AsNoTracking().Include(y => y.CourseItem)
+            GetLectureByIdViewModel = await _context.Lectures.AsNoTracking()
+                .Include(y => y.CourseItem)
                 .FirstOrDefaultAsync(x => x.LectureId == id);
 
             return Page();

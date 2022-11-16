@@ -1,13 +1,13 @@
-using courseappchallenge.Data;
+using CourseAppChallenge.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using courseappchallenge.Models;
-using courseappchallenge.ViewModels;
-using courseappchallenge.ViewModels.CourseViewModels;
+using CourseAppChallenge.Models;
+using CourseAppChallenge.ViewModels;
+using CourseAppChallenge.ViewModels.CourseViewModels;
 using Microsoft.AspNetCore.Authorization;
 
-namespace courseappchallenge.Pages.Courses;
+namespace CourseAppChallenge.Pages.Courses;
 
 [Authorize(Policy = "RequireAdministratorRole")]
 public class EditModel : PageModel
@@ -21,15 +21,18 @@ public class EditModel : PageModel
 
     [BindProperty] public EditCourseViewModel EditCourseViewModel { get; set; } = default!;
 
-    public Course Course { get; set; } = default!;
+    public Guid Id { get; set; }
 
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
         if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
+        Id = (Guid)id;
 
-        Course = await _context.Courses.FirstOrDefaultAsync(m => m.CourseId == id);
-        if (Course == null) return NotFound(new ErrorResultViewModel("Can not find this course."));
+        var course = await _context.Courses.AsNoTracking().FirstOrDefaultAsync(x => x.CourseId == id);
+        if (course == null) return NotFound(new ErrorResultViewModel("Can not find this course."));
+
+        EditCourseViewModel = course;
 
         return Page();
     }
@@ -37,20 +40,22 @@ public class EditModel : PageModel
     public async Task<IActionResult> OnPostAsync(Guid? id)
     {
         if (!ModelState.IsValid) return Page();
+        
+        var course = await _context.Courses.FindAsync(id);
+        if (course == null) return NotFound(new ErrorResultViewModel("Can not find this course."));
 
         try
         {
-            var entry = _context.Update(Course);
-            entry.CurrentValues.SetValues(EditCourseViewModel);
+            await TryUpdateModelAsync(
+                course!,
+                "editcourseviewmodel", 
+                c => c.CourseTitle, c => c.Tag, c => c.Summary,
+                c => c.DurationInMinutes);
+
+            _context.Courses.Update(course);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
-        }
-        catch (DbUpdateConcurrencyException ex)
-        {
-            return NotFound(!CourseExists(Course.CourseId)
-                ? new ErrorResultViewModel("Can not find this course.", ex.Message)
-                : new ErrorResultViewModel("Something is wrong.", ex.Message));
         }
         catch (DbUpdateException ex)
         {
