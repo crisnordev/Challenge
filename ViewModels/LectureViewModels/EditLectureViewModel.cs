@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using courseappchallenge.Models;
 
-namespace CourseAppChallenge.ViewModels.LectureViewModels;
+namespace courseappchallenge.ViewModels.LectureViewModels;
 
 public class EditLectureViewModel
 {
@@ -25,18 +25,4 @@ public class EditLectureViewModel
     [StringLength(2046, MinimumLength = 10,
         ErrorMessage = "Lecture video Url must have between 10 and 2046 characters.")]
     public string VideoUrl { get; set; } = "https://www.";
-
-    public static implicit operator EditLectureViewModel(Lecture lecture) => new()
-    {
-        LectureTitle = lecture.LectureTitle,
-        Description = lecture.Description,
-        VideoUrl = lecture.VideoUrl,
-    };
-
-    public static implicit operator Lecture(EditLectureViewModel editLectureViewModel) => new()
-    {
-        LectureTitle = editLectureViewModel.LectureTitle,
-        Description = editLectureViewModel.Description,
-        VideoUrl = editLectureViewModel.VideoUrl,
-    };
 }

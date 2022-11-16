@@ -1,14 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using courseappchallenge.Models;
 
-namespace CourseAppChallenge.ViewModels.CourseItemViewModels;
+namespace courseappchallenge.ViewModels.CourseItemViewModels;
 
 public class CreateCourseItemViewModel
 {
-    public CreateCourseItemViewModel()
-    {
-    }
-
     [Required(ErrorMessage = "Module title is required.")]
     [Display(Name = "Module title")]
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Module title must have between 2 and 80 characters.")]
@@ -20,16 +16,6 @@ public class CreateCourseItemViewModel
     public int Order { get; set; }
 
     public Guid CourseId { get; set; }
-
-    public static implicit operator CreateCourseItemViewModel(CourseItem courseItem) => new()
-    {
-        CourseItemTitle = courseItem.CourseItemTitle,
-        Order = courseItem.Order
-    };
-
-    public static implicit operator CourseItem(CreateCourseItemViewModel createCourseItem) => new()
-    {
-        CourseItemTitle = createCourseItem.CourseItemTitle,
-        Order = createCourseItem.Order
-    };
+    
+    [Display(Name = "Course")] public Course Course { get; set; } = default!;
 }

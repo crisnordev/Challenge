@@ -1,17 +1,13 @@
 ﻿using courseappchallenge.Models;
 using courseappchallenge.ViewModels.CourseItemViewModels;
 
-namespace CourseAppChallenge.ViewModels.CourseViewModels;
+namespace courseappchallenge.ViewModels.CourseViewModels;
 
 public class GetCoursesViewModel
 {
     public IList<GetCourseViewModel> GetCoursesViewModelList { get; set; } = new List<GetCourseViewModel>();
 
-    [Display(Name = "Course")] public string CourseTitle { get; set; }
-
-    [Display(Name = "Tag")] public string Tag { get; set; }
-
-    public static implicit operator GetCoursesViewModel(Course course) => new()
+    public static implicit operator GetCoursesViewModel(List<Course> courses)
     {
         var coursesViewModel = new GetCoursesViewModel();
 

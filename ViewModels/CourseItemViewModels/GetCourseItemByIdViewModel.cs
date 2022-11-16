@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using courseappchallenge.Models;
 
-namespace CourseAppChallenge.ViewModels.CourseItemViewModels;
+namespace courseappchallenge.ViewModels.CourseItemViewModels;
 
 public class GetCourseItemByIdViewModel
 {
@@ -13,7 +13,7 @@ public class GetCourseItemByIdViewModel
 
     [Display(Name = "Course")] public string CourseTitle { get; set; } = string.Empty;
 
-    [Display(Name = "Lectures")] public List<string> Lectures { get; set; } = new();
+    [Display(Name = "Lectures")] public IList<string> Lectures { get; set; } = new List<string>();
 
     public static implicit operator GetCourseItemByIdViewModel(CourseItem courseItem)
     {
@@ -26,7 +26,10 @@ public class GetCourseItemByIdViewModel
             Lectures = new List<string>()
         };
 
-        item.Lectures.AddRange(courseItem.Lectures.Select(x => x.LectureTitle));
+        foreach (var lecture in courseItem.Lectures)
+        {
+            item.Lectures.Add(lecture.LectureTitle);
+        }
 
         return item;
     }

@@ -1,37 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using CourseAppChallenge.Shared;
+using courseappchallenge.Shared;
 
-namespace CourseAppChallenge.ViewModels;
+namespace courseappchallenge.Models;
 
 public class Lecture : Entity
 {
-    public Lecture()
-    {
-    }
+    public Guid LectureId { get; set; } = Guid.NewGuid();
 
-    public Lecture(string title, string description, string videoUrl, CourseItem courseItem)
-    {
-        LectureId = Guid.NewGuid();
-        LectureTitle = title;
-        Description = description;
-        VideoUrl = videoUrl;
-        CourseItem = courseItem;
-    }
-
-    [Display(Name = "Lecture Id")] public Guid LectureId { get; set; }
-
-    [Required(ErrorMessage = "Lecture title is required.")]
-    [Display(Name = "Lecture")]
-    [StringLength(80, MinimumLength = 2, ErrorMessage = "Lecture title must have between 2 and 80 characters.")]
     public string LectureTitle { get; set; } = string.Empty;
 
     public string Description { get; set; } = string.Empty;
 
-    [Url]
-    [Required]
-    [Display(Name = "Url")]
-    [StringLength(2046, MinimumLength = 10,
-        ErrorMessage = "Lecture video Url must have between 10 and 2046 characters.")]
     public string VideoUrl { get; set; } = "https://www.";
 
     public Guid CourseItemId { get; set; } = Guid.NewGuid();

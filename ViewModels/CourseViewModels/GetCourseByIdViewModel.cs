@@ -2,7 +2,7 @@
 using courseappchallenge.Models;
 using NuGet.Packaging;
 
-namespace CourseAppChallenge.ViewModels.CourseViewModels;
+namespace courseappchallenge.ViewModels.CourseViewModels;
 
 public class GetCourseByIdViewModel
 {
@@ -16,7 +16,7 @@ public class GetCourseByIdViewModel
 
     [Display(Name = "DurationInMinutes")] public int Duration { get; set; }
 
-    [Display(Name = "Modules")] public List<string> CourseItems { get; set; } = new();
+    [Display(Name = "Modules")] public IList<string> CourseItems { get; set; } = new List<string>();
 
     public static implicit operator GetCourseByIdViewModel(Course course)
     {
@@ -30,8 +30,7 @@ public class GetCourseByIdViewModel
             CourseItems = new List<string>()
         };
 
-        courseView.CourseItems.AddRange(course.CourseItems.Select(x => x.CourseItemTitle));
-
-        return courseView;
+        getCourseByIdViewModel.CourseItems.AddRange(course.CourseItems.Select(x => x.CourseItemTitle));
+        return getCourseByIdViewModel;
     }
 }

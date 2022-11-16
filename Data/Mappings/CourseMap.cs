@@ -1,8 +1,8 @@
-﻿using CourseAppChallenge.ViewModels;
+using courseappchallenge.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CourseAppChallenge.Data.Mappings;
+namespace courseappchallenge.Data.Mappings;
 
 public class CourseMap : IEntityTypeConfiguration<Course>
 {

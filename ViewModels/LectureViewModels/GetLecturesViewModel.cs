@@ -1,20 +1,12 @@
 ﻿using courseappchallenge.Models;
 
-namespace CourseAppChallenge.ViewModels.LectureViewModels;
+namespace courseappchallenge.ViewModels.LectureViewModels;
 
 public class GetLecturesViewModel
 {
-    public GetLecturesViewModel()
-    {
-    }
+    public IList<GetLectureViewModel> GetLecturesViewModelList { get; set; } = new List<GetLectureViewModel>();
 
-    public Guid LectureId { get; set; }
-
-    [Display(Name = "Lecture")] public string LectureTitle { get; set; }
-
-    [Display(Name = "Module")] public string CourseItemTitle { get; set; }
-
-    public static implicit operator GetLecturesViewModel(Lecture lecture) => new()
+    public static implicit operator GetLecturesViewModel(List<Lecture> lectures)
     {
         var getLecturesViewModel = new GetLecturesViewModel();
 

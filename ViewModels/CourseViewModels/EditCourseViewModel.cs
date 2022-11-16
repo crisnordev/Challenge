@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using courseappchallenge.Models;
 
-namespace CourseAppChallenge.ViewModels.CourseViewModels;
+namespace courseappchallenge.ViewModels.CourseViewModels;
 
 public class EditCourseViewModel
 {
@@ -13,7 +13,7 @@ public class EditCourseViewModel
     [Required(ErrorMessage = "Course tag is required.")]
     [Display(Name = "Tag")]
     [StringLength(4, MinimumLength = 4, ErrorMessage = "Course tag must have 4 characters.")]
-    public string Tag { get; set; }
+    public string Tag { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Course summary is required.")]
     [Display(Name = "Summary")]
@@ -25,30 +25,11 @@ public class EditCourseViewModel
     [Range(1, 1000, ErrorMessage = "Module duration must be between 1 and 1000.")]
     public int Duration { get; set; }
 
-    public Dictionary<Guid, string> CourseItems { get; set; }
-
-    public static implicit operator EditCourseViewModel(Course course)
+    public static implicit operator EditCourseViewModel(Course course) => new()
     {
-        var editCourse = new EditCourseViewModel
-        {
-            CourseTitle = course.CourseTitle,
-            Tag = course.Tag,
-            Summary = course.Summary,
-            Duration = course.Duration,
-            CourseItems = new Dictionary<Guid, string>()
-        };
-
-        foreach (var item in course.CourseItems)
-            editCourse.CourseItems.Add(item.CourseItemId, item.CourseItemTitle);
-
-        return editCourse;
-    }
-
-    public static implicit operator Course(EditCourseViewModel editCourseView) => new()
-    {
-        CourseTitle = editCourseView.CourseTitle,
-        Tag = editCourseView.Tag,
-        Summary = editCourseView.Summary,
-        Duration = editCourseView.Duration
+        CourseTitle = course.CourseTitle,
+        Tag = course.Tag,
+        Summary = course.Summary,
+        Duration = course.DurationInMinutes
     };
 }

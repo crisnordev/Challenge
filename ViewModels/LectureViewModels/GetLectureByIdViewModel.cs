@@ -1,13 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using courseappchallenge.Models;
 
-namespace CourseAppChallenge.ViewModels.LectureViewModels;
+namespace courseappchallenge.ViewModels.LectureViewModels;
 
 public class GetLectureByIdViewModel
 {
-    public GetLectureByIdViewModel()
-    {
-    }
+    public Guid LectureId { get; set; } = Guid.Empty;
 
     [Display(Name = "Lecture")] public string LectureTitle { get; set; } = string.Empty;
 

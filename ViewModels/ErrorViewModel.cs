@@ -1,4 +1,4 @@
-namespace CourseAppChallenge.ViewModels;
+namespace courseappchallenge.ViewModels;
 
 public class ErrorViewModel
 {
