@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using courseappchallenge.Models;
 
 namespace CourseAppChallenge.ViewModels.LectureViewModels;
 
@@ -16,8 +16,13 @@ public class GetLecturesViewModel
 
     public static implicit operator GetLecturesViewModel(Lecture lecture) => new()
     {
-        LectureId = lecture.LectureId,
-        LectureTitle = lecture.LectureTitle,
-        CourseItemTitle = lecture.CourseItem.CourseItemTitle
-    };
+        var getLecturesViewModel = new GetLecturesViewModel();
+
+        foreach (var lecture in lectures)
+        {
+            getLecturesViewModel.GetLecturesViewModelList.Add(lecture);
+        }
+
+        return getLecturesViewModel;
+    }
 }

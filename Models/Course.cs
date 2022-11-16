@@ -5,10 +5,7 @@ namespace CourseAppChallenge.ViewModels;
 
 public class Course : Entity
 {
-    public Course()
-    {
-        CourseItems = new List<CourseItem>();
-    }
+    public Guid CourseId { get; set; } = Guid.NewGuid();
 
     public Course(string title, string tag, string summary, int duration)
     {
@@ -37,10 +34,7 @@ public class Course : Entity
     [StringLength(160, MinimumLength = 2, ErrorMessage = "Course summary must have between 2 and 160 characters.")]
     public string Summary { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Module duration is required.")]
-    [Display(Name = "Duration")]
-    [Range(1, 1000, ErrorMessage = "Module duration must be between 1 and 1000.")]
-    public int Duration { get; set; }
+    public int DurationInMinutes { get; set; }
 
-    [Display(Name = "Modules")] public IEnumerable<CourseItem> CourseItems { get; set; }
+    public IEnumerable<CourseItem> CourseItems { get; set; } = new List<CourseItem>();
 }

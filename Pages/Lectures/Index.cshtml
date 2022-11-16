@@ -1,0 +1,55 @@
+@page
+@model courseappchallenge.Pages.Lectures.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GetLecturesViewModel.GetLecturesViewModelList[0].LectureTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GetLecturesViewModel.GetLecturesViewModelList[0].CourseItemTitle)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.GetLecturesViewModel.GetLecturesViewModelList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LectureTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseItemTitle)
+            </td>
+            @{
+                if (User.IsInRole("Administrator"))
+                {
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.LectureId">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.LectureId">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.LectureId">Delete</a>
+                    </td>
+                }
+                else if (User.IsInRole("Student"))
+                {
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@item.LectureId">Details</a>
+                    </td>
+                }
+            }
+        </tr>
+    }
+    </tbody>
+</table>

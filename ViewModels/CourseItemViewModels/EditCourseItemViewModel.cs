@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using courseappchallenge.Models;
 
 namespace CourseAppChallenge.ViewModels.CourseItemViewModels;
 

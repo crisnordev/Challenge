@@ -22,7 +22,7 @@ public class CourseMap : IEntityTypeConfiguration<Course>
         builder.Property(x => x.Summary).IsRequired().HasColumnName("Summary").HasColumnType("NVARCHAR")
             .HasMaxLength(160);
 
-        builder.Property(x => x.Duration)
+        builder.Property(x => x.DurationInMinutes)
             .IsRequired()
             .HasColumnName("Duration")
             .HasColumnType("INTEGER");

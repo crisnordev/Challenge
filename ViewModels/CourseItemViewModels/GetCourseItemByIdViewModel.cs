@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using courseappchallenge.Models;
 
 namespace CourseAppChallenge.ViewModels.CourseItemViewModels;
 
@@ -9,8 +10,6 @@ public class GetCourseItemByIdViewModel
     [Display(Name = "Module")] public string CourseItemTitle { get; set; } = string.Empty;
 
     [Display(Name = "Order")] public int Order { get; set; }
-
-    public Guid CourseId { get; set; }
 
     [Display(Name = "Course")] public string CourseTitle { get; set; } = string.Empty;
 
@@ -23,7 +22,6 @@ public class GetCourseItemByIdViewModel
             CourseItemId = courseItem.CourseItemId,
             CourseItemTitle = courseItem.CourseItemTitle,
             Order = courseItem.Order,
-            CourseId = courseItem.Course.CourseId,
             CourseTitle = courseItem.Course.CourseTitle,
             Lectures = new List<string>()
         };

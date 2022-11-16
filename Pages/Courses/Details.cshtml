@@ -1,0 +1,64 @@
+@page
+@model courseappchallenge.Pages.Courses.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Course</h4>
+    <hr/>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GetCourseByIdViewModel.CourseTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GetCourseByIdViewModel.CourseTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GetCourseByIdViewModel.Tag)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GetCourseByIdViewModel.Tag)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GetCourseByIdViewModel.Summary)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GetCourseByIdViewModel.Summary)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GetCourseByIdViewModel.Duration)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GetCourseByIdViewModel.Duration)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GetCourseByIdViewModel.CourseItems)
+        </dt>
+        @foreach (var item in Model.GetCourseByIdViewModel.CourseItems)
+        {
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => item)
+            </dd>
+        }
+    </dl>
+</div>
+<div>
+    @{
+        if (User.IsInRole("Administrator"))
+        {
+            <td>
+                <a asp-page="./Edit" asp-route-id="@Model.GetCourseByIdViewModel?.CourseId">Edit</a> |
+                <a asp-page="./Index">Back to List</a>
+            </td>
+        }
+        <td>
+            <a asp-page="./Index">Back to List</a>
+        </td>
+    }
+
+</div>

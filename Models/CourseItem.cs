@@ -5,10 +5,7 @@ namespace CourseAppChallenge.ViewModels;
 
 public class CourseItem : Entity
 {
-    public CourseItem()
-    {
-        Lectures = new List<Lecture>();
-    }
+    public Guid CourseItemId { get; set; } = Guid.NewGuid();
 
     public CourseItem(string title, int order, Course course)
     {
@@ -26,12 +23,11 @@ public class CourseItem : Entity
     [StringLength(80, MinimumLength = 2, ErrorMessage = "Module title must have between 2 and 80 characters.")]
     public string CourseItemTitle { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Module order is required.")]
-    [Display(Name = "Order")]
-    [Range(1, 1000, ErrorMessage = "Module order must be between 1 and 1000.")]
     public int Order { get; set; }
 
-    [Display(Name = "Course")] public Course Course { get; set; }
+    public Guid CourseId { get; set; } = Guid.NewGuid();
 
-    [Display(Name = "Lectures")] public IEnumerable<Lecture> Lectures { get; set; }
+    public Course Course { get; set; } = default!;
+
+    public IEnumerable<Lecture> Lectures { get; set; } = new List<Lecture>();
 }

@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using courseappchallenge.Models;
+using NuGet.Packaging;
 
 namespace CourseAppChallenge.ViewModels.CourseViewModels;
 
@@ -12,19 +14,19 @@ public class GetCourseByIdViewModel
 
     [Display(Name = "Summary")] public string Summary { get; set; } = string.Empty;
 
-    [Display(Name = "Duration")] public int Duration { get; set; }
+    [Display(Name = "DurationInMinutes")] public int Duration { get; set; }
 
     [Display(Name = "Modules")] public List<string> CourseItems { get; set; } = new();
 
     public static implicit operator GetCourseByIdViewModel(Course course)
     {
-        var courseView = new GetCourseByIdViewModel
+        var getCourseByIdViewModel = new GetCourseByIdViewModel()
         {
             CourseId = course.CourseId,
             CourseTitle = course.CourseTitle,
             Tag = course.Tag,
             Summary = course.Summary,
-            Duration = course.Duration,
+            Duration = course.DurationInMinutes,
             CourseItems = new List<string>()
         };
 

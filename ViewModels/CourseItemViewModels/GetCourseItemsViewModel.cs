@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using courseappchallenge.Models;
 
 namespace CourseAppChallenge.ViewModels.CourseItemViewModels;
 
@@ -18,9 +18,13 @@ public class GetCourseItemsViewModel
 
     public static implicit operator GetCourseItemsViewModel(CourseItem courseItem) => new()
     {
-        CourseItemId = courseItem.CourseItemId,
-        CourseItemTitle = courseItem.CourseItemTitle,
-        Order = courseItem.Order,
-        CourseTitle = courseItem.Course.CourseTitle
-    };
+        var courseItemsViewModel = new GetCourseItemsViewModel();
+
+        foreach (var item in courseItems)
+        {
+            courseItemsViewModel.CourseItemsViewModelList?.Add(item);
+        }
+
+        return courseItemsViewModel;
+    }
 }
