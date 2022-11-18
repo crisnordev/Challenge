@@ -6,59 +6,59 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c14de8b-053b-4f8a-8971-3d750eb3966b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/DetailsCourseItem.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Pages/Courses/DetailsCourse.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CourseAppChallenge.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CourseAppChallenge.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20221117153615_v-2.0.0.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/20221117153615_v-2.0.0.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/CourseItems/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/CourseItems/Details.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/CourseItems/Details.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/CourseItems/Details.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Courses/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/Details.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Courses/Details.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/Details.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Lectures/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Lectures/Create.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Lectures/Details.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Details.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Lectures/Details.cshtml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/CourseAppChallenge.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/CourseAppChallenge.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/CourseItems/CourseNamePageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/CourseNamePageModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/CourseItems/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/CreateCourseItem.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/CourseItems/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/CreateCourseItem.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/CourseItems/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/DeleteCourseItem.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/CourseItems/Delete.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/DeleteCourseItem.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/CourseItems/Details.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/CourseItems/Details.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/DetailsCourseItem.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/CourseItems/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/EditCourseItem.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/CourseItems/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/EditCourseItem.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/CourseItems/Index.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/CourseItems/Index.cshtml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Courses/CoursesNavigationPages.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Courses/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CreateCourse.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Courses/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CreateCourse.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Courses/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/DeleteCourse.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Courses/Delete.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/DeleteCourse.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Courses/Details.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Courses/Details.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/DetailsCourse.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Courses/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/EditCourse.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Courses/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/EditCourse.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Courses/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/IndexCourse.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Courses/Index.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/IndexCourse.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Lectures/CourseItemNamePageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/Lectures/CourseItemNamePageModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/Lectures/CreateLecture.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Create.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/Lectures/CreateLecture.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/Lectures/DeleteLecture.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Delete.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/Lectures/DeleteLecture.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/Lectures/DetailsLecture.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Details.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/Lectures/DetailsLecture.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/Lectures/EditLecture.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Edit.cshtml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Courses/CourseItems/Lectures/EditLecture.cshtml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Index.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Lectures/Index.cshtml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pages/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Pages/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/CourseItemViewModels/CreateCourseItemViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/CourseItemViewModels/CreateCourseItemViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/CourseItemViewModels/GetCourseItemByIdViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/CourseItemViewModels/GetCourseItemByIdViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/CourseViewModels/GetCourseByIdViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/CourseViewModels/GetCourseByIdViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/CourseViewModels/GetCoursesViewModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/LectureViewModels/CreateLectureViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/LectureViewModels/CreateLectureViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/LectureViewModels/GetLectureByIdViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/LectureViewModels/GetLectureByIdViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/CourseAppChallenge.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/CourseAppChallenge.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/CourseAppChallenge.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/CourseAppChallenge.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/CourseAppChallenge.staticwebassets.runtime.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/CourseAppChallenge.staticwebassets.runtime.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.AspNetCore.Cryptography.Internal.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.AspNetCore.Cryptography.Internal.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.AspNetCore.Identity.UI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.AspNetCore.Identity.UI.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.Data.Sqlite.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.Data.Sqlite.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Design.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Design.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Relational.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Relational.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Sqlite.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Sqlite.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.Extensions.FileProviders.Embedded.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.Extensions.FileProviders.Embedded.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.Extensions.Identity.Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.Extensions.Identity.Core.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.Extensions.Identity.Stores.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/net6.0/Microsoft.Extensions.Identity.Stores.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Debug/net6.0/SecureIdentity.dll" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/courseappchallenge.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/courseappchallenge.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/CourseAppChallenge.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/CourseAppChallenge.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/CourseAppChallenge.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/CourseAppChallenge.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/CourseAppChallenge.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/CourseAppChallenge.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/CourseAppChallenge.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/CourseAppChallenge.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/courseappchallenge.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/courseappchallenge.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/courseappchallenge.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/courseappchallenge.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/courseappchallenge.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/courseappchallenge.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/ref/CourseAppChallenge.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/ref/CourseAppChallenge.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/refint/CourseAppChallenge.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/refint/CourseAppChallenge.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/staticwebassets.build.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/staticwebassets.build.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/Debug/net6.0/staticwebassets.development.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/net6.0/staticwebassets.development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/courseappchallenge.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/courseappchallenge.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/courseappchallenge.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/obj/courseappchallenge.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/courseappchallenge.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/obj/courseappchallenge.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.packagespec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/obj/rider.project.restore.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-v2.0.0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wwwroot/app.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wwwroot/app.db-shm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wwwroot/app.db-wal" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,23 +66,17 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://C:/dev/CourseAppChallenge/Pages/CourseItems/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/dev/CourseAppChallenge/Pages/CourseItems/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/dev/CourseAppChallenge/Pages/CourseItems/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/dev/CourseAppChallenge/Pages/Courses/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/dev/CourseAppChallenge/Pages/Courses/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/dev/CourseAppChallenge/Pages/Courses/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/dev/CourseAppChallenge/Pages/Courses/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/dev/CourseAppChallenge/Pages/Courses/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/dev/CourseAppChallenge/Pages/Lectures/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/dev/CourseAppChallenge/Pages/Lectures/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/dev/CourseAppChallenge/Pages/Lectures/Details.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Courses/DetailsCourse.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Courses/EditCourse.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Pages/Courses/IndexCourse.cshtml" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2HeH7gNFy70AW5iFaX8hUx9WSBq" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -146,7 +140,8 @@
       <workItem from="1668688046381" duration="6598000" />
       <workItem from="1668699452644" duration="7750000" />
       <workItem from="1668711929217" duration="623000" />
-      <workItem from="1668717367470" duration="1274000" />
+      <workItem from="1668717367470" duration="6888000" />
+      <workItem from="1668772122305" duration="15987000" />
     </task>
     <task id="LOCAL-00001" summary="Publishing on Azure.">
       <created>1668640852524</created>
@@ -169,7 +164,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668706516415</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Publishing on Azure.">
+      <created>1668719092591</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1668719092591</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

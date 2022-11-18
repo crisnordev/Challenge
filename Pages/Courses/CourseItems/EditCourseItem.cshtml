@@ -1,0 +1,36 @@
+@page
+@model CourseAppChallenge.Pages.Courses.CourseItems.EditCourseItemModel
+
+@{
+    ViewData["Title"] = "EditCourseItem";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>CourseItem</h4>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id"/>
+            <div class="form-group">
+                <label asp-for="EditCourseItemViewModel.CourseItemTitle" class="control-label"></label>
+                <input asp-for="EditCourseItemViewModel.CourseItemTitle" class="form-control"/>
+                <span asp-validation-for="EditCourseItemViewModel.CourseItemTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EditCourseItemViewModel.Order" class="control-label"></label>
+                <input asp-for="EditCourseItemViewModel.Order" class="form-control"/>
+                <span asp-validation-for="EditCourseItemViewModel.Order" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+    <div>
+        <a asp-page="./Courses/DetailsCourse">Back to List</a>
+    </div>
+</div>

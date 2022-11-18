@@ -1,0 +1,53 @@
+@page
+@model CourseAppChallenge.Pages.Courses.CourseItems.Lectures.DetailsLectureModel
+
+@{
+    ViewData["Title"] = "DetailsLecture";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Lecture</h4>
+    <hr/>
+    <h4><a href="@Model.GetLectureByIdViewModel.VideoUrl">@Model.GetLectureByIdViewModel.VideoUrl</a></h4>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GetLectureByIdViewModel.LectureTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GetLectureByIdViewModel.LectureTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GetLectureByIdViewModel.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GetLectureByIdViewModel.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GetLectureByIdViewModel.CourseItemTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GetLectureByIdViewModel.CourseItemTitle)
+        </dd>
+    </dl>
+</div>
+<div>
+    @{
+        if (User.IsInRole("Administrator"))
+        {
+            <dt>
+                <a asp-page="./EditLecture" asp-route-id="@Model.GetLectureByIdViewModel?.LectureId">Edit</a> |
+                <a asp-page="./DeleteLecture" asp-route-id="@Model.GetLectureByIdViewModel?.LectureId">Delete</a> |
+                <a asp-page="./CourseItems/DetailsCourseItems" asp-route-id="@Model.GetLectureByIdViewModel.CourseItemId">Back to module</a>
+            </dt>
+        }
+        if (User.IsInRole("Student"))
+        {
+            <dt>
+                <a asp-page="../DetailsCourseItems" asp-route-id="@Model.GetLectureByIdViewModel.CourseItemId">Back to module</a>
+            </dt>
+        }
+    }
+</div>

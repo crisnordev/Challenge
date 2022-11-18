@@ -21,7 +21,5 @@ public class CreateLectureViewModel
         ErrorMessage = "Lecture video Url must have between 10 and 2046 characters.")]
     public string VideoUrl { get; set; } = "https://www.";
 
-    public Guid CourseItemId { get; set; } = Guid.Empty;
-
     public CourseItem CourseItem { get; set; } = default!;
 }

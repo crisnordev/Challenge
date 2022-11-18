@@ -15,12 +15,15 @@ public class GetLectureByIdViewModel
 
     [Display(Name = "Module")] public string CourseItemTitle { get; set; } = default!;
 
+    public Guid CourseItemId { get; set; }
+
     public static implicit operator GetLectureByIdViewModel(Lecture lecture) => new()
     {
         LectureId = lecture.LectureId,
         LectureTitle = lecture.LectureTitle,
         Description = lecture.Description,
         VideoUrl = lecture.VideoUrl,
-        CourseItemTitle = lecture.CourseItem.CourseItemTitle
+        CourseItemTitle = lecture.CourseItem.CourseItemTitle,
+        CourseItemId = lecture.CourseItemId
     };
 }

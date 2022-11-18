@@ -108,18 +108,18 @@ public static class DbInitializer
         {
             new()
             {
-                LectureTitle = "C# runtime",
-                Description = "In this lecture you will learn about C# runtime.",
-                VideoUrl = "https://learn.microsoft.com/",
+                LectureTitle = ".NET runtime",
+                Description = "In this lecture you will learn about .NET runtime.",
+                VideoUrl = "https://learn.microsoft.com/pt-br/dotnet/standard/clr",
                 CourseItemId = cSharpModule.CourseItemId,
                 CourseItem = cSharpModule
             },
 
             new()
             {
-                LectureTitle = "C# SDK",
-                Description = "In this lecture you will learn about C# SDK.",
-                VideoUrl = "https://learn.microsoft.com/",
+                LectureTitle = ".NET SDK",
+                Description = "In this lecture you will learn about .NET SDK.",
+                VideoUrl = "https://learn.microsoft.com/pt-br/dotnet/core/sdk",
                 CourseItemId = cSharpModule.CourseItemId,
                 CourseItem = cSharpModule
             },
@@ -128,7 +128,7 @@ public static class DbInitializer
             {
                 LectureTitle = "Strings",
                 Description = "In this lecture you will learn about strings.",
-                VideoUrl = "https://learn.microsoft.com/",
+                VideoUrl = "https://learn.microsoft.com/pt-br/dotnet/api/system.string?view=net-7.0",
                 CourseItemId = classesModule.CourseItemId,
                 CourseItem = classesModule
             },
@@ -137,7 +137,7 @@ public static class DbInitializer
             {
                 LectureTitle = "ToString",
                 Description = "In this lecture you will learn about ToString method.",
-                VideoUrl = "https://learn.microsoft.com/",
+                VideoUrl = "https://learn.microsoft.com/pt-br/dotnet/api/system.object.tostring?view=net-7.0",
                 CourseItemId = methodsModule.CourseItemId,
                 CourseItem = methodsModule
             },
@@ -146,7 +146,7 @@ public static class DbInitializer
             {
                 LectureTitle = ".NET CLI",
                 Description = "In this lecture you will learn about .NET CLI.",
-                VideoUrl = "https://learn.microsoft.com/",
+                VideoUrl = "https://learn.microsoft.com/pt-br/dotnet/core/tools/",
                 CourseItemId = dotNetModule.CourseItemId,
                 CourseItem = dotNetModule
             },
@@ -155,7 +155,7 @@ public static class DbInitializer
             {
                 LectureTitle = "Entity Framework Core",
                 Description = "In this lecture you will learn about Entity Framework Core.",
-                VideoUrl = "https://learn.microsoft.com/",
+                VideoUrl = "https://learn.microsoft.com/en-us/ef/",
                 CourseItemId = dotNetModule.CourseItemId,
                 CourseItem = dotNetModule
             }

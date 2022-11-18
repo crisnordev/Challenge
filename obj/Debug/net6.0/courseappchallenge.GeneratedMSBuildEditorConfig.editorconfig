@@ -120,44 +120,56 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/dev/courseappchallenge/Pages/CourseItems/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlSXRlbXNcQ3JlYXRlLmNzaHRtbA==
+[C:/dev/courseappchallenge/Pages/Courses/CourseItems/CreateCourseItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDb3Vyc2VJdGVtc1xDcmVhdGVDb3Vyc2VJdGVtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/dev/courseappchallenge/Pages/CourseItems/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlSXRlbXNcRGVsZXRlLmNzaHRtbA==
+[C:/dev/courseappchallenge/Pages/Courses/CourseItems/DeleteCourseItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDb3Vyc2VJdGVtc1xEZWxldGVDb3Vyc2VJdGVtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/dev/courseappchallenge/Pages/CourseItems/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlSXRlbXNcRGV0YWlscy5jc2h0bWw=
+[C:/dev/courseappchallenge/Pages/Courses/CourseItems/DetailsCourseItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDb3Vyc2VJdGVtc1xEZXRhaWxzQ291cnNlSXRlbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/dev/courseappchallenge/Pages/CourseItems/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlSXRlbXNcRWRpdC5jc2h0bWw=
+[C:/dev/courseappchallenge/Pages/Courses/CourseItems/EditCourseItem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDb3Vyc2VJdGVtc1xFZGl0Q291cnNlSXRlbS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/dev/courseappchallenge/Pages/CourseItems/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlSXRlbXNcSW5kZXguY3NodG1s
+[C:/dev/courseappchallenge/Pages/Courses/CourseItems/Lectures/CreateLecture.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDb3Vyc2VJdGVtc1xMZWN0dXJlc1xDcmVhdGVMZWN0dXJlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/dev/courseappchallenge/Pages/Courses/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDcmVhdGUuY3NodG1s
+[C:/dev/courseappchallenge/Pages/Courses/CourseItems/Lectures/DeleteLecture.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDb3Vyc2VJdGVtc1xMZWN0dXJlc1xEZWxldGVMZWN0dXJlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/dev/courseappchallenge/Pages/Courses/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xEZWxldGUuY3NodG1s
+[C:/dev/courseappchallenge/Pages/Courses/CourseItems/Lectures/DetailsLecture.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDb3Vyc2VJdGVtc1xMZWN0dXJlc1xEZXRhaWxzTGVjdHVyZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/dev/courseappchallenge/Pages/Courses/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xEZXRhaWxzLmNzaHRtbA==
+[C:/dev/courseappchallenge/Pages/Courses/CourseItems/Lectures/EditLecture.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDb3Vyc2VJdGVtc1xMZWN0dXJlc1xFZGl0TGVjdHVyZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/dev/courseappchallenge/Pages/Courses/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xFZGl0LmNzaHRtbA==
+[C:/dev/courseappchallenge/Pages/Courses/CreateCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDcmVhdGVDb3Vyc2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/dev/courseappchallenge/Pages/Courses/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xJbmRleC5jc2h0bWw=
+[C:/dev/courseappchallenge/Pages/Courses/DeleteCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xEZWxldGVDb3Vyc2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/dev/courseappchallenge/Pages/Courses/DetailsCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xEZXRhaWxzQ291cnNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/dev/courseappchallenge/Pages/Courses/EditCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xFZGl0Q291cnNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/dev/courseappchallenge/Pages/Courses/IndexCourse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xJbmRleENvdXJzZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/dev/courseappchallenge/Pages/Error.cshtml]
@@ -166,26 +178,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/dev/courseappchallenge/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/dev/courseappchallenge/Pages/Lectures/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVjdHVyZXNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/dev/courseappchallenge/Pages/Lectures/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVjdHVyZXNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/dev/courseappchallenge/Pages/Lectures/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVjdHVyZXNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/dev/courseappchallenge/Pages/Lectures/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVjdHVyZXNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/dev/courseappchallenge/Pages/Lectures/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVjdHVyZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/dev/courseappchallenge/Pages/Privacy.cshtml]
