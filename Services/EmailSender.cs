@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
@@ -7,21 +6,14 @@ namespace CourseAppChallenge.Services;
 
 public class EmailSender : IEmailSender
 {
-    public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
-    {
-        Options = optionsAccessor.Value;
-    }
-
-    public AuthMessageSenderOptions Options { get; }
-
     public async Task SendEmailAsync(string toEmail, string subject, string message)
     {
-        if (string.IsNullOrEmpty(Options.SendGridKey)) throw new Exception("Null SendGridKey");
+        if (string.IsNullOrEmpty(Configuration.SendGridKey.SendGridApiKey)) throw new Exception("Null SendGridKey");
 
-        await Execute(Options.SendGridKey, subject, message, toEmail);
+        await Execute(Configuration.SendGridKey.SendGridApiKey, subject, message, toEmail);
     }
 
-    public async Task Execute(string apiKey, string subject, string message, string toEmail)
+    public static async Task Execute(string apiKey, string subject, string message, string toEmail)
     {
         var client = new SendGridClient(apiKey);
         var msg = new SendGridMessage

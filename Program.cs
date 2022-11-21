@@ -1,3 +1,4 @@
+using CourseAppChallenge;
 using Microsoft.EntityFrameworkCore;
 using CourseAppChallenge.Data;
 using CourseAppChallenge.Models;
@@ -40,11 +41,13 @@ builder.Services.ConfigureApplicationCookie(o =>
 
 builder.Services.AddRazorPages();
 
-builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
-
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 
 var app = builder.Build();
+
+var sendGridKey = new Configuration.SendGridConfig();
+app.Configuration.GetSection("SendGridKey").Bind(sendGridKey);
+Configuration.SendGridKey = sendGridKey;
 
 if (app.Environment.IsDevelopment())
 {
