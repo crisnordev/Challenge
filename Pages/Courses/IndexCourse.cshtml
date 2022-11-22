@@ -48,7 +48,7 @@
                         <a asp-page="./DeleteCourse" asp-route-id="@item.CourseId">Delete</a>
                     </td>
                 }
-                if (!User.IsInRole("Administrator"))
+                if (User.IsInRole("Student"))
                 {
                     <td>
                         <a asp-page="./DetailsCourse" asp-route-id="@item.CourseId">Details</a>

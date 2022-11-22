@@ -91,7 +91,7 @@ public class RegisterModel : PageModel
 
         if (result.Succeeded)
         {
-            var addRole = await _userManager.AddToRoleAsync(user, "Administrator");
+            var addRole = await _userManager.AddToRoleAsync(user, "Student");
             if (!addRole.Succeeded)
                 return BadRequest(new ErrorResultViewModel("Can not add user role."));
             
