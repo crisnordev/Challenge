@@ -8,6 +8,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+    
+env:
+  ConnectionStrings__DefaultConnection: ${{ secrets.AZURE_SQLITE_CONNECTION_STRING }}
 
 jobs:
   build:
@@ -25,8 +28,8 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-            creds: ${{ secrets.AZURE_CREDENTIALS }} 
-
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          
       - name: Install EF Tools
         run: dotnet tool install --global dotnet-ef
 
@@ -64,5 +67,5 @@ jobs:
         with:
           app-name: 'CourseAppChallenge'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_33DF5058ED6145E99AF7F153AB8BA29E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A87870746ADF45AD9B87A19A7A43F1F9 }}
           package: .
