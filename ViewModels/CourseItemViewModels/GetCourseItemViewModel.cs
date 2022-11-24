@@ -11,7 +11,7 @@ public class GetCourseItemViewModel
 
     [Display(Name = "Order")] public int Order { get; set; }
 
-    [Display(Name = "Course")] public string CourseTitle { get; set; }
+    [Display(Name = "Course")] public string CourseTitle { get; set; } = string.Empty;
 
     public static implicit operator GetCourseItemViewModel(CourseItem courseItem) => new()
     {

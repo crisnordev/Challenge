@@ -1,0 +1,61 @@
+﻿@page
+@model CourseAppChallenge.Areas.Content.Pages.Courses.IndexCourseModel
+
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Courses</h1>
+<hr/>
+@if (User.IsInRole("Administrator"))
+{
+    <b>
+        <a asp-page="./CreateCourse">Create new course</a>
+    </b>
+}
+<table class="table table-striped table-hover">
+    <thead>
+    <tr class="success">
+        <th>
+            @Html.DisplayNameFor(model => model.GetCoursesViewModel[0].CourseTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GetCoursesViewModel[0].Tag)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.GetCoursesViewModel)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tag)
+            </td>
+            @{
+                if (User.IsInRole("Administrator"))
+                {
+                    <td>
+                        <a asp-area="Content" asp-page="/Courses/DetailsCourse" asp-route-id="@item.CourseId">Details</a> |
+                        <a asp-area="Content" asp-page="/Courses/EditCourse" asp-route-id="@item.CourseId">Edit</a> |
+                        <a asp-area="Content" asp-page="/Courses/DeleteCourse" asp-route-id="@item.CourseId">Delete</a>
+                    </td>
+                }
+                if (User.IsInRole("Student"))
+                {
+                    <td>
+                        <a asp-area="Content" asp-page="/Courses/DetailsCourse" asp-route-id="@item.CourseId">Details</a>
+                    </td>
+                }
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}

@@ -19,7 +19,5 @@ public class CreateLectureViewModel
     [Display(Name = "Url")]
     [StringLength(2046, MinimumLength = 10,
         ErrorMessage = "Lecture video Url must have between 10 and 2046 characters.")]
-    public string VideoUrl { get; set; } = "https://www.";
-
-    public CourseItem CourseItem { get; set; } = default!;
+    public string VideoUrl { get; set; } = string.Empty;
 }

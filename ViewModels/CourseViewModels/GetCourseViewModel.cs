@@ -11,13 +11,10 @@ public class GetCourseViewModel
 
     [Display(Name = "Tag")] public string Tag { get; set; } = string.Empty;
 
-    [Display(Name = "Duration in minutes")] public int DurationInMinutes { get; set; }
-
     public static implicit operator GetCourseViewModel(Course course) => new()
     {
         CourseId = course.CourseId,
         CourseTitle = course.CourseTitle,
-        Tag = course.Tag,
-        DurationInMinutes = course.DurationInMinutes
+        Tag = course.Tag
     };
 }

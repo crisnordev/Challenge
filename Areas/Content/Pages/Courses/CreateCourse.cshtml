@@ -1,0 +1,47 @@
+@page
+@model CourseAppChallenge.Areas.Content.Pages.Courses.CreateCourseModel
+
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Create new course</h1>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CreateCourseViewModel.CourseTitle" class="control-label"></label>
+                <input asp-for="CreateCourseViewModel.CourseTitle" class="form-control"/>
+                <span asp-validation-for="CreateCourseViewModel.CourseTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateCourseViewModel.Tag" class="control-label"></label>
+                <input asp-for="CreateCourseViewModel.Tag" class="form-control"/>
+                <span asp-validation-for="CreateCourseViewModel.Tag" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateCourseViewModel.Summary" class="control-label"></label>
+                <input asp-for="CreateCourseViewModel.Summary" class="form-control"/>
+                <span asp-validation-for="CreateCourseViewModel.Summary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateCourseViewModel.DurationInMinutes" class="control-label"></label>
+                <input asp-for="CreateCourseViewModel.DurationInMinutes" class="form-control"/>
+                <span asp-validation-for="CreateCourseViewModel.DurationInMinutes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<b>
+    <a asp-area="Content" asp-page="/Courses/IndexCourse">Back to courses</a>
+</b>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

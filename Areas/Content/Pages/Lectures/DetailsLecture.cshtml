@@ -1,0 +1,49 @@
+@page
+@model CourseAppChallenge.Areas.Content.Pages.Lectures.DetailsLectureModel
+
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Lecture details</h1>
+<hr/>
+<div>
+    <h4>
+        <a href="@Model.GetLectureByIdViewModel.VideoUrl">@Model.GetLectureByIdViewModel.VideoUrl</a>
+    </h4>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GetLectureByIdViewModel.LectureTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GetLectureByIdViewModel.LectureTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GetLectureByIdViewModel.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GetLectureByIdViewModel.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.GetLectureByIdViewModel.CourseItemTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GetLectureByIdViewModel.CourseItemTitle)
+        </dd>
+        @if (User.IsInRole("Administrator"))
+        {
+            <dt>
+                <a asp-area="Content" asp-page="/Lectures/EditLecture" asp-route-id="@Model.LectureId">Edit</a> |
+                <a asp-area="Content" asp-page="/Lectures/DeleteLecture" asp-route-id="@Model.LectureId">Delete</a>
+            </dt>
+        }
+    </dl>
+</div>
+<br/>
+<b>
+    <a asp-area="Content" asp-page="/CourseItems/DetailsCourseItem" asp-route-id="@Model.CourseItemId">Module</a>
+</b>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

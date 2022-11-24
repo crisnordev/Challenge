@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using CourseAppChallenge.Shared;
+﻿using CourseAppChallenge.Shared;
 
 namespace CourseAppChallenge.Models;
 

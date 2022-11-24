@@ -7,7 +7,7 @@ public class DeleteLectureViewModel
 {
     [Display(Name = "Lecture")] public string LectureTitle { get; set; } = string.Empty;
 
-    [Display(Name = "Module")] public string CourseItemTitle { get; set; } = default!;
+    [Display(Name = "Module")] public string CourseItemTitle { get; set; } = string.Empty;
 
     public static implicit operator DeleteLectureViewModel(Lecture lecture) => new()
     {

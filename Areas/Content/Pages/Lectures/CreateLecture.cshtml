@@ -1,0 +1,47 @@
+@page
+@model CourseAppChallenge.Areas.Content.Pages.Lectures.CreateLectureModel
+
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Create new lecture</h1>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CourseItemTitle" class="control-label"></label>
+                <input asp-for="CourseItemTitle" class="form-control" disabled/>
+                <span asp-validation-for="CourseItemTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateLectureViewModel.LectureTitle" class="control-label"></label>
+                <input asp-for="CreateLectureViewModel.LectureTitle" class="form-control"/>
+                <span asp-validation-for="CreateLectureViewModel.LectureTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateLectureViewModel.Description" class="control-label"></label>
+                <input asp-for="CreateLectureViewModel.Description" class="form-control"/>
+                <span asp-validation-for="CreateLectureViewModel.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateLectureViewModel.VideoUrl" class="control-label"></label>
+                <input asp-for="CreateLectureViewModel.VideoUrl" class="form-control"/>
+                <span asp-validation-for="CreateLectureViewModel.VideoUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<b>
+    <a asp-area="Content" asp-page="/CourseItems/DetailsCourseItem" asp-route-id="@Model.CourseItemId">Back to module</a>
+</b>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}
