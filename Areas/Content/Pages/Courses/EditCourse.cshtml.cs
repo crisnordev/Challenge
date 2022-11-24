@@ -38,10 +38,10 @@ public class EditCourseModel : PageModel
 
     public async Task<IActionResult> OnPostAsync(Guid? id)
     {
-        if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
+        if (id == null) return NotFound(new ErrorResultViewModel("COED X01 - Id can not be null."));
         if (!ModelState.IsValid) return Page();
         var course = await _context.Courses.FindAsync(id);
-        if (course == null) return NotFound(new ErrorResultViewModel("Can not find this course."));
+        if (course == null) return NotFound(new ErrorResultViewModel("COED X02 - Can not find this course."));
         
         await TryUpdateModelAsync(
             course!,
@@ -58,12 +58,12 @@ public class EditCourseModel : PageModel
         }
         catch (DbUpdateException ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Internal server error.",
+            return StatusCode(500, new ErrorResultViewModel("COED X03 - Internal server error.",
                 ex.Message));
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Something is wrong.",
+            return StatusCode(500, new ErrorResultViewModel("COED X04 - Something is wrong.",
                 ex.Message));
         }
     }

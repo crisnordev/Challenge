@@ -26,9 +26,9 @@ public class EditLectureModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
-        if (id == null) return NotFound(new ErrorResultViewModel("LED X 01 - Id can not be null."));
+        if (id == null) return NotFound(new ErrorResultViewModel("LEED X 01 - Id can not be null."));
         var lecture = await _context.Lectures.AsNoTracking().FirstOrDefaultAsync(m => m.LectureId == id);
-        if (lecture == null) return NotFound(new ErrorResultViewModel("LED X 02 - Can not find this lecture."));
+        if (lecture == null) return NotFound(new ErrorResultViewModel("LEED X 02 - Can not find this lecture."));
         LectureId = id;
         CourseItemId = lecture.CourseItemId;
         EditLectureViewModel = lecture;
@@ -38,10 +38,10 @@ public class EditLectureModel : PageModel
 
     public async Task<IActionResult> OnPostAsync(Guid? id)
     {
-        if (id == null) return NotFound(new ErrorResultViewModel("LED X 03 - Id can not be null."));
+        if (id == null) return NotFound(new ErrorResultViewModel("LEED X 03 - Id can not be null."));
         if (!ModelState.IsValid) return Page();
         var lecture = await _context.Lectures.FirstOrDefaultAsync(m => m.LectureId == id);
-        if (lecture == null) return NotFound(new ErrorResultViewModel("LED X 04 - Can not find this lecture."));
+        if (lecture == null) return NotFound(new ErrorResultViewModel("LEED X 04 - Can not find this lecture."));
 
         try
         {
@@ -57,11 +57,11 @@ public class EditLectureModel : PageModel
         }
         catch (DbUpdateException ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("LED X 05 - Internal server error.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("LEED X 05 - Internal server error.", ex.Message));
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("LED X 06 - Something is wrong.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("LEED X 06 - Something is wrong.", ex.Message));
         }
     }
 }

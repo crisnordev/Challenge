@@ -27,11 +27,11 @@ public class DetailsLectureModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
-        if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
+        if (id == null) return NotFound(new ErrorResultViewModel("LEDT X01 - Id can not be null."));
         var lecture = await _context.Lectures.AsNoTracking()
             .Include(y => y.CourseItem)
             .FirstOrDefaultAsync(x => x.LectureId == id);
-        if (lecture == null) return NotFound(new ErrorResultViewModel("Can not find lecture."));
+        if (lecture == null) return NotFound(new ErrorResultViewModel("LEDT X02 - Can not find lecture."));
         GetLectureByIdViewModel = lecture;
         LectureId = id;
         CourseItemId = lecture.CourseItemId;
@@ -42,11 +42,11 @@ public class DetailsLectureModel : PageModel
         }
         catch (DbException ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("LEDT X03 - Internal server error.", ex.Message));
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("LEDT X04 - Something is wrong.", ex.Message));
         }
     }
 }

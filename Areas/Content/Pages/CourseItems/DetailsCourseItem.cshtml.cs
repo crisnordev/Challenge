@@ -27,7 +27,7 @@ public class DetailsCourseItemModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
-        if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
+        if (id == null) return NotFound(new ErrorResultViewModel("CIDT X01 - Id can not be null."));
         CourseItemId = id;
 
         try
@@ -36,7 +36,7 @@ public class DetailsCourseItemModel : PageModel
                 Include(y => y.Course).
                 Include(z => z.Lectures).
                 FirstOrDefaultAsync(x => x.CourseItemId == id);
-            if (courseItem == null) return NotFound(new ErrorResultViewModel("Can not find this module."));
+            if (courseItem == null) return NotFound(new ErrorResultViewModel("CIDT X02 - Can not find this module."));
             CourseId = courseItem.CourseId;
             GetCourseItemByIdViewModel = courseItem;
             
@@ -45,11 +45,11 @@ public class DetailsCourseItemModel : PageModel
         }
         catch (DbException ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CIDT X03 - Internal server error.", ex.Message));
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CIDT X04 - Something is wrong.", ex.Message));
         }
     }
 }

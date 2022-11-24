@@ -28,9 +28,9 @@ public class CreateLectureModel : PageModel
 
     public async Task<IActionResult> OnGet(Guid? id)
     {
-        if (id == null) return BadRequest(new ErrorResultViewModel("Id can not be null"));
+        if (id == null) return BadRequest(new ErrorResultViewModel("LECR X01 - Id can not be null"));
         var courseItem = await _context.CourseItems.AsNoTracking().FirstOrDefaultAsync(x => x.CourseItemId == id);
-        if (courseItem == null) return NotFound(new ErrorResultViewModel("Can not find this module."));
+        if (courseItem == null) return NotFound(new ErrorResultViewModel("LECR X02 - Can not find this module."));
         CourseItemTitle = courseItem.CourseItemTitle;
         CourseItemId = id;
         
@@ -41,20 +41,20 @@ public class CreateLectureModel : PageModel
         }
         catch (DbUpdateException ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("LECR X03 - Internal server error.", ex.Message));
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("LECR X04 - Something is wrong.", ex.Message));
         }
     }
 
     public async Task<IActionResult> OnPostAsync(Guid? id)
     {
         if (!ModelState.IsValid) return Page();
-        if (id == null) return BadRequest(new ErrorResultViewModel("Id can not be null"));
+        if (id == null) return BadRequest(new ErrorResultViewModel("LECR X05 - Id can not be null"));
         var courseItem = await _context.CourseItems.FirstOrDefaultAsync(x => x.CourseItemId == id);
-        if (courseItem == null) return NotFound(new ErrorResultViewModel("Can not find this module."));
+        if (courseItem == null) return NotFound(new ErrorResultViewModel("LECR X06 - Can not find this module."));
         
         var entry = await _context.Lectures.AddAsync(new Lecture());
         entry.CurrentValues.SetValues(CreateLectureViewModel);
@@ -68,11 +68,11 @@ public class CreateLectureModel : PageModel
         }
         catch (DbUpdateException ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("LECR X07 - Internal server error.", ex.Message));
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("LECR X08 - Something is wrong.", ex.Message));
         }
     }
 }

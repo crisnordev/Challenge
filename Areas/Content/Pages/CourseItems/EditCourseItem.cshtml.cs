@@ -26,9 +26,9 @@ public class EditCourseItemModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
-        if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
+        if (id == null) return NotFound(new ErrorResultViewModel("CIED X01 - Id can not be null."));
         var courseItem = await _context.CourseItems.AsNoTracking().FirstOrDefaultAsync(x => x.CourseItemId == id);
-        if (courseItem == null) return NotFound(new ErrorResultViewModel("Can not find this module."));
+        if (courseItem == null) return NotFound(new ErrorResultViewModel("CIED X02 - Can not find this module."));
         EditCourseItemViewModel = courseItem;
         CourseId = courseItem.CourseId;
         
@@ -39,7 +39,7 @@ public class EditCourseItemModel : PageModel
     {
         if (!ModelState.IsValid) return Page();
         var courseItem = await _context.CourseItems.FirstOrDefaultAsync(x => x.CourseItemId == id);
-        if (courseItem == null) return NotFound(new ErrorResultViewModel("Can not find this module."));
+        if (courseItem == null) return NotFound(new ErrorResultViewModel("CIED X03 - Can not find this module."));
 
         await TryUpdateModelAsync(
             courseItem!,
@@ -55,11 +55,11 @@ public class EditCourseItemModel : PageModel
         }
         catch (DbUpdateException ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CIED X04 - Internal server error.", ex.Message));
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CIED X05 - Something is wrong.", ex.Message));
         }
     }
 

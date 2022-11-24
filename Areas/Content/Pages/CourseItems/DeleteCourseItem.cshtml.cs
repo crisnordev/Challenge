@@ -26,12 +26,12 @@ public class DeleteCourseItemModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
-        if (id == null) return NotFound(new ErrorResultViewModel("CIDE X 01 - Id can not be null."));
+        if (id == null) return NotFound(new ErrorResultViewModel("CIDL X01 - Id can not be null."));
         CourseItemId = id;
 
         var courseItem = await _context.CourseItems.AsNoTracking().Include(y => y.Course)
             .FirstOrDefaultAsync(x => x.CourseItemId == id);
-        if (courseItem == null) return NotFound(new ErrorResultViewModel("CIDE X 02 - Can not find this module."));
+        if (courseItem == null) return NotFound(new ErrorResultViewModel("CIDL X02 - Can not find this module."));
         DeleteCourseItemViewModel = courseItem;
         CourseId = courseItem.CourseId;
 
@@ -41,7 +41,7 @@ public class DeleteCourseItemModel : PageModel
     public async Task<IActionResult> OnPostAsync(Guid? id)
     {
         var courseItem = await _context.CourseItems.FirstOrDefaultAsync(x => x.CourseItemId == id);
-        if (courseItem == null) return NotFound(new ErrorResultViewModel("CIDE X 03 - Can not find this module."));
+        if (courseItem == null) return NotFound(new ErrorResultViewModel("CIDL X03 - Can not find this module."));
         
         try
         {
@@ -52,11 +52,11 @@ public class DeleteCourseItemModel : PageModel
         }
         catch (DbUpdateException ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("CIDE X 04 - Internal server error.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CIDL X04 - Internal server error.", ex.Message));
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("CIDE X 05 - Something is wrong.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CIDL X05 - Something is wrong.", ex.Message));
         }
     }
 }

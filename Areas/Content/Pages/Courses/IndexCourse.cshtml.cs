@@ -34,11 +34,11 @@ public class IndexCourseModel: PageModel
         }
         catch (DbUpdateException ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("COIN X01 - Internal server error.", ex.Message));
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("COIN X02 - Something is wrong.", ex.Message));
         }
     }
 }

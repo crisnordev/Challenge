@@ -26,12 +26,12 @@ public class DeleteCourseModel : PageModel
     
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
-        if (id == null) return NotFound(new ErrorResultViewModel("Id can not be null."));
+        if (id == null) return NotFound(new ErrorResultViewModel("CODL X01 - Id can not be null."));
         CourseId = id;
 
         var course = await _context.Courses.AsNoTracking().Include(y => y.CourseItems)
             .FirstOrDefaultAsync(x => x.CourseId == id);
-        if (course == null) return NotFound(new ErrorResultViewModel("Can not find course."));
+        if (course == null) return NotFound(new ErrorResultViewModel("CODL X02 - Can not find course."));
 
         DeleteCourseViewModel = course!;
 
@@ -40,9 +40,9 @@ public class DeleteCourseModel : PageModel
 
     public async Task<IActionResult> OnPostAsync(Guid? id)
     {
-        if (id == null) return BadRequest(new ErrorResultViewModel("Id can not be null."));
+        if (id == null) return BadRequest(new ErrorResultViewModel("CODL X03 - Id can not be null."));
         var course = await _context.Courses.FindAsync(id); 
-        if (course == null) return NotFound(new ErrorResultViewModel("Can not find course."));
+        if (course == null) return NotFound(new ErrorResultViewModel("CODL X04 - Can not find course."));
         
         try
         {
@@ -53,11 +53,11 @@ public class DeleteCourseModel : PageModel
         }
         catch (DbUpdateException ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Internal server error.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CODL X05 - Internal server error.", ex.Message));
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("Something is wrong.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CODL X06 - Something is wrong.", ex.Message));
         }
     }
 }

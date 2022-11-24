@@ -27,10 +27,10 @@ public class DetailsCourseModel : PageModel
 
     public async Task<IActionResult> OnGetAsync(Guid? id)
     {
-        if (id == null) return NotFound(new ErrorResultViewModel("CDT X01 - Id can not be null."));
+        if (id == null) return NotFound(new ErrorResultViewModel("CODT X01 - Id can not be null."));
         var course = await _context.Courses.AsNoTracking().Include(x => x.CourseItems)
             .FirstOrDefaultAsync(y => y.CourseId == id);
-        if (course == null) return NotFound(new ErrorResultViewModel("CDT X02 - Can not find this course."));
+        if (course == null) return NotFound(new ErrorResultViewModel("CODT X02 - Can not find this course."));
         GetCourseByIdViewModel = course;
         CourseId = id;
         
@@ -41,11 +41,11 @@ public class DetailsCourseModel : PageModel
         }
         catch (DbException ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("CDT X03 - Internal server error.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CODT X03 - Internal server error.", ex.Message));
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("CDT X04 - Something is wrong.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CODT X04 - Something is wrong.", ex.Message));
         }
     }
 }

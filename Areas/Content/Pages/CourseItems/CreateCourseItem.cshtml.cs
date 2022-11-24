@@ -42,20 +42,20 @@ public class CreateCourseItemModel : PageModel
         }
         catch (DbUpdateException ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("CCI X03 - Internal server error.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CICR X03 - Internal server error.", ex.Message));
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("CCI X04 - Something is wrong.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CICR X04 - Something is wrong.", ex.Message));
         }
     }
 
     public async Task<IActionResult> OnPostAsync(Guid? id)
     {
-        if (id == null) return NotFound(new ErrorResultViewModel("CCI X05 - Id can not be null.")); 
+        if (id == null) return NotFound(new ErrorResultViewModel("CICR X05 - Id can not be null.")); 
         if (!ModelState.IsValid) return Page();
         var course = await _context.Courses.FirstOrDefaultAsync(x => x.CourseId == id);
-        if (course == null) return NotFound(new ErrorResultViewModel("CCI X06 - Can not find this course."));
+        if (course == null) return NotFound(new ErrorResultViewModel("CICR X06 - Can not find this course."));
 
         var entry = await _context.CourseItems.AddAsync(new CourseItem());
         entry.CurrentValues.SetValues(CreateCourseItemViewModel);
@@ -69,11 +69,11 @@ public class CreateCourseItemModel : PageModel
         }
         catch (DbUpdateException ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("CCI X07 - Internal server error.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CICR X07 - Internal server error.", ex.Message));
         }
         catch (Exception ex)
         {
-            return StatusCode(500, new ErrorResultViewModel("CCI X08 - Something is wrong.", ex.Message));
+            return StatusCode(500, new ErrorResultViewModel("CICR X08 - Something is wrong.", ex.Message));
         }
     }
 }
